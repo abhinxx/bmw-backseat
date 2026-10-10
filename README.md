@@ -20,6 +20,8 @@ Research on the BMW datasets (kept local, not in this repo):
 | Sales volumes | EU / CN / US / RoW for 2024, 2025, 2030 forecast |
 | PM interview | Current workflow, pain points, what a PM wants from the tool |
 
+Personas (`personas/`, in this repo): 9 evidence-backed G60 behavioural personas (3 each for Americas, Europe, Asia) as JSON with evidence tier, cited quotes and falsification criteria, plus avatar SVGs. Age, job and location in `identity_illustration` are labelled illustration only - the data has no demographics.
+
 Key findings:
 
 - **No demographics** in the data (no age, gender, income, family) - customer segments must be behavioural, e.g. "frustrated by controls".
