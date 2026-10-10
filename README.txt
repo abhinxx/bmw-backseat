@@ -6,6 +6,14 @@ Python env:    .venv/bin/python  (openpyxl, pandas, pypdf, pdfplumber)
 
 Only usable files are listed below. Everything else in research/ is intermediate output and can be ignored.
 
+FOLDER CONTENTS (after cleanup, commit 28b5cce)
+  BMW-Data/           10 raw input files (section 1)
+  research/data/      16 files: 5 reshaped/extracted data (sec. 2), 5 summaries (sec. 3), 2 raw NHTSA pulls
+                      and 4 files from another agent (sec. 7)
+  research/*.md       8 documents: 6 reports, PROVENANCE.md, BRIEFS.md (sec. 4)
+  research/scripts/   4 Python scripts (sec. 5)
+  README.txt, .gitignore
+
 
 1. RAW INPUT DATA  (BMW-Data/, read-only, not in git)
 -----------------------------------------------------
@@ -61,7 +69,9 @@ research/C_F70_feedback.md       1 Series feedback findings
 research/D_feedback_audit.md     data quality, duplication rules, SAFE vs UNSAFE comparisons, ingestion schema (sec. 9)
 research/E_customer_studies.md   survey structure and findings
 research/F_option_lists.md       price-list findings and caveats
-research/PROVENANCE.md           which input file -> which script -> which output
+research/PROVENANCE.md           HISTORICAL: input -> script -> output for the full research run. Most scripts and
+                                 intermediate files it names were deleted in cleanup; they exist in git at 659d82e.
+research/BRIEFS.md               HISTORICAL: the task list given to the research subagents
 
 
 5. PYTHON SCRIPTS  (only these 4 remain; all were re-run after cleanup and still pass)
@@ -73,6 +83,8 @@ research/scripts/F_summary.py            regenerates F_focus_features.json from 
 Run from project root:  .venv/bin/python research/scripts/<name>.py
 The other 30 scripts (which produced the section 3 summaries and section 4 reports) were deleted from the
 folder. They are still in git: restore with  git checkout 659d82e -- research/scripts/
+Re-running the kept scripts also writes 3 small side files (F_parse_log.json, F_focus_features.md,
+E_studies.json) into research/data/. They are by-products; ignore or delete them.
 
 
 6. KEY FACTS  (verified against the raw files)
@@ -100,8 +112,8 @@ folder. They are still in git: restore with  git checkout 659d82e -- research/sc
 -----------
 - Clean feedback file (see section 2).
 - External research (competitors, Reddit, press): only raw NHTSA recall/complaint pulls exist
-  (research/data/G_nhtsa_recalls.json, G_nhtsa_complaints.json). Files G_batch1_index.json,
-  G_search_batch2/3/4.json and F_analysis_diffs.json were written by another agent, not part of this work.
+  (research/data/G_nhtsa_recalls.json, G_nhtsa_complaints.json). Files G_batch1_index.json and
+  G_search_batch2/3/4.json were written by another agent, are not part of this work, and are not committed.
 - No application code.
 
 
