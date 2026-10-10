@@ -1,0 +1,25 @@
+secrets are poushed to prod btw?
+
+---
+
+<pasted_content id="27d1">
+┌───────────────────────────────┬────────────┬──────────┬─────────────┐
+│           Variable            │ Production │ Preview  │ Development │
+├───────────────────────────────┼────────────┼──────────┼─────────────┤
+│ NEXT_PUBLIC_SUPABASE_URL      │ ✓          │ ✓        │ ✓           │
+├───────────────────────────────┼────────────┼──────────┼─────────────┤
+│ NEXT_PUBLIC_SUPABASE_ANON_KEY │ ✓          │ ✓        │ ✓           │
+├───────────────────────────────┼────────────┼──────────┼─────────────┤
+│ SUPABASE_SERVICE_ROLE_KEY     │ ✓ secret   │ ✓ secret │ ✓           │
+├───────────────────────────────┼────────────┼──────────┼─────────────┤
+│ OPENAI_API_KEY                │ ✓ secret   │ ✓ secret │ ✓           │
+├───────────────────────────────┼────────────┼──────────┼─────────────┤
+│ LINKUP_API_KEY                │ ✓ secret   │ ✓ secret │ ✓           │
+└───────────────────────────────┴────────────┴──────────┴─────────────┘
+</pasted_content id="27d1">
+
+ put this in doc too. and where is the info like apple design language and things we already found? is it in plan draft 1?
+
+---
+
+verify secrets again via vercel
