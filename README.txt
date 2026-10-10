@@ -1,7 +1,7 @@
 EHL HACKATHON - BMW PRODUCT INTELLIGENCE CONSOLE - HANDOVER README
 ====================================================================
 Project root: /Users/abhinavsingh/Documents/codes/ehl-hackathon   (git repo, last research commit 976522a)
-Product brief: /Users/abhinavsingh/Downloads/BMW_Product_Vision_PRD_Brief.md
+Product brief: BMW_Product_Vision_PRD_Brief.md  (in this folder; moved from ~/Downloads)
 Python env:    .venv/bin/python  (openpyxl, pandas, pypdf, pdfplumber)
 
 Only usable files are listed below. Everything else in research/ is intermediate output and can be ignored.
@@ -12,7 +12,7 @@ FOLDER CONTENTS (after cleanup, commit 28b5cce)
                       and 4 files from another agent (sec. 7)
   research/*.md       8 documents: 6 reports, PROVENANCE.md, BRIEFS.md (sec. 4)
   research/scripts/   4 Python scripts (sec. 5)
-  README.txt, .gitignore
+  README.txt, .gitignore, BMW_Product_Vision_PRD_Brief.md (the product vision brief)
 
 
 1. RAW INPUT DATA  (BMW-Data/, read-only, not in git)
