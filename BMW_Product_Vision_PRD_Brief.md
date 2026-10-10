@@ -1,6 +1,10 @@
 # BMW Market Intelligence & Future-Customer Simulator
 ## Product vision and context brief for the EHL Hackathon
 
+**Project name:** BMW Backseat - the PM drives; the customers take the backseat.
+**Repository:** https://github.com/abhinxx/bmw-backseat
+**Event:** [European Hackathon League](https://ehl.gg) Grand Finale, Munich, 10-11 October 2026, BMW challenge.
+
 **Document purpose:** Introduce the product vision, business context, intended experience, boundaries, and principles. This is a product brief for a coding agent or project contributor to understand *what we are building and why*. It intentionally does not prescribe a technical stack, architecture, libraries, or implementation method.
 
 ---
