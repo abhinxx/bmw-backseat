@@ -1,0 +1,70 @@
+{
+  "generated": "2026-10-10",
+  "count": 9,
+  "architecture": "behavior clusters x market overlay x revenue anchor; evidence tiers A/B/C; identity = illustration",
+  "personas": [
+    {
+      "id": "AM-1",
+      "name": "Dana",
+      "region": "Americas",
+      "cluster": "C0",
+      "tier": "A - inductive (own feedback n=1605 BEV r"
+    },
+    {
+      "id": "AM-2",
+      "name": "Marcus",
+      "region": "Americas",
+      "cluster": "C2",
+      "tier": "A - inductive (n=2407 ICE rows, largest "
+    },
+    {
+      "id": "AM-3",
+      "name": "Elena",
+      "region": "Americas",
+      "cluster": "C3",
+      "tier": "A - inductive (C3 n=646 IDs) + US study"
+    },
+    {
+      "id": "EU-1",
+      "name": "Soren",
+      "region": "Europe",
+      "cluster": "C2",
+      "tier": "A- - inductive but small cohort (EU 111 "
+    },
+    {
+      "id": "EU-2",
+      "name": "Claire",
+      "region": "Europe",
+      "cluster": "C1",
+      "tier": "A/B - C1 is 53% of customers but EU slic"
+    },
+    {
+      "id": "EU-3",
+      "name": "Anja",
+      "region": "Europe",
+      "cluster": "C0",
+      "tier": "A- - cohort-backed (EU ICE digital inten"
+    },
+    {
+      "id": "AS-1",
+      "name": "Wei",
+      "region": "Asia",
+      "cluster": "C3",
+      "tier": "B/C - NO feedback rows; built from BMW's"
+    },
+    {
+      "id": "AS-2",
+      "name": "Mei",
+      "region": "Asia",
+      "cluster": "C1",
+      "tier": "B/C - deductive, same chain as AS-1"
+    },
+    {
+      "id": "AS-3",
+      "name": "Jiwon",
+      "region": "Asia",
+      "cluster": "C2",
+      "tier": "A- for Korea/Japan behaviour (real feedb"
+    }
+  ]
+}

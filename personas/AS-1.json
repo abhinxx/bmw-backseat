@@ -1,0 +1,216 @@
+{
+  "persona_id": "AS-1",
+  "name": "Wei",
+  "label": "Status connector (C0+C3 deductive x CN)",
+  "region": "Asia",
+  "market": "China",
+  "cohort": "CN (no feedback rows)",
+  "evidence_tier": "B/C - NO feedback rows; built from BMW's own CN study (Tier B) + McKinsey briefing report (Tier B) + external CN sources (Tier C)",
+  "identity_illustration": {
+    "content": {
+      "age": 36,
+      "location": "Shanghai",
+      "job": "fintech founder",
+      "household": "chauffeur-driven rear row = business stage"
+    },
+    "status": "ILLUSTRATION ONLY - no demographic field exists in any provided dataset; age/job/location are narrative devices to make a statistically-defined segment usable in interviews"
+  },
+  "cluster_foundation": {
+    "cluster_id": "C3",
+    "cluster_name": "Comfort-Requester",
+    "population_share": 0.162,
+    "key_stats": {
+      "comfort_topic_share": 0.976,
+      "wants_share": 0.187
+    },
+    "derivation": "K-Means k=4 on 4,000 per-customer feature rows (topic shares over 7 supercategories mapped from 221 VFC level2 classes, feedback-type shares, McKinsey-overlap flag); market/engine NOT inputs",
+    "per_customer_source": {
+      "file": "BMW-Data/G60_feedback_hackathon.xlsx",
+      "sheet": "Feedback_Explorer"
+    },
+    "cluster_source": "../per_customer_table.csv -> ../persona_clusters_profiles.csv",
+    "coverage_note": "85.5% of G60 feedback rows classified; 'no_class_found' 525 rows excluded from clustering features"
+  },
+  "validation": {
+    "bootstrap_ari_mean": 0.555,
+    "bootstrap_n": 30,
+    "km_vs_ward_ari": 0.228,
+    "holdout_g70_distribution": [
+      0.13,
+      0.5,
+      0.18,
+      0.19
+    ],
+    "holdout_f70_distribution": [
+      0.12,
+      0.55,
+      0.24,
+      0.09
+    ],
+    "main_distribution": [
+      0.125,
+      0.53,
+      0.184,
+      0.162
+    ],
+    "silhouette_note": "no elbow; k=4 by interpretability",
+    "evidence": "../persona_clusters_profiles.csv + ../holdout_projection.csv"
+  },
+  "market_overlay_evidence": [
+    {
+      "claim": "CN satisfaction baseline (G68)",
+      "source": {
+        "file": "BMW-Data/F70_G60_G68_G70_customer_studies.xlsx",
+        "sheet_cn_eu": "CN_EU_2025",
+        "sheet_us": "US_2025",
+        "derived": "../features_market_satisfaction.csv",
+        "note": "US 7-pt rescaled to 0-10; item mapping documented in features_market_satisfaction.csv build script"
+      },
+      "location": "sheet CN_EU_2025, G68_CN column",
+      "tier": "B (BMW study)"
+    },
+    {
+      "claim": "CN vs EU deltas: Rear roominess +1.24, Sportiness +1.23, Energy efficiency +0.98, Interior quality +0.69; Connected services 7.35",
+      "source": "../features_market_satisfaction.csv",
+      "location": "delta table",
+      "tier": "B"
+    },
+    {
+      "claim": "CN switching 55%, take-rate ~60, top-10 hightech features, 63% yearly payment preference",
+      "source": {
+        "file": "BMW-Data/car-connectivity-what-consumers-want-and-are-willing-to-pay.pdf",
+        "exhibits": {
+          "switching": "Exhibit 1, p.5: CN 55 / DE 39 / US 38; BEV cluster 57",
+          "take_rate": "Exhibit 2, p.6: total ~49 / BEV 58 / CN ~60",
+          "top_features": "Exhibit 3, p.9: CN top-10 hightech (Drive recorder 73, Smartphone 70, Full AD 68, Charging support 67); DE comfort (Heated seats 72); US convenience (Smartphone 66, Heated 63)",
+          "payment": "Exhibit 7, p.13: subscription 39 vs one-time 30; yearly 63-65",
+          "wtp": "Exhibit 8, p.14: WTP ~80% of current premium price level; relevance avg ~51%"
+        }
+      },
+      "location": "Exh.1 p.5, Exh.2 p.6, Exh.3 p.9, Exh.7 p.13",
+      "tier": "B"
+    },
+    {
+      "claim": "Premium MNC brand halo fading; one-way switching premium MNC -> premium Chinese EV; charging anxiety",
+      "source": "McKinsey China Auto Consumer Insights 2024 (n=2449, 19 cities)",
+      "location": "https://www.mckinsey.com/industries/automotive-and-assembly/our-insights/mckinsey-china-auto-consumer-insights-2024",
+      "tier": "C (external)"
+    },
+    {
+      "claim": "CN seat preference: soft padding, queen seat, rear 'rolling living room', comfort standard incl. heating+ventilation+massage",
+      "source": "DVN interview Zexia He (Audi China seat systems) 2026-07-16",
+      "location": "https://drivingvisionnews.com/news/2026-07-16/dvn-interview-zexia-he-on-audi-vs-audi-seat-systems",
+      "tier": "C (external)"
+    },
+    {
+      "claim": "G68 CN deliveries 75,000 (2025) -> 78,000 (2030)",
+      "source": {
+        "file": "BMW-Data/sales_volumes.xlsx",
+        "sheet": "G60_G68",
+        "volume_2025": {
+          "EU": 115000,
+          "US": 78000,
+          "CN": 75000
+        },
+        "share_2025": {
+          "EU": 0.429,
+          "US": 0.291,
+          "CN": 0.28
+        },
+        "volume_2030": {
+          "EU": 127000,
+          "US": 80000,
+          "CN": 78000
+        }
+      },
+      "location": "sheet G60_G68",
+      "tier": "A"
+    }
+  ],
+  "revenue_anchor": {
+    "volumes": {
+      "file": "BMW-Data/sales_volumes.xlsx",
+      "sheet": "G60_G68",
+      "volume_2025": {
+        "EU": 115000,
+        "US": 78000,
+        "CN": 75000
+      },
+      "share_2025": {
+        "EU": 0.429,
+        "US": 0.291,
+        "CN": 0.28
+      },
+      "volume_2030": {
+        "EU": 127000,
+        "US": 80000,
+        "CN": 78000
+      }
+    },
+    "persona_weight_basis": "cluster share x market volume share",
+    "market_share_of_g60_2025": 0.28
+  },
+  "feedback_evidence_quotes": [
+    {
+      "quote_id": "G60-0035",
+      "country": "KR",
+      "engine": "ICE",
+      "feedback_type": "Difficult to Use",
+      "vfc": "Luggage compartment",
+      "role": "ASIA PROXY - space vs exterior size"
+    },
+    {
+      "quote_id": "G60-0274",
+      "country": "KR",
+      "engine": "BEV",
+      "feedback_type": "Difficult to Use",
+      "vfc": "ConnectedDrive and Infotainment",
+      "role": "ASIA PROXY - software fluency expectation"
+    }
+  ],
+  "assumptions_register": [
+    {
+      "assumption": "CN rear-row 'rolling living room' priority applies to G60 segment (evidence from Audi China seat program, adjacent segment)",
+      "status": "UNVERIFIED",
+      "verification_path": "CN G60 owner survey n>=30"
+    },
+    {
+      "assumption": "CN buyers expect comfort features as standard rather than options (heating/ventilation/massage standard-set)",
+      "status": "UNVERIFIED",
+      "verification_path": "option take-rate audit vs local competitors"
+    },
+    {
+      "assumption": "KR/JP feedback directionally proxies CN expectations (hot-climate/heating correction already applied: heating NOT dismissed for CN - northern China winters + standard-expectation evidence)",
+      "status": "UNVERIFIED",
+      "verification_path": "dropped as error by external-evidence check; retained for audit"
+    }
+  ],
+  "falsification_criteria": [
+    "If CN CRM contradicts rear-roominess/sportiness as top axes, AS-1 discarded; if internal CN feedback shows powertrain (not connectivity) friction dominates, AS-1 reframed"
+  ],
+  "audit_trail": {
+    "pipeline": {
+      "run_date": "2026-10-10",
+      "pipeline_scripts": [
+        "~/.hermes/cache/scratch/pipeline1.py (study matrix)",
+        "~/.hermes/cache/scratch/pipeline3.py (customer clustering + validation battery)",
+        "~/.hermes/cache/scratch/quotes_g60.py (verbatim quote extraction with IDs)",
+        "~/.hermes/cache/scratch/pipeline4.py (cohort-level tests + PCA)"
+      ],
+      "pipeline_outputs": [
+        "../features_market_satisfaction.csv",
+        "../per_customer_table.csv",
+        "../persona_clusters_profiles.csv",
+        "../cohort_feature_matrix.csv",
+        "../holdout_projection.csv"
+      ]
+    },
+    "quote_verification": "every quote_id resolvable in G60_feedback_hackathon.xlsx Feedback_Explorer column ID; strings verified verbatim by extraction script quotes_g60.py"
+  },
+  "next_data_to_confirm": [
+    "CRM configuration/order data (powertrain x option take rates)",
+    "ConnectedDrive usage logs (feature activation, session depth)",
+    "demographic market panels (age/income/urban split)",
+    "CN CRM/after-sales data (closes Tier-C gap)"
+  ]
+}

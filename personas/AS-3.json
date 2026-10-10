@@ -1,0 +1,202 @@
+{
+  "persona_id": "AS-3",
+  "name": "Jiwon",
+  "label": "Quality-first ICE skeptic (C2 x KR/JP inductive)",
+  "region": "Asia",
+  "market": "Korea + Japan",
+  "cohort": "OTHER cohort (KR 278 / JP 76 rows)",
+  "evidence_tier": "A- for Korea/Japan behaviour (real feedback rows), but NO volume anchor in sales_volumes.xlsx",
+  "identity_illustration": {
+    "content": {
+      "age": 44,
+      "location": "Seoul",
+      "job": "import/export manager",
+      "household": "premium ICE buyer evaluating domestic EVs"
+    },
+    "status": "ILLUSTRATION ONLY - no demographic field exists in any provided dataset; age/job/location are narrative devices to make a statistically-defined segment usable in interviews"
+  },
+  "cluster_foundation": {
+    "cluster_id": "C2",
+    "cluster_name": "Dynamics-Loyal",
+    "population_share": 0.184,
+    "key_stats": {
+      "dynamics_topic_share": 0.954,
+      "likes_share": 0.744,
+      "friction": 0.171
+    },
+    "derivation": "K-Means k=4 on 4,000 per-customer feature rows (topic shares over 7 supercategories mapped from 221 VFC level2 classes, feedback-type shares, McKinsey-overlap flag); market/engine NOT inputs",
+    "per_customer_source": {
+      "file": "BMW-Data/G60_feedback_hackathon.xlsx",
+      "sheet": "Feedback_Explorer"
+    },
+    "cluster_source": "../per_customer_table.csv -> ../persona_clusters_profiles.csv",
+    "coverage_note": "85.5% of G60 feedback rows classified; 'no_class_found' 525 rows excluded from clustering features"
+  },
+  "validation": {
+    "bootstrap_ari_mean": 0.555,
+    "bootstrap_n": 30,
+    "km_vs_ward_ari": 0.228,
+    "holdout_g70_distribution": [
+      0.13,
+      0.5,
+      0.18,
+      0.19
+    ],
+    "holdout_f70_distribution": [
+      0.12,
+      0.55,
+      0.24,
+      0.09
+    ],
+    "main_distribution": [
+      0.125,
+      0.53,
+      0.184,
+      0.162
+    ],
+    "silhouette_note": "no elbow; k=4 by interpretability",
+    "evidence": "../persona_clusters_profiles.csv + ../holdout_projection.csv"
+  },
+  "market_overlay_evidence": [
+    {
+      "claim": "KR/JP = only inductive Asia feedback available: KR 278 rows / JP 76 rows, ICE-dominant (OTHER cohort ICE 296 rows)",
+      "source": {
+        "file": "BMW-Data/G60_feedback_hackathon.xlsx",
+        "sheet": "Feedback_Explorer"
+      },
+      "location": "Country/Engine columns; ../cohort_raw_counts.csv",
+      "tier": "A"
+    },
+    {
+      "claim": "KR stability/quality praised, space/software criticized (see quotes)",
+      "source": {
+        "file": "BMW-Data/G60_feedback_hackathon.xlsx",
+        "sheet": "Feedback_Explorer"
+      },
+      "location": "quote IDs below",
+      "tier": "A"
+    },
+    {
+      "claim": "no volume anchor for KR/JP in sales_volumes.xlsx (G60 sheet covers EU/CN/US only)",
+      "source": {
+        "file": "BMW-Data/sales_volumes.xlsx",
+        "sheet": "G60_G68",
+        "volume_2025": {
+          "EU": 115000,
+          "US": 78000,
+          "CN": 75000
+        },
+        "share_2025": {
+          "EU": 0.429,
+          "US": 0.291,
+          "CN": 0.28
+        },
+        "volume_2030": {
+          "EU": 127000,
+          "US": 80000,
+          "CN": 78000
+        }
+      },
+      "location": "absence noted",
+      "tier": "LIMITATION"
+    },
+    {
+      "claim": "ventilated seats historically a US-centric penetration; heated seats penetrated in China too",
+      "source": "Automotive Seats Market in China 2022-2027",
+      "location": "https://mobilityforesights.com/product/automotive-seats-market-in-china",
+      "tier": "C (external)"
+    }
+  ],
+  "revenue_anchor": {
+    "volumes": {
+      "file": "BMW-Data/sales_volumes.xlsx",
+      "sheet": "G60_G68",
+      "volume_2025": {
+        "EU": 115000,
+        "US": 78000,
+        "CN": 75000
+      },
+      "share_2025": {
+        "EU": 0.429,
+        "US": 0.291,
+        "CN": 0.28
+      },
+      "volume_2030": {
+        "EU": 127000,
+        "US": 80000,
+        "CN": 78000
+      }
+    },
+    "persona_weight_basis": "cluster share x market volume share",
+    "market_share_of_g60_2025": null
+  },
+  "feedback_evidence_quotes": [
+    {
+      "quote_id": "G60-0004",
+      "country": "KR",
+      "engine": "ICE",
+      "feedback_type": "Likes",
+      "vfc": "Drive, driving dynamics and chassis",
+      "role": "stability delight"
+    },
+    {
+      "quote_id": "G60-0035",
+      "country": "KR",
+      "engine": "ICE",
+      "feedback_type": "Difficult to Use",
+      "vfc": "Luggage compartment",
+      "role": "space-vs-size critic"
+    },
+    {
+      "quote_id": "G60-0023",
+      "country": "JP",
+      "engine": "ICE",
+      "feedback_type": "Likes",
+      "vfc": "Drivetrain",
+      "role": "weight + efficiency delight"
+    },
+    {
+      "quote_id": "G60-0274",
+      "country": "KR",
+      "engine": "BEV",
+      "feedback_type": "Difficult to Use",
+      "vfc": "ConnectedDrive and Infotainment",
+      "role": "software stability"
+    }
+  ],
+  "assumptions_register": [
+    {
+      "assumption": "KR/JP cluster placement (projected to C2) transfers directionally to CN premium ICE",
+      "status": "UNVERIFIED",
+      "verification_path": "CN ICE cohort comparison once data exists"
+    }
+  ],
+  "falsification_criteria": [
+    "If internal G60 Asia volumes show KR/JP <5% of regional mix, AS-3 becomes appendix-only persona"
+  ],
+  "audit_trail": {
+    "pipeline": {
+      "run_date": "2026-10-10",
+      "pipeline_scripts": [
+        "~/.hermes/cache/scratch/pipeline1.py (study matrix)",
+        "~/.hermes/cache/scratch/pipeline3.py (customer clustering + validation battery)",
+        "~/.hermes/cache/scratch/quotes_g60.py (verbatim quote extraction with IDs)",
+        "~/.hermes/cache/scratch/pipeline4.py (cohort-level tests + PCA)"
+      ],
+      "pipeline_outputs": [
+        "../features_market_satisfaction.csv",
+        "../per_customer_table.csv",
+        "../persona_clusters_profiles.csv",
+        "../cohort_feature_matrix.csv",
+        "../holdout_projection.csv"
+      ]
+    },
+    "quote_verification": "every quote_id resolvable in G60_feedback_hackathon.xlsx Feedback_Explorer column ID; strings verified verbatim by extraction script quotes_g60.py"
+  },
+  "next_data_to_confirm": [
+    "CRM configuration/order data (powertrain x option take rates)",
+    "ConnectedDrive usage logs (feature activation, session depth)",
+    "demographic market panels (age/income/urban split)",
+    "CN CRM/after-sales data (closes Tier-C gap)"
+  ]
+}
