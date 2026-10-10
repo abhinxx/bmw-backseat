@@ -1,0 +1,16 @@
+{
+  "name": "bmw-backseat",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "data:feedback": "tsx scripts/ingest-feedback.ts",
+    "env:push": "bash scripts/push-env.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "exceljs": "^4.4.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

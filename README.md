@@ -29,13 +29,43 @@ Key findings:
 - **#1 complaint (G60, G70): digital controls** (iDrive, touchscreen, CarPlay, My BMW App). The US survey confirms it independently.
 - **Demo case - rear seat heating:** standard on G70, a EUR 2,750 option on G60; G70 wins US 2nd-row comfort 73.6% vs 47.1% top-2-box.
 
+## Data caveats
+
+- One feedback comment can span several rows (one per category label). Always count comments, never rows.
+- Feedback has no dates. Non-US feedback comes from one source only; sources B, C and D are US-only.
+- Survey China/EU means have unusual precision and US blocks sum to exactly 100% (possibly generated data); no sample sizes.
+- Price lists are German, July 2026, and newer than the cars in the feedback (e.g. the G70 already has Panoramic iDrive).
+- The feedback contains signs of templated or partly generated text; treat provenance as unverified.
+
+## Repository layout
+
+| Path | In git | What |
+|---|---|---|
+| `README.md` | yes | This file |
+| `BMW_Product_Vision_PRD_Brief.md` | yes | Product vision brief |
+| `personas/` | yes | G60 persona JSONs and avatar SVGs |
+| `scripts/` | yes | Node/TS data cleaning (`npm run data:feedback`) |
+| `BMW-Data/` | no | Raw BMW files, including the official challenge brief |
+| `research/` | no | Research reports, extracted data (survey, option lists, aggregates), legacy Python scripts |
+| `data/` | no | Cleaned output from `scripts/`, loaded into the database |
+| `.entire/`, `.claude/` | yes | Entire session capture and Claude Code settings |
+
+## Data cleaning
+
+```
+npm install
+npm run data:feedback   # BMW-Data feedback xlsx -> data/clean/feedback_comments.json
+```
+
+Produces one record per comment (10,128) with its category labels as a list; sentiment is kept per label because one comment can be both a "Like" and a "Difficult to Use". The script rebuilds every original spreadsheet row from the cleaned data and refuses to write output if any cell differs.
+
 ## Next
 
-1. One cleaned feedback dataset (one record per comment).
-2. External research: competitors, press, Reddit, NHTSA.
-3. The console app.
+1. Clickable app shell with placeholder data, deployed on Vercel.
+2. Cleaned data in Supabase; replace placeholders screen by screen.
+3. Persona reactions, research agent, requirements board.
 
 ## Setup
 
 - Agent sessions are captured with [Entire](https://docs.entire.io) (`.entire/`).
-- Raw BMW data (`BMW-Data/`) and research outputs (`research/`) are not public; cleaned datasets will be added when ready.
+- Raw BMW data and research outputs are not public. Older commits (before `aeea164`) still contain `research/`.
