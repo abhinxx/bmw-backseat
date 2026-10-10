@@ -21,12 +21,13 @@ BMW-Data/BMW-Group-Report-2025-en.pdf   added by someone else later; NOT read or
 NOTE: one feedback comment repeats on several rows (one row per category). Count unique IDs, never rows.
 
 
-2. CLEAN DATA, READY TO USE  (replaces the raw files named)
------------------------------------------------------------
-research/data/E_studies_long.csv     ALL survey scores, one row per (sheet, market, model, attribute, metric),
+2. RESHAPED / EXTRACTED DATA, READY TO USE  (same values as the originals, nothing corrected or removed;
+   only put into a form a program can filter. Replaces the raw files named.)
+-------------------------------------------------------------------------------------------------------
+research/data/E_studies_long.csv     RESHAPED: ALL survey scores, one row per (sheet, market, model, attribute, metric),
                                      each value with its source cell. Replaces the customer_studies.xlsx.
                                      Checked: 185 values by the parent agent + 40 by the E subagent, 0 mismatches.
-research/data/F_items.json           ALL equipment items of the 3 price lists (431 items): standard/optional per
+research/data/F_items.json           EXTRACTED from PDF: ALL equipment items of the 3 price lists (431 items): standard/optional per
                                      engine variant, option code, price EUR, conditions, page number.
                                      Replaces the 3 option-list PDFs (equipment pages).
 research/data/F_options.csv          same as F_items.json flattened, one row per (item, variant) - for spreadsheets
@@ -34,7 +35,8 @@ research/data/F_variants.json        23 engine variants: fuel, kW/PS, base price
 research/data/F_packages.json        M Sport packages and M-model pages: price lines and contents
                                      F_* checked: 42/42 values vs rendered PDF pages, 23/23 variants vs raw text.
 
-NOT YET CLEANED: the 3 feedback .xlsx files (the main data). No complete clean file exists for them.
+NOT YET CLEANED OR RESHAPED: the 3 feedback .xlsx files (the main data). They still have repeated rows,
+blank feedback types and broken labels. No usable file exists for them yet.
 Next step for whoever continues: build one file with the 10,128 unique comments (one record per comment,
 labels as a list) using the schema in research/D_feedback_audit.md section 9, then verify it by rebuilding
 all 13,771 original rows and comparing cell by cell.
@@ -62,13 +64,15 @@ research/F_option_lists.md       price-list findings and caveats
 research/PROVENANCE.md           which input file -> which script -> which output
 
 
-5. PYTHON SCRIPTS WORTH KEEPING  (4 of 34; the rest only regenerate the reports/summaries)
------------------------------------------------------------------------------------------
+5. PYTHON SCRIPTS  (only these 4 remain; all were re-run after cleanup and still pass)
+-------------------------------------------------------------------------------------
 research/scripts/E_03_extract.py         regenerates E_studies_long.csv from the survey workbook
 research/scripts/F_parse_pricelists.py   regenerates F_items/F_options/F_variants/F_packages from the PDFs
 research/scripts/F_check_visual.py       verifies the price-list output (must print 42/42 passed)
 research/scripts/F_summary.py            regenerates F_focus_features.json from F_items.json
 Run from project root:  .venv/bin/python research/scripts/<name>.py
+The other 30 scripts (which produced the section 3 summaries and section 4 reports) were deleted from the
+folder. They are still in git: restore with  git checkout 659d82e -- research/scripts/
 
 
 6. KEY FACTS  (verified against the raw files)
