@@ -1,0 +1,1 @@
+i have added in local, test it, both openai and linkup, quick short test, read linkup doc first btw, secondly, push the secrets yourself. and what is the status of vercel and supabase? are they all connected and work in sync with gh? can we proceed to work on UI and code and data or still fundamentals pending?
