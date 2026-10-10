@@ -15,3 +15,5 @@ research/data/G_nhtsa_tmp.json
 # internal: research outputs and handover notes stay local (share directly with teammate)
 research/
 README.txt
+# local backups
+backups/
