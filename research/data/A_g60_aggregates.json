@@ -1,0 +1,1974 @@
+{
+ "counts": {
+  "rows": 5005,
+  "unique_ids": 4000,
+  "unique_feedback_texts": 4000,
+  "rows_per_id": {
+   "1": 3635,
+   "2": 145,
+   "3": 58,
+   "4": 61,
+   "5": 37,
+   "6": 27,
+   "7": 14,
+   "8": 11,
+   "9": 7,
+   "10": 2,
+   "11": 1,
+   "17": 1,
+   "18": 1
+  },
+  "ids_with_multiple_texts": 0,
+  "ids_with_multiple_sources": 0,
+  "ids_with_multiple_countries": 0,
+  "ids_with_multiple_engines": 0,
+  "max_categories_per_id": 16,
+  "text_duplicated_across_ids": 0
+ },
+ "duplication_examples": [
+  {
+   "id": "G60-2467",
+   "rows": 18,
+   "country": "US",
+   "engine": "BEVE",
+   "feedback_types": [
+    "(missing)",
+    "Defect",
+    "Difficult to Use",
+    "Likes",
+    "Wants"
+   ],
+   "categories": [
+    "Apple CarPlay : Customer request: function",
+    "ConnectedDrive and Infotainment, overall technology : Like: function",
+    "Cushioning / damping vehicle : Malfunction",
+    "Drivetrain : Not user-friendly",
+    "Exterior design : Look / design appeals",
+    "Handling / Riding : Like: function",
+    "Head-Up Display : Customer request: usability",
+    "Head-Up Display : Malfunction",
+    "Instrument panel : Customer request: usability",
+    "Interior design : Look / design appeals",
+    "Multi-function steering wheel operation : Not user-friendly",
+    "My Modes / driving experience : Not user-friendly",
+    "Seats : Likes comfort",
+    "Steering : Like: function",
+    "Steering wheel : Like: function",
+    "Steering wheel : Not user-friendly",
+    "Sun visor, front : Malfunction",
+    "no_class_found"
+   ],
+   "text_head": "great:\n* very comfortable and quiet.\n* excellent handling, with precise steering.\n* interior is practical and modern; quality has been great so far.\n* seats are comfy, veganza material feels nice.\n* good balance between real buttons and software controls.\n* efficient, averaging around 3.6 mi/kwh.\n* "
+  },
+  {
+   "id": "G60-3704",
+   "rows": 17,
+   "country": "US",
+   "engine": "BEVE",
+   "feedback_types": [
+    "(missing)",
+    "Defect",
+    "Difficult to Use",
+    "Likes",
+    "Wants"
+   ],
+   "categories": [
+    "Adjustment of lower lumbar support : Customer request: function",
+    "Audio mode, sound : Noise",
+    "Body equipment, overall technology : Not user-friendly",
+    "Body equipment, overall technology : Workmanship appeals",
+    "Driver profile : Customer request: usability",
+    "Electric Range : Customer request: function",
+    "Electric Range : Range, not OK",
+    "Engine acoustics / engine sound : Malfunction",
+    "Engine acoustics / engine sound : Not user-friendly",
+    "Luggage compartment : insufficient storage space",
+    "Public charging / external providers : Not user-friendly",
+    "Seating, ventilate / heat : Malfunction",
+    "Seats : Likes comfort",
+    "Seats : Not comfortable",
+    "Seats : Not user-friendly",
+    "Space / spatial impression : Customer request: space / spatial impression",
+    "no_class_found"
+   ],
+   "text_head": "overall the car is really great, and there's a lot to appreciate about it both when i'm driving and as someone who owns it. i'm obsessed with how it looks; i honestly get giddy every time i walk up to it. the build quality is the main reason i picked this instead of a model s, and as a car it's fant"
+  }
+ ],
+ "distributions": {
+  "Source": {
+   "Source B": {
+    "rows": 2627,
+    "unique_ids": 2626
+   },
+   "Source C": {
+    "rows": 384,
+    "unique_ids": 384
+   },
+   "Source D": {
+    "rows": 136,
+    "unique_ids": 136
+   },
+   "Source A": {
+    "rows": 1858,
+    "unique_ids": 854
+   }
+  },
+  "Country": {
+   "GB": {
+    "rows": 89,
+    "unique_ids": 36
+   },
+   "AU": {
+    "rows": 7,
+    "unique_ids": 3
+   },
+   "JP": {
+    "rows": 76,
+    "unique_ids": 53
+   },
+   "US": {
+    "rows": 4365,
+    "unique_ids": 3610
+   },
+   "ES": {
+    "rows": 1,
+    "unique_ids": 1
+   },
+   "DK": {
+    "rows": 49,
+    "unique_ids": 20
+   },
+   "KR": {
+    "rows": 278,
+    "unique_ids": 205
+   },
+   "FR": {
+    "rows": 14,
+    "unique_ids": 8
+   },
+   "SE": {
+    "rows": 51,
+    "unique_ids": 28
+   },
+   "FI": {
+    "rows": 14,
+    "unique_ids": 9
+   },
+   "LV": {
+    "rows": 3,
+    "unique_ids": 1
+   },
+   "NO": {
+    "rows": 17,
+    "unique_ids": 8
+   },
+   "CA": {
+    "rows": 41,
+    "unique_ids": 18
+   }
+  },
+  "Engine Type": {
+   "BEVE": {
+    "rows": 1763,
+    "unique_ids": 1363
+   },
+   "PHEV": {
+    "rows": 474,
+    "unique_ids": 378
+   },
+   "ICE": {
+    "rows": 2768,
+    "unique_ids": 2259
+   }
+  },
+  "Feedback Type": {
+   "Defect": {
+    "rows": 435,
+    "unique_ids": 346
+   },
+   "Difficult to Use": {
+    "rows": 1306,
+    "unique_ids": 1211
+   },
+   "(missing)": {
+    "rows": 731,
+    "unique_ids": 731
+   },
+   "Wants": {
+    "rows": 582,
+    "unique_ids": 537
+   },
+   "Likes": {
+    "rows": 1951,
+    "unique_ids": 1791
+   }
+  }
+ },
+ "crosstabs": {
+  "source_x_country": {
+   "Source A": {
+    "AU": {
+     "rows": 7,
+     "unique_ids": 3
+    },
+    "CA": {
+     "rows": 41,
+     "unique_ids": 18
+    },
+    "DK": {
+     "rows": 49,
+     "unique_ids": 20
+    },
+    "ES": {
+     "rows": 1,
+     "unique_ids": 1
+    },
+    "FI": {
+     "rows": 14,
+     "unique_ids": 9
+    },
+    "FR": {
+     "rows": 14,
+     "unique_ids": 8
+    },
+    "GB": {
+     "rows": 89,
+     "unique_ids": 36
+    },
+    "JP": {
+     "rows": 76,
+     "unique_ids": 53
+    },
+    "KR": {
+     "rows": 278,
+     "unique_ids": 205
+    },
+    "LV": {
+     "rows": 3,
+     "unique_ids": 1
+    },
+    "NO": {
+     "rows": 17,
+     "unique_ids": 8
+    },
+    "SE": {
+     "rows": 51,
+     "unique_ids": 28
+    },
+    "US": {
+     "rows": 1218,
+     "unique_ids": 464
+    }
+   },
+   "Source B": {
+    "AU": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "CA": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "DK": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "ES": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "FI": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "FR": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "GB": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "JP": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "KR": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "LV": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "NO": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "SE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "US": {
+     "rows": 2627,
+     "unique_ids": 2626
+    }
+   },
+   "Source C": {
+    "AU": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "CA": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "DK": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "ES": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "FI": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "FR": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "GB": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "JP": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "KR": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "LV": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "NO": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "SE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "US": {
+     "rows": 384,
+     "unique_ids": 384
+    }
+   },
+   "Source D": {
+    "AU": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "CA": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "DK": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "ES": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "FI": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "FR": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "GB": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "JP": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "KR": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "LV": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "NO": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "SE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "US": {
+     "rows": 136,
+     "unique_ids": 136
+    }
+   }
+  },
+  "country_x_engine": {
+   "AU": {
+    "BEVE": {
+     "rows": 1,
+     "unique_ids": 1
+    },
+    "ICE": {
+     "rows": 6,
+     "unique_ids": 2
+    },
+    "PHEV": {
+     "rows": 0,
+     "unique_ids": 0
+    }
+   },
+   "CA": {
+    "BEVE": {
+     "rows": 15,
+     "unique_ids": 8
+    },
+    "ICE": {
+     "rows": 12,
+     "unique_ids": 6
+    },
+    "PHEV": {
+     "rows": 14,
+     "unique_ids": 4
+    }
+   },
+   "DK": {
+    "BEVE": {
+     "rows": 49,
+     "unique_ids": 20
+    },
+    "ICE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "PHEV": {
+     "rows": 0,
+     "unique_ids": 0
+    }
+   },
+   "ES": {
+    "BEVE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "ICE": {
+     "rows": 1,
+     "unique_ids": 1
+    },
+    "PHEV": {
+     "rows": 0,
+     "unique_ids": 0
+    }
+   },
+   "FI": {
+    "BEVE": {
+     "rows": 3,
+     "unique_ids": 3
+    },
+    "ICE": {
+     "rows": 1,
+     "unique_ids": 1
+    },
+    "PHEV": {
+     "rows": 10,
+     "unique_ids": 5
+    }
+   },
+   "FR": {
+    "BEVE": {
+     "rows": 8,
+     "unique_ids": 3
+    },
+    "ICE": {
+     "rows": 2,
+     "unique_ids": 2
+    },
+    "PHEV": {
+     "rows": 4,
+     "unique_ids": 3
+    }
+   },
+   "GB": {
+    "BEVE": {
+     "rows": 16,
+     "unique_ids": 6
+    },
+    "ICE": {
+     "rows": 60,
+     "unique_ids": 23
+    },
+    "PHEV": {
+     "rows": 13,
+     "unique_ids": 7
+    }
+   },
+   "JP": {
+    "BEVE": {
+     "rows": 13,
+     "unique_ids": 11
+    },
+    "ICE": {
+     "rows": 63,
+     "unique_ids": 42
+    },
+    "PHEV": {
+     "rows": 0,
+     "unique_ids": 0
+    }
+   },
+   "KR": {
+    "BEVE": {
+     "rows": 24,
+     "unique_ids": 19
+    },
+    "ICE": {
+     "rows": 227,
+     "unique_ids": 164
+    },
+    "PHEV": {
+     "rows": 27,
+     "unique_ids": 22
+    }
+   },
+   "LV": {
+    "BEVE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "ICE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "PHEV": {
+     "rows": 3,
+     "unique_ids": 1
+    }
+   },
+   "NO": {
+    "BEVE": {
+     "rows": 16,
+     "unique_ids": 7
+    },
+    "ICE": {
+     "rows": 0,
+     "unique_ids": 0
+    },
+    "PHEV": {
+     "rows": 1,
+     "unique_ids": 1
+    }
+   },
+   "SE": {
+    "BEVE": {
+     "rows": 28,
+     "unique_ids": 14
+    },
+    "ICE": {
+     "rows": 1,
+     "unique_ids": 1
+    },
+    "PHEV": {
+     "rows": 22,
+     "unique_ids": 13
+    }
+   },
+   "US": {
+    "BEVE": {
+     "rows": 1590,
+     "unique_ids": 1271
+    },
+    "ICE": {
+     "rows": 2395,
+     "unique_ids": 2017
+    },
+    "PHEV": {
+     "rows": 380,
+     "unique_ids": 322
+    }
+   }
+  }
+ },
+ "taxonomy": {
+  "unclassified_rows": 725,
+  "unclassified_row_pct": 14.5,
+  "unclassified_ids_any_row": 725,
+  "unclassified_ids_all_rows": 440,
+  "unclassified_id_pct_all_rows": 11.0,
+  "n_level2_values": 221,
+  "top25_level2_by_unique_ids": [
+   {
+    "category": "Drivetrain",
+    "unique_ids": 411,
+    "rows": 419,
+    "like": 352,
+    "dislike": 51,
+    "want": 15,
+    "unlabeled": 1
+   },
+   {
+    "category": "Handling / Riding",
+    "unique_ids": 226,
+    "rows": 227,
+    "like": 215,
+    "dislike": 8,
+    "want": 4,
+    "unlabeled": 0
+   },
+   {
+    "category": "Body equipment, overall technology",
+    "unique_ids": 211,
+    "rows": 213,
+    "like": 128,
+    "dislike": 60,
+    "want": 25,
+    "unlabeled": 0
+   },
+   {
+    "category": "Exterior design",
+    "unique_ids": 157,
+    "rows": 157,
+    "like": 144,
+    "dislike": 0,
+    "want": 13,
+    "unlabeled": 0
+   },
+   {
+    "category": "Drive, driving dynamics and chassis, overall technology",
+    "unique_ids": 126,
+    "rows": 126,
+    "like": 124,
+    "dislike": 0,
+    "want": 0,
+    "unlabeled": 2
+   },
+   {
+    "category": "Interior design",
+    "unique_ids": 101,
+    "rows": 101,
+    "like": 86,
+    "dislike": 0,
+    "want": 15,
+    "unlabeled": 0
+   },
+   {
+    "category": "Electric Range",
+    "unique_ids": 95,
+    "rows": 96,
+    "like": 34,
+    "dislike": 52,
+    "want": 10,
+    "unlabeled": 0
+   },
+   {
+    "category": "Seats",
+    "unique_ids": 94,
+    "rows": 105,
+    "like": 46,
+    "dislike": 46,
+    "want": 13,
+    "unlabeled": 0
+   },
+   {
+    "category": "Touch screen, operation",
+    "unique_ids": 70,
+    "rows": 72,
+    "like": 37,
+    "dislike": 30,
+    "want": 5,
+    "unlabeled": 0
+   },
+   {
+    "category": "My Modes / driving experience",
+    "unique_ids": 58,
+    "rows": 59,
+    "like": 27,
+    "dislike": 19,
+    "want": 13,
+    "unlabeled": 0
+   },
+   {
+    "category": "Operating concept, operating system",
+    "unique_ids": 52,
+    "rows": 53,
+    "like": 21,
+    "dislike": 18,
+    "want": 14,
+    "unlabeled": 0
+   },
+   {
+    "category": "Exterior",
+    "unique_ids": 51,
+    "rows": 51,
+    "like": 33,
+    "dislike": 18,
+    "want": 0,
+    "unlabeled": 0
+   },
+   {
+    "category": "Interior comfort",
+    "unique_ids": 51,
+    "rows": 51,
+    "like": 49,
+    "dislike": 0,
+    "want": 2,
+    "unlabeled": 0
+   },
+   {
+    "category": "Public charging / external providers",
+    "unique_ids": 49,
+    "rows": 49,
+    "like": 9,
+    "dislike": 30,
+    "want": 10,
+    "unlabeled": 0
+   },
+   {
+    "category": "ConnectedDrive and Infotainment, overall technology",
+    "unique_ids": 47,
+    "rows": 51,
+    "like": 18,
+    "dislike": 32,
+    "want": 0,
+    "unlabeled": 1
+   },
+   {
+    "category": "Apple CarPlay",
+    "unique_ids": 45,
+    "rows": 45,
+    "like": 9,
+    "dislike": 33,
+    "want": 3,
+    "unlabeled": 0
+   },
+   {
+    "category": "Audio mode, sound",
+    "unique_ids": 43,
+    "rows": 46,
+    "like": 20,
+    "dislike": 20,
+    "want": 6,
+    "unlabeled": 0
+   },
+   {
+    "category": "non-contact trunk lid opening",
+    "unique_ids": 42,
+    "rows": 43,
+    "like": 2,
+    "dislike": 40,
+    "want": 1,
+    "unlabeled": 0
+   },
+   {
+    "category": "Highway assistant",
+    "unique_ids": 38,
+    "rows": 38,
+    "like": 23,
+    "dislike": 12,
+    "want": 3,
+    "unlabeled": 0
+   },
+   {
+    "category": "Instrument cluster",
+    "unique_ids": 38,
+    "rows": 39,
+    "like": 7,
+    "dislike": 25,
+    "want": 7,
+    "unlabeled": 0
+   },
+   {
+    "category": "Navigation",
+    "unique_ids": 38,
+    "rows": 38,
+    "like": 12,
+    "dislike": 21,
+    "want": 5,
+    "unlabeled": 0
+   },
+   {
+    "category": "Ambient light",
+    "unique_ids": 37,
+    "rows": 37,
+    "like": 19,
+    "dislike": 5,
+    "want": 13,
+    "unlabeled": 0
+   },
+   {
+    "category": "Braking",
+    "unique_ids": 37,
+    "rows": 38,
+    "like": 7,
+    "dislike": 28,
+    "want": 3,
+    "unlabeled": 0
+   },
+   {
+    "category": "Automatic engine start-stop function (MSA)",
+    "unique_ids": 36,
+    "rows": 37,
+    "like": 2,
+    "dislike": 24,
+    "want": 11,
+    "unlabeled": 0
+   },
+   {
+    "category": "Head-Up Display",
+    "unique_ids": 36,
+    "rows": 37,
+    "like": 16,
+    "dislike": 17,
+    "want": 4,
+    "unlabeled": 0
+   }
+  ]
+ },
+ "themes": {
+  "overall_like_top15": [
+   {
+    "theme": "Handling / Riding : Like: function",
+    "unique_ids": 209,
+    "rows": 209
+   },
+   {
+    "theme": "Drivetrain : Like: performance",
+    "unique_ids": 198,
+    "rows": 198
+   },
+   {
+    "theme": "Exterior design : Look / design appeals",
+    "unique_ids": 144,
+    "rows": 144
+   },
+   {
+    "theme": "Drive, driving dynamics and chassis, overall technology : Like: function",
+    "unique_ids": 124,
+    "rows": 124
+   },
+   {
+    "theme": "Interior design : Look / design appeals",
+    "unique_ids": 86,
+    "rows": 86
+   },
+   {
+    "theme": "Drivetrain : Like: function",
+    "unique_ids": 70,
+    "rows": 70
+   },
+   {
+    "theme": "Body equipment, overall technology : Like: function",
+    "unique_ids": 66,
+    "rows": 66
+   },
+   {
+    "theme": "Drivetrain : Like: Efficiency",
+    "unique_ids": 51,
+    "rows": 51
+   },
+   {
+    "theme": "Interior comfort : Likes comfort",
+    "unique_ids": 49,
+    "rows": 49
+   },
+   {
+    "theme": "Body equipment, overall technology : Workmanship appeals",
+    "unique_ids": 42,
+    "rows": 42
+   },
+   {
+    "theme": "Exterior : Likes size",
+    "unique_ids": 33,
+    "rows": 33
+   },
+   {
+    "theme": "Drivetrain : Like: responsiveness",
+    "unique_ids": 31,
+    "rows": 31
+   },
+   {
+    "theme": "Seats : Likes comfort",
+    "unique_ids": 30,
+    "rows": 30
+   },
+   {
+    "theme": "Space / spatial impression : Like: Space / spatial impression",
+    "unique_ids": 28,
+    "rows": 28
+   },
+   {
+    "theme": "Touch screen, operation : Look / design appeals",
+    "unique_ids": 28,
+    "rows": 28
+   }
+  ],
+  "overall_dislike_top15": [
+   {
+    "theme": "Body equipment, overall technology : Not user-friendly",
+    "unique_ids": 60,
+    "rows": 60
+   },
+   {
+    "theme": "Electric Range : Range, not OK",
+    "unique_ids": 43,
+    "rows": 43
+   },
+   {
+    "theme": "non-contact trunk lid opening : Not user-friendly",
+    "unique_ids": 39,
+    "rows": 39
+   },
+   {
+    "theme": "Public charging / external providers : Not user-friendly",
+    "unique_ids": 24,
+    "rows": 24
+   },
+   {
+    "theme": "Vehicle, lock / unlock : Not user-friendly",
+    "unique_ids": 22,
+    "rows": 22
+   },
+   {
+    "theme": "Drivetrain : Drive power/driving performance not OK",
+    "unique_ids": 20,
+    "rows": 20
+   },
+   {
+    "theme": "Instrument cluster : Not user-friendly",
+    "unique_ids": 19,
+    "rows": 19
+   },
+   {
+    "theme": "Driver profile : Not user-friendly",
+    "unique_ids": 18,
+    "rows": 18
+   },
+   {
+    "theme": "Operating concept, operating system : Not user-friendly",
+    "unique_ids": 18,
+    "rows": 18
+   },
+   {
+    "theme": "ConnectedDrive and Infotainment, overall technology : Not user-friendly",
+    "unique_ids": 17,
+    "rows": 17
+   },
+   {
+    "theme": "Luggage compartment : insufficient storage space",
+    "unique_ids": 17,
+    "rows": 17
+   },
+   {
+    "theme": "My Modes / driving experience : Not user-friendly",
+    "unique_ids": 17,
+    "rows": 17
+   },
+   {
+    "theme": "Apple CarPlay : Not user-friendly",
+    "unique_ids": 16,
+    "rows": 16
+   },
+   {
+    "theme": "Navigation : Not user-friendly",
+    "unique_ids": 16,
+    "rows": 16
+   },
+   {
+    "theme": "Braking : Not user-friendly",
+    "unique_ids": 15,
+    "rows": 15
+   }
+  ],
+  "overall_want_top15": [
+   {
+    "theme": "Body equipment, overall technology : Dislike: price-performance ratio",
+    "unique_ids": 17,
+    "rows": 17
+   },
+   {
+    "theme": "Operating concept, operating system : Customer request: usability",
+    "unique_ids": 14,
+    "rows": 14
+   },
+   {
+    "theme": "Exterior design : Customer request: design",
+    "unique_ids": 13,
+    "rows": 13
+   },
+   {
+    "theme": "Drivetrain : Customer request: performance",
+    "unique_ids": 11,
+    "rows": 11
+   },
+   {
+    "theme": "Automatic engine start-stop function (MSA) : Permanent switch-off not possible",
+    "unique_ids": 10,
+    "rows": 10
+   },
+   {
+    "theme": "Electric Range : Customer request: function",
+    "unique_ids": 10,
+    "rows": 10
+   },
+   {
+    "theme": "Interior design : Customer request: design",
+    "unique_ids": 10,
+    "rows": 10
+   },
+   {
+    "theme": "Ambient light : Customer request: function",
+    "unique_ids": 9,
+    "rows": 9
+   },
+   {
+    "theme": "Panorama glass roof : Customer request: function",
+    "unique_ids": 9,
+    "rows": 9
+   },
+   {
+    "theme": "Comfort Access : Customer request: function",
+    "unique_ids": 8,
+    "rows": 8
+   },
+   {
+    "theme": "Door, open / close : Customer request: function",
+    "unique_ids": 8,
+    "rows": 8
+   },
+   {
+    "theme": "Frunk : Customer request: function",
+    "unique_ids": 8,
+    "rows": 8
+   },
+   {
+    "theme": "My Modes / driving experience : Customer request: usability",
+    "unique_ids": 8,
+    "rows": 8
+   },
+   {
+    "theme": "Seat massage : Customer request: function",
+    "unique_ids": 8,
+    "rows": 8
+   },
+   {
+    "theme": "Space / spatial impression : Customer request: space / spatial impression",
+    "unique_ids": 8,
+    "rows": 8
+   }
+  ],
+  "US_dislike": [
+   {
+    "theme": "Body equipment, overall technology : Not user-friendly",
+    "unique_ids": 56,
+    "rows": 56
+   },
+   {
+    "theme": "non-contact trunk lid opening : Not user-friendly",
+    "unique_ids": 39,
+    "rows": 39
+   },
+   {
+    "theme": "Electric Range : Range, not OK",
+    "unique_ids": 29,
+    "rows": 29
+   },
+   {
+    "theme": "Public charging / external providers : Not user-friendly",
+    "unique_ids": 23,
+    "rows": 23
+   },
+   {
+    "theme": "Vehicle, lock / unlock : Not user-friendly",
+    "unique_ids": 22,
+    "rows": 22
+   },
+   {
+    "theme": "Instrument cluster : Not user-friendly",
+    "unique_ids": 19,
+    "rows": 19
+   },
+   {
+    "theme": "Driver profile : Not user-friendly",
+    "unique_ids": 18,
+    "rows": 18
+   },
+   {
+    "theme": "Operating concept, operating system : Not user-friendly",
+    "unique_ids": 18,
+    "rows": 18
+   },
+   {
+    "theme": "My Modes / driving experience : Not user-friendly",
+    "unique_ids": 16,
+    "rows": 16
+   },
+   {
+    "theme": "Apple CarPlay : Not user-friendly",
+    "unique_ids": 15,
+    "rows": 15
+   },
+   {
+    "theme": "Luggage compartment : insufficient storage space",
+    "unique_ids": 15,
+    "rows": 15
+   },
+   {
+    "theme": "(Active) cruise control : Not user-friendly",
+    "unique_ids": 14,
+    "rows": 14
+   },
+   {
+    "theme": "Air conditioning control panel : Not user-friendly",
+    "unique_ids": 14,
+    "rows": 14
+   },
+   {
+    "theme": "Automatic engine start-stop function (MSA) : Not user-friendly",
+    "unique_ids": 14,
+    "rows": 14
+   },
+   {
+    "theme": "Braking : Not user-friendly",
+    "unique_ids": 14,
+    "rows": 14
+   }
+  ],
+  "US_like": [
+   {
+    "theme": "Handling / Riding : Like: function",
+    "unique_ids": 168,
+    "rows": 168
+   },
+   {
+    "theme": "Drivetrain : Like: performance",
+    "unique_ids": 136,
+    "rows": 136
+   },
+   {
+    "theme": "Exterior design : Look / design appeals",
+    "unique_ids": 135,
+    "rows": 135
+   },
+   {
+    "theme": "Drive, driving dynamics and chassis, overall technology : Like: function",
+    "unique_ids": 77,
+    "rows": 77
+   },
+   {
+    "theme": "Interior design : Look / design appeals",
+    "unique_ids": 74,
+    "rows": 74
+   },
+   {
+    "theme": "Drivetrain : Like: function",
+    "unique_ids": 68,
+    "rows": 68
+   },
+   {
+    "theme": "Body equipment, overall technology : Like: function",
+    "unique_ids": 64,
+    "rows": 64
+   },
+   {
+    "theme": "Interior comfort : Likes comfort",
+    "unique_ids": 48,
+    "rows": 48
+   },
+   {
+    "theme": "Body equipment, overall technology : Workmanship appeals",
+    "unique_ids": 41,
+    "rows": 41
+   },
+   {
+    "theme": "Drivetrain : Like: Efficiency",
+    "unique_ids": 34,
+    "rows": 34
+   },
+   {
+    "theme": "Drivetrain : Like: responsiveness",
+    "unique_ids": 31,
+    "rows": 31
+   },
+   {
+    "theme": "Exterior : Likes size",
+    "unique_ids": 31,
+    "rows": 31
+   },
+   {
+    "theme": "Seats : Likes comfort",
+    "unique_ids": 29,
+    "rows": 29
+   },
+   {
+    "theme": "Touch screen, operation : Look / design appeals",
+    "unique_ids": 28,
+    "rows": 28
+   },
+   {
+    "theme": "Space / spatial impression : Like: Space / spatial impression",
+    "unique_ids": 27,
+    "rows": 27
+   }
+  ],
+  "KR_dislike": [
+   {
+    "theme": "Drivetrain : Drive power/driving performance not OK",
+    "unique_ids": 7,
+    "rows": 7
+   },
+   {
+    "theme": "Storage compartments : insufficient storage space",
+    "unique_ids": 4,
+    "rows": 4
+   },
+   {
+    "theme": "Body equipment, overall technology : Not user-friendly",
+    "unique_ids": 3,
+    "rows": 3
+   },
+   {
+    "theme": "Luggage compartment : insufficient storage space",
+    "unique_ids": 2,
+    "rows": 2
+   },
+   {
+    "theme": "Manage / pair mobile device (Bluetooth) : Not user-friendly",
+    "unique_ids": 2,
+    "rows": 2
+   },
+   {
+    "theme": "Map update : Not user-friendly",
+    "unique_ids": 2,
+    "rows": 2
+   },
+   {
+    "theme": "Android Auto : Malfunction",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Auxiliary heater function : Malfunction",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Blower function : Noise",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Charge high-voltage battery : Not user-friendly",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "ConnectedDrive and Infotainment, overall technology : Not user-friendly",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Cooling : Malfunction",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Drive Recorder : Malfunction",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Driver assistance, automated driving, overall technology : Malfunction",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Drivetrain : Fuel / power consumption too high",
+    "unique_ids": 1,
+    "rows": 1
+   }
+  ],
+  "KR_like": [
+   {
+    "theme": "Drivetrain : Like: performance",
+    "unique_ids": 43,
+    "rows": 43
+   },
+   {
+    "theme": "Drive, driving dynamics and chassis, overall technology : Like: function",
+    "unique_ids": 21,
+    "rows": 21
+   },
+   {
+    "theme": "Handling / Riding : Like: function",
+    "unique_ids": 18,
+    "rows": 18
+   },
+   {
+    "theme": "Drivetrain : Like: Efficiency",
+    "unique_ids": 11,
+    "rows": 11
+   },
+   {
+    "theme": "Exterior design : Look / design appeals",
+    "unique_ids": 8,
+    "rows": 8
+   },
+   {
+    "theme": "Interior design : Look / design appeals",
+    "unique_ids": 7,
+    "rows": 7
+   },
+   {
+    "theme": "Interior : Like: vehicle equipment",
+    "unique_ids": 3,
+    "rows": 3
+   },
+   {
+    "theme": "Body equipment, overall technology : Like: price-performance ratio",
+    "unique_ids": 2,
+    "rows": 2
+   },
+   {
+    "theme": "Exterior : Likes size",
+    "unique_ids": 2,
+    "rows": 2
+   },
+   {
+    "theme": "Impression of safety : Like: function",
+    "unique_ids": 2,
+    "rows": 2
+   },
+   {
+    "theme": "Body equipment, overall technology : Like: function",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Customer Account (My BMW / MINI Portal) : Like: function",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Driver assistance, automated driving, overall technology : Like: usability",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "Drivetrain : Like: function",
+    "unique_ids": 1,
+    "rows": 1
+   },
+   {
+    "theme": "High voltage battery : Like: function",
+    "unique_ids": 1,
+    "rows": 1
+   }
+  ]
+ },
+ "country_sizes_unique_ids": {
+  "US": 3610,
+  "KR": 205,
+  "JP": 53,
+  "GB": 36,
+  "SE": 28,
+  "DK": 20,
+  "CA": 18,
+  "FI": 9,
+  "FR": 8,
+  "NO": 8,
+  "AU": 3,
+  "ES": 1,
+  "LV": 1
+ },
+ "dislike_quotes": {
+  "Body equipment, overall technology": {
+   "unique_ids": 60,
+   "quotes": [
+    {
+     "id": "G60-0063",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer explained there is much more to take in with this vehicle versus their 2024 model, and they are gradually learning the features as they drive. Customer added they occasionally call the BMW de […truncated]"
+    },
+    {
+     "id": "G60-0162",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer stated he keeps running into various small issues while learning how the electronics work. Customer stated he either solves them himself or reaches out to the salesperson who sold him the veh […truncated]"
+    }
+   ]
+  },
+  "Electric Range": {
+   "unique_ids": 52,
+   "quotes": [
+    {
+     "id": "G60-0034",
+     "country": "SE",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "for a car on a newly developed model platform, the range should have been much better. i have to drive very slowly to get a sensible distance between charges, even for 30- to 40-mile round trips, whic […truncated]"
+    },
+    {
+     "id": "G60-0195",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer stated the vehicle is only getting around 100 miles of range on a full charge, which is much lower than what they expected. Customer charges the car overnight at home to 100 percent using a B […truncated]"
+    }
+   ]
+  },
+  "Drivetrain": {
+   "unique_ids": 51,
+   "quotes": [
+    {
+     "id": "G60-0371",
+     "country": "KR",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "there is simply no flawless design performance here"
+    },
+    {
+     "id": "G60-0401",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Defect",
+     "text": "no proper gear shifter, just that goofy little switch, and the controls are a pain to work with. half the settings don't stay put after i shut off the ignition. the retractable steering wheel doesn't  […truncated]"
+    }
+   ]
+  },
+  "Seats": {
+   "unique_ids": 42,
+   "quotes": [
+    {
+     "id": "G60-0107",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "I had a serious problem with Seat materials scuff/soil easily: \"The seats seem to stain kind of easily and I'm not really sure how I'm supposed to clean them. If something wet is on the seat, it leave […truncated]"
+    },
+    {
+     "id": "G60-0236",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Defect",
+     "text": "the interior feels like a step down from the previous model in both materials and equipment.\n\nno full leather on the dash, no stitched leather on the center of the steering wheel, and there are a lot  […truncated]"
+    }
+   ]
+  },
+  "non-contact trunk lid opening": {
+   "unique_ids": 40,
+   "quotes": [
+    {
+     "id": "G60-0180",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer stated the kick-to-open function is not working as smoothly as they would prefer, and even though the dealer showed them how to use it, it still does not activate every time. Writer suggested […truncated]"
+    },
+    {
+     "id": "G60-0488",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "I had a minor problem with Trunk/hatch/tailgate - Touch-free sensor doesn't work consistently/DTU: \"Hard to figure out the exact place and movement needed to get it to activate\""
+    }
+   ]
+  },
+  "Apple CarPlay": {
+   "unique_ids": 33,
+   "quotes": [
+    {
+     "id": "G60-0094",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer stated that running Apple CarPlay and iDrive at the same time is challenging because once CarPlay connects, the iDrive Home button changes into a CarPlay Home button, leaving no simple way to […truncated]"
+    },
+    {
+     "id": "G60-0202",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Defect",
+     "text": "Customer stated wireless CarPlay will occasionally not connect. Customer stated he has had to reboot the phone, remove it from iDrive, then pair it again. Customer stated the issue has not appeared si […truncated]"
+    }
+   ]
+  },
+  "Public charging / external providers": {
+   "unique_ids": 30,
+   "quotes": [
+    {
+     "id": "G60-0159",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer reported that at times it is hard for her to locate a charging station that is compatible."
+    },
+    {
+     "id": "G60-0273",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "Customer stated that after coming from Tesla, the charging experience has been very different. Customer stated it has been hard for him to find charging stations near his area."
+    }
+   ]
+  },
+  "ConnectedDrive and Infotainment, overall technology": {
+   "unique_ids": 29,
+   "quotes": [
+    {
+     "id": "G60-0103",
+     "country": "US",
+     "engine": "BEVE",
+     "feedback_type": "Defect",
+     "text": "Customer stated that in the last few weeks he has experienced a few tech problems with the vehicle. Customer stated the first problem was the screen going completely black for around a day and a half. […truncated]"
+    },
+    {
+     "id": "G60-0190",
+     "country": "US",
+     "engine": "PHEV",
+     "feedback_type": "Difficult to Use",
+     "text": "the car itself is great. the idrive system is a bit confusing to use. having had seven bmws before, i really miss the old mechanical buttons."
+    }
+   ]
+  },
+  "Touch screen, operation": {
+   "unique_ids": 29,
+   "quotes": [
+    {
+     "id": "G60-0033",
+     "country": "KR",
+     "engine": "BEVE",
+     "feedback_type": "Difficult to Use",
+     "text": "pros: front seat is wider than i thought, very convenient and clean with no oil smell, comfy ride, nice design. cons: touch-style emergency button is hard to press if the screen has dirt, rear seat an […truncated]"
+    },
+    {
+     "id": "G60-0123",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "steering wheel feels loose, and at times when you go to turn it just kind of locks up. the front camera also doesn't really show how close the front is when parking. when the sun is out the screen is  […truncated]"
+    }
+   ]
+  },
+  "Braking": {
+   "unique_ids": 28,
+   "quotes": [
+    {
+     "id": "G60-0240",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "my bmw 530i is a really good car, but it still feels like it could be better. i'm very happy with the chassis and the suspension setup, and the engine has alll the power i would ever need while stayin […truncated]"
+    },
+    {
+     "id": "G60-0292",
+     "country": "US",
+     "engine": "ICE",
+     "feedback_type": "Difficult to Use",
+     "text": "I had a serious problem with Excessive brake dust: \"The wheels pick up dirt very quickly\""
+    }
+   ]
+  }
+ },
+ "features": {
+  "rear_seat_comfort_heating": {
+   "taxonomy": {
+    "unique_ids": 97,
+    "rows": 108,
+    "id_sentiment": {
+     "like": 43,
+     "dislike": 42,
+     "want": 12
+    },
+    "by_country_unique_ids": {
+     "US": 90,
+     "KR": 4
+    }
+   },
+   "keyword": {
+    "unique_ids": 47,
+    "rows": 119,
+    "id_sentiment": {
+     "dislike": 24,
+     "want": 10,
+     "like": 10,
+     "unlabeled": 3
+    },
+    "by_country_unique_ids": {
+     "US": 43,
+     "KR": 3
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 135,
+    "rows": 214,
+    "id_sentiment": {
+     "dislike": 60,
+     "like": 50,
+     "want": 22,
+     "unlabeled": 3
+    },
+    "by_country_unique_ids": {
+     "US": 127,
+     "KR": 4
+    }
+   }
+  },
+  "seat_heating_ventilation": {
+   "taxonomy": {
+    "unique_ids": 94,
+    "rows": 105,
+    "id_sentiment": {
+     "dislike": 42,
+     "like": 41,
+     "want": 11
+    },
+    "by_country_unique_ids": {
+     "US": 87,
+     "KR": 4
+    }
+   },
+   "keyword": {
+    "unique_ids": 29,
+    "rows": 87,
+    "id_sentiment": {
+     "dislike": 15,
+     "like": 8,
+     "want": 6
+    },
+    "by_country_unique_ids": {
+     "US": 27
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 120,
+    "rows": 186,
+    "id_sentiment": {
+     "dislike": 55,
+     "like": 49,
+     "want": 16
+    },
+    "by_country_unique_ids": {
+     "US": 111,
+     "KR": 5
+    }
+   }
+  },
+  "exterior_colour_paint": {
+   "taxonomy": {
+    "unique_ids": 157,
+    "rows": 157,
+    "id_sentiment": {
+     "like": 144,
+     "want": 13
+    },
+    "by_country_unique_ids": {
+     "US": 148,
+     "KR": 8
+    }
+   },
+   "keyword": {
+    "unique_ids": 70,
+    "rows": 96,
+    "id_sentiment": {
+     "like": 33,
+     "dislike": 21,
+     "want": 14,
+     "unlabeled": 2
+    },
+    "by_country_unique_ids": {
+     "US": 68
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 193,
+    "rows": 219,
+    "id_sentiment": {
+     "like": 148,
+     "want": 22,
+     "dislike": 21,
+     "unlabeled": 2
+    },
+    "by_country_unique_ids": {
+     "US": 182,
+     "KR": 9
+    }
+   }
+  },
+  "performance_power": {
+   "taxonomy": {
+    "unique_ids": 728,
+    "rows": 772,
+    "id_sentiment": {
+     "like": 652,
+     "dislike": 59,
+     "want": 14,
+     "unlabeled": 3
+    },
+    "by_country_unique_ids": {
+     "US": 554,
+     "KR": 99,
+     "JP": 28,
+     "GB": 13,
+     "CA": 8,
+     "SE": 8,
+     "DK": 7,
+     "FR": 4,
+     "FI": 3,
+     "NO": 3
+    }
+   },
+   "keyword": {
+    "unique_ids": 243,
+    "rows": 442,
+    "id_sentiment": {
+     "like": 108,
+     "dislike": 97,
+     "unlabeled": 27,
+     "want": 11
+    },
+    "by_country_unique_ids": {
+     "US": 202,
+     "KR": 14,
+     "JP": 11,
+     "DK": 5,
+     "GB": 4,
+     "FR": 3,
+     "SE": 3
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 849,
+    "rows": 1066,
+    "id_sentiment": {
+     "like": 656,
+     "dislike": 143,
+     "unlabeled": 29,
+     "want": 21
+    },
+    "by_country_unique_ids": {
+     "US": 662,
+     "KR": 103,
+     "JP": 30,
+     "GB": 14,
+     "DK": 11,
+     "SE": 10,
+     "CA": 8,
+     "FR": 4,
+     "FI": 3,
+     "NO": 3
+    }
+   }
+  },
+  "digital_idrive_infotainment_controls": {
+   "taxonomy": {
+    "unique_ids": 307,
+    "rows": 324,
+    "id_sentiment": {
+     "dislike": 152,
+     "like": 111,
+     "want": 43,
+     "unlabeled": 1
+    },
+    "by_country_unique_ids": {
+     "US": 290,
+     "GB": 6,
+     "SE": 4,
+     "KR": 3
+    }
+   },
+   "keyword": {
+    "unique_ids": 772,
+    "rows": 1287,
+    "id_sentiment": {
+     "dislike": 505,
+     "like": 134,
+     "want": 91,
+     "unlabeled": 42
+    },
+    "by_country_unique_ids": {
+     "US": 727,
+     "KR": 16,
+     "GB": 11,
+     "SE": 7,
+     "DK": 6
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 877,
+    "rows": 1393,
+    "id_sentiment": {
+     "dislike": 539,
+     "like": 193,
+     "want": 103,
+     "unlabeled": 42
+    },
+    "by_country_unique_ids": {
+     "US": 828,
+     "KR": 17,
+     "GB": 12,
+     "SE": 8,
+     "DK": 6
+    }
+   }
+  },
+  "controls_complexity_narrow": {
+   "taxonomy": {
+    "unique_ids": 912,
+    "rows": 953,
+    "id_sentiment": {
+     "dislike": 906,
+     "unlabeled": 6
+    },
+    "by_country_unique_ids": {
+     "US": 880,
+     "KR": 14,
+     "GB": 5,
+     "SE": 5,
+     "DK": 4,
+     "CA": 3
+    }
+   },
+   "keyword": {
+    "unique_ids": 72,
+    "rows": 130,
+    "id_sentiment": {
+     "dislike": 62,
+     "unlabeled": 6,
+     "like": 2,
+     "want": 2
+    },
+    "by_country_unique_ids": {
+     "US": 68
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 928,
+    "rows": 1020,
+    "id_sentiment": {
+     "dislike": 912,
+     "unlabeled": 12,
+     "like": 2,
+     "want": 2
+    },
+    "by_country_unique_ids": {
+     "US": 893,
+     "KR": 15,
+     "DK": 5,
+     "GB": 5,
+     "SE": 5,
+     "CA": 3
+    }
+   }
+  },
+  "driver_assistance": {
+   "taxonomy": {
+    "unique_ids": 199,
+    "rows": 203,
+    "id_sentiment": {
+     "dislike": 94,
+     "like": 82,
+     "want": 22,
+     "unlabeled": 1
+    },
+    "by_country_unique_ids": {
+     "US": 191,
+     "GB": 3
+    }
+   },
+   "keyword": {
+    "unique_ids": 80,
+    "rows": 137,
+    "id_sentiment": {
+     "dislike": 48,
+     "like": 25,
+     "want": 6,
+     "unlabeled": 1
+    },
+    "by_country_unique_ids": {
+     "US": 75
+    }
+   },
+   "taxonomy_or_keyword": {
+    "unique_ids": 213,
+    "rows": 273,
+    "id_sentiment": {
+     "dislike": 107,
+     "like": 83,
+     "want": 22,
+     "unlabeled": 1
+    },
+    "by_country_unique_ids": {
+     "US": 203,
+     "GB": 3,
+     "KR": 3
+    }
+   }
+  }
+ },
+ "segments": {
+  "comfort_focused_positive": 424,
+  "comfort_negatives": 246,
+  "frustrated_by_controls_usability": 334,
+  "performance_enthusiast": 219,
+  "tech_digital_focus": 571,
+  "ev_range_charging_concerned": 244,
+  "value_cost_sensitive_voiced": 126,
+  "pure_praisers_like_no_dislike": 1672,
+  "mixed_valuers_like_and_dislike": 119,
+  "total_unique_ids": 4000,
+  "note": "overlapping flags, not a partition; keyword/taxonomy presence per comment, not stated priorities",
+  "frustrated_by_controls_usability_by_engine": {
+   "BEVE": 90,
+   "ICE": 214,
+   "PHEV": 30
+  },
+  "tech_digital_focus_by_country_top5": {
+   "US": 534,
+   "KR": 12,
+   "GB": 9,
+   "SE": 6,
+   "DK": 4
+  }
+ },
+ "data_quality": {
+  "null_feedback_type_rows": 731,
+  "null_taxonomy_rows": 200,
+  "no_class_found_rows": 525,
+  "long_comments_gt1000chars": 58,
+  "max_comment_len": 3498,
+  "median_comment_len": 151.0,
+  "ids_with_nonascii_text": 19,
+  "us_share_of_unique_ids_pct": 90.2,
+  "countries": 13,
+  "multi_topic_gt2000chars": 4,
+  "engine_label_note": "BEV appears as 'BEVE' in this export",
+  "source_d_null_l2": 136,
+  "feedbacktype_null_by_source": {
+   "Source A": 525,
+   "Source C": 70,
+   "Source D": 136
+  }
+ }
+}

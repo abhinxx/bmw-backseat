@@ -1,0 +1,171 @@
+{
+ "tax_heat": [
+  "Heated rear window || Malfunction",
+  "Heated rear window || Not user-friendly",
+  "Heated steering wheel || Customer request: function",
+  "Heated steering wheel || Customer request: usability",
+  "Heated steering wheel || Like: function",
+  "Heated steering wheel || Not user-friendly",
+  "Panel heating || Customer request: function",
+  "Panel heating || Like: function",
+  "Panel heating || Not user-friendly",
+  "Seating, ventilate / heat || Customer request: function",
+  "Seating, ventilate / heat || Customer request: usability",
+  "Seating, ventilate / heat || Effect, power not OK",
+  "Seating, ventilate / heat || Like: function",
+  "Seating, ventilate / heat || Like: usability",
+  "Seating, ventilate / heat || Malfunction",
+  "Seating, ventilate / heat || Noise",
+  "Seating, ventilate / heat || Not user-friendly",
+  "Vehicle, climatization || Condensation",
+  "Vehicle, climatization || Customer request: function",
+  "Vehicle, climatization || Customer request: usability"
+ ],
+ "tax_seat": [
+  "Child restraint seat || Like: function",
+  "Child restraint seat || Not user-friendly",
+  "Child restraint seat, use || Not user-friendly",
+  "Rear seat entertainment || Customer request: function",
+  "Rear seat entertainment || Customer request: usability",
+  "Rear seat entertainment || Like: function",
+  "Rear seat entertainment || Like: usability",
+  "Rear seat entertainment || Malfunction",
+  "Rear seat entertainment || Not user-friendly",
+  "Seat belts || Customer request: function",
+  "Seat belts || Customer request: usability",
+  "Seat belts || Likes comfort",
+  "Seat belts || Malfunction",
+  "Seat belts || Not comfortable",
+  "Seat belts || Not user-friendly",
+  "Seat belts || Warning / notification active",
+  "Seat massage || Customer request: function",
+  "Seat massage || Customer request: usability",
+  "Seat massage || Like: function",
+  "Seat massage || Like: usability"
+ ],
+ "tax_colour": [],
+ "tax_rear": [
+  "Bumper, rear || Damage",
+  "Cross Traffic Warning Rear with Brake Intervention || Malfunction",
+  "Cross Traffic Warning Rear with Brake Intervention || Not user-friendly",
+  "Exterior rearview mirror || Customer request: function",
+  "Exterior rearview mirror || Customer request: usability",
+  "Exterior rearview mirror || Like: function",
+  "Exterior rearview mirror || Like: usability",
+  "Exterior rearview mirror || Malfunction",
+  "Exterior rearview mirror || Not user-friendly",
+  "Headrests, rear || View/restricted panoramic view",
+  "Heated rear window || Malfunction",
+  "Heated rear window || Not user-friendly",
+  "Interior rearview mirror || Customer request: function",
+  "Interior rearview mirror || Like: function",
+  "Interior rearview mirror || Malfunction",
+  "Interior rearview mirror || Not user-friendly",
+  "Outer door handle, rear || Customer request: usability",
+  "Rear seat entertainment || Customer request: function",
+  "Rear seat entertainment || Customer request: usability",
+  "Rear seat entertainment || Like: function"
+ ],
+ "tax_seatheating_uid": 0,
+ "tax_steeringheat_uid": 7,
+ "tax_paint_label_hits": {},
+ "tax_rear_uid": 41,
+ "texts_gt20pct_nonlatin": 1,
+ "ids_gt20pct_nonlatin": 1,
+ "nonlatin_by_country": {
+  "KR": 1
+ },
+ "text_len_stats": {
+  "0": 17,
+  "0.05": 52,
+  "0.25": 90,
+  "0.5": 166,
+  "0.9": 674,
+  "0.99": 2122,
+  "1": 4260
+ },
+ "rows_text_short_lt10": 0,
+ "fbtype_none_rows": 682,
+ "fbtype_none_and_taxmissing": 670,
+ "fbtype_none_uid": 682,
+ "exact_dupe_rows": 0,
+ "shared_texts": [
+  {
+   "text": "Customer stated he appreciates how smooth the vehicle rides.",
+   "n_ids": 2
+  },
+  {
+   "text": "Customer stated he is pleased with the IPA.",
+   "n_ids": 2
+  },
+  {
+   "text": "Customer stated she enjoys the way it drives.",
+   "n_ids": 2
+  },
+  {
+   "text": "Customer stated the car drives like an absolute dream.",
+   "n_ids": 2
+  },
+  {
+   "text": "Customer stated the vehicle feels very comfortable.",
+   "n_ids": 3
+  },
+  {
+   "text": "Customer stated the vehicle is very comfortable.",
+   "n_ids": 2
+  }
+ ],
+ "engine_labels": [
+  "BEVE",
+  "ICE",
+  "PHEV"
+ ],
+ "sourceA": {
+  "rows": 1383,
+  "uids": 695,
+  "mean_rows": 1.99,
+  "fbtype_mix": {
+   "(None)": 470,
+   "Defect": 122,
+   "Difficult to Use": 116,
+   "Likes": 320,
+   "Wants": 84
+  }
+ },
+ "sourceB": {
+  "rows": 2855,
+  "uids": 2853,
+  "fbtype_mix": {
+   "Defect": 215,
+   "Difficult to Use": 769,
+   "Likes": 1466,
+   "Wants": 403
+  }
+ },
+ "Source C": {
+  "rows": 314,
+  "uids": 314,
+  "fbtype_mix": {
+   "(None)": 74,
+   "Defect": 59,
+   "Difficult to Use": 181
+  },
+  "no_class_rows": 0
+ },
+ "Source D": {
+  "rows": 138,
+  "uids": 138,
+  "fbtype_mix": {
+   "(None)": 138
+  },
+  "no_class_rows": 0
+ },
+ "wants_by_country": {
+  "ES": 1,
+  "FR": 1,
+  "GB": 1,
+  "JP": 1,
+  "KR": 4,
+  "US": 479
+ }
+}
