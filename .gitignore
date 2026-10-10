@@ -11,3 +11,7 @@ research/data/F_pages/
 research/data/*_err.txt
 research/data/G_t.json
 research/data/G_nhtsa_tmp.json
+
+# internal: research outputs and handover notes stay local (share directly with teammate)
+research/
+README.txt
