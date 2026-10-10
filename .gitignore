@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.DS_Store
+node_modules/
+# raw hackathon data: keep out of git until confirmed shareable
+BMW-Data/
