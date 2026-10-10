@@ -1,0 +1,225 @@
+{
+  "persona_id": "AM-3",
+  "name": "Elena",
+  "label": "Comfort-requester premium family (C3 x US)",
+  "region": "Americas",
+  "market": "US (NAFTA cohort)",
+  "cohort": "NAFTA/mixed",
+  "evidence_tier": "A - inductive (C3 n=646 IDs) + US study",
+  "identity_illustration": {
+    "content": {
+      "age": 38,
+      "location": "Chicago, IL",
+      "job": "chief physician",
+      "household": "2 kids, chauffeur days 2x/wk"
+    },
+    "status": "ILLUSTRATION ONLY - no demographic field exists in any provided dataset; age/job/location are narrative devices to make a statistically-defined segment usable in interviews"
+  },
+  "cluster_foundation": {
+    "cluster_id": "C3",
+    "cluster_name": "Comfort-Requester",
+    "population_share": 0.162,
+    "key_stats": {
+      "comfort_topic_share": 0.976,
+      "wants_share": 0.187
+    },
+    "derivation": "K-Means k=4 on 4,000 per-customer feature rows (topic shares over 7 supercategories mapped from 221 VFC level2 classes, feedback-type shares, McKinsey-overlap flag); market/engine NOT inputs",
+    "per_customer_source": {
+      "file": "BMW-Data/G60_feedback_hackathon.xlsx",
+      "sheet": "Feedback_Explorer"
+    },
+    "cluster_source": "../per_customer_table.csv -> ../persona_clusters_profiles.csv",
+    "coverage_note": "85.5% of G60 feedback rows classified; 'no_class_found' 525 rows excluded from clustering features"
+  },
+  "validation": {
+    "bootstrap_ari_mean": 0.555,
+    "bootstrap_n": 30,
+    "km_vs_ward_ari": 0.228,
+    "holdout_g70_distribution": [
+      0.13,
+      0.5,
+      0.18,
+      0.19
+    ],
+    "holdout_f70_distribution": [
+      0.12,
+      0.55,
+      0.24,
+      0.09
+    ],
+    "main_distribution": [
+      0.125,
+      0.53,
+      0.184,
+      0.162
+    ],
+    "silhouette_note": "no elbow; k=4 by interpretability",
+    "evidence": "../persona_clusters_profiles.csv + ../holdout_projection.csv"
+  },
+  "market_overlay_evidence": [
+    {
+      "claim": "US satisfaction baseline 19 attributes",
+      "source": {
+        "file": "BMW-Data/F70_G60_G68_G70_customer_studies.xlsx",
+        "sheet_cn_eu": "CN_EU_2025",
+        "sheet_us": "US_2025",
+        "derived": "../features_market_satisfaction.csv",
+        "note": "US 7-pt rescaled to 0-10; item mapping documented in features_market_satisfaction.csv build script"
+      },
+      "location": "sheet US_2025, G60 column",
+      "tier": "A/B"
+    },
+    {
+      "claim": "US switching propensity 38%; BEV 57% cluster",
+      "source": {
+        "file": "BMW-Data/car-connectivity-what-consumers-want-and-are-willing-to-pay.pdf",
+        "exhibits": {
+          "switching": "Exhibit 1, p.5: CN 55 / DE 39 / US 38; BEV cluster 57",
+          "take_rate": "Exhibit 2, p.6: total ~49 / BEV 58 / CN ~60",
+          "top_features": "Exhibit 3, p.9: CN top-10 hightech (Drive recorder 73, Smartphone 70, Full AD 68, Charging support 67); DE comfort (Heated seats 72); US convenience (Smartphone 66, Heated 63)",
+          "payment": "Exhibit 7, p.13: subscription 39 vs one-time 30; yearly 63-65",
+          "wtp": "Exhibit 8, p.14: WTP ~80% of current premium price level; relevance avg ~51%"
+        }
+      },
+      "location": "Exhibit 1 p.5",
+      "tier": "B"
+    },
+    {
+      "claim": "US take-rate basis 49 / BEV 58",
+      "source": {
+        "file": "BMW-Data/car-connectivity-what-consumers-want-and-are-willing-to-pay.pdf",
+        "exhibits": {
+          "switching": "Exhibit 1, p.5: CN 55 / DE 39 / US 38; BEV cluster 57",
+          "take_rate": "Exhibit 2, p.6: total ~49 / BEV 58 / CN ~60",
+          "top_features": "Exhibit 3, p.9: CN top-10 hightech (Drive recorder 73, Smartphone 70, Full AD 68, Charging support 67); DE comfort (Heated seats 72); US convenience (Smartphone 66, Heated 63)",
+          "payment": "Exhibit 7, p.13: subscription 39 vs one-time 30; yearly 63-65",
+          "wtp": "Exhibit 8, p.14: WTP ~80% of current premium price level; relevance avg ~51%"
+        }
+      },
+      "location": "Exhibit 2 p.6",
+      "tier": "B"
+    },
+    {
+      "claim": "US top features convenience-oriented (Smartphone integration 66, Heated seats 63)",
+      "source": {
+        "file": "BMW-Data/car-connectivity-what-consumers-want-and-are-willing-to-pay.pdf",
+        "exhibits": {
+          "switching": "Exhibit 1, p.5: CN 55 / DE 39 / US 38; BEV cluster 57",
+          "take_rate": "Exhibit 2, p.6: total ~49 / BEV 58 / CN ~60",
+          "top_features": "Exhibit 3, p.9: CN top-10 hightech (Drive recorder 73, Smartphone 70, Full AD 68, Charging support 67); DE comfort (Heated seats 72); US convenience (Smartphone 66, Heated 63)",
+          "payment": "Exhibit 7, p.13: subscription 39 vs one-time 30; yearly 63-65",
+          "wtp": "Exhibit 8, p.14: WTP ~80% of current premium price level; relevance avg ~51%"
+        }
+      },
+      "location": "Exhibit 3 p.9",
+      "tier": "B"
+    },
+    {
+      "claim": "NAFTA cohorts: ICE 2407 rows / BEV 1605 / PHEV 394; BEV charging intensity 18.1 per 100 IDs; friction 44.6 (BEV)",
+      "source": {
+        "file": "BMW-Data/G60_feedback_hackathon.xlsx",
+        "sheet": "Feedback_Explorer"
+      },
+      "location": "derived in ../cohort_feature_matrix.csv",
+      "tier": "A"
+    },
+    {
+      "claim": "Europe BEV ~1 in 4 sales, BEV+PHEV 40% Europe - regional EV context",
+      "source": {
+        "file": "Downloads/BMW-Group-Report-2025-en.pdf",
+        "tier": "B (BMW audited public disclosure)",
+        "facts": {
+          "deliveries_2025": "p.9: 2,463,681 automotive deliveries; BEV share 17.9%",
+          "electrified": "p.13/p.26: 642,071 electrified delivered (+8.2%)",
+          "europe_electrification": "p.13: ~1 in 4 vehicles sold in Europe is BEV; BEV+PHEV = 40% of European new sales"
+        }
+      },
+      "location": "p.13",
+      "tier": "B"
+    }
+  ],
+  "revenue_anchor": {
+    "volumes": {
+      "file": "BMW-Data/sales_volumes.xlsx",
+      "sheet": "G60_G68",
+      "volume_2025": {
+        "EU": 115000,
+        "US": 78000,
+        "CN": 75000
+      },
+      "share_2025": {
+        "EU": 0.429,
+        "US": 0.291,
+        "CN": 0.28
+      },
+      "volume_2030": {
+        "EU": 127000,
+        "US": 80000,
+        "CN": 78000
+      }
+    },
+    "persona_weight_basis": "cluster share x market volume share",
+    "market_share_of_g60_2025": 0.291
+  },
+  "feedback_evidence_quotes": [
+    {
+      "quote_id": "G60-0380",
+      "country": "US",
+      "engine": "ICE",
+      "feedback_type": "Wants",
+      "vfc": "Seat massage",
+      "role": "C3 want exemplar"
+    },
+    {
+      "quote_id": "G60-0532",
+      "country": "US",
+      "engine": "ICE",
+      "feedback_type": "Wants",
+      "vfc": "Seating, ventilate / heat",
+      "role": "C3 want exemplar"
+    },
+    {
+      "quote_id": "G60-0268",
+      "country": "US",
+      "engine": "BEV",
+      "feedback_type": "Wants",
+      "vfc": "Interior comfort",
+      "role": "luxury-ambience want"
+    }
+  ],
+  "assumptions_register": [
+    {
+      "assumption": "US interior-ambience low scores (colors 3.82, lighting 3.81, US study) are purchase-moving, not decoration",
+      "status": "UNVERIFIED",
+      "verification_path": "conjoint/price-sensitivity test on interior options"
+    }
+  ],
+  "falsification_criteria": [
+    "If option-take-rate data shows massage/ventilation attach <10% in US, AM-3 priority demotes"
+  ],
+  "audit_trail": {
+    "pipeline": {
+      "run_date": "2026-10-10",
+      "pipeline_scripts": [
+        "~/.hermes/cache/scratch/pipeline1.py (study matrix)",
+        "~/.hermes/cache/scratch/pipeline3.py (customer clustering + validation battery)",
+        "~/.hermes/cache/scratch/quotes_g60.py (verbatim quote extraction with IDs)",
+        "~/.hermes/cache/scratch/pipeline4.py (cohort-level tests + PCA)"
+      ],
+      "pipeline_outputs": [
+        "../features_market_satisfaction.csv",
+        "../per_customer_table.csv",
+        "../persona_clusters_profiles.csv",
+        "../cohort_feature_matrix.csv",
+        "../holdout_projection.csv"
+      ]
+    },
+    "quote_verification": "every quote_id resolvable in G60_feedback_hackathon.xlsx Feedback_Explorer column ID; strings verified verbatim by extraction script quotes_g60.py"
+  },
+  "next_data_to_confirm": [
+    "CRM configuration/order data (powertrain x option take rates)",
+    "ConnectedDrive usage logs (feature activation, session depth)",
+    "demographic market panels (age/income/urban split)",
+    "CN CRM/after-sales data (closes Tier-C gap)"
+  ]
+}
