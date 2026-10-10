@@ -1,0 +1,1003 @@
+{
+ "n_rows_long": 3275,
+ "anomalies": [
+  {
+   "kind": "blank_rows_inside_us_blocks",
+   "rows": [
+    867,
+    877
+   ]
+  },
+  {
+   "kind": "decimal_precision",
+   "cn_eu_mean_deciles_min_max_mode": [
+    12,
+    15,
+    14
+   ],
+   "us_share_distinct_dp": [
+    1,
+    2,
+    3,
+    17,
+    18
+   ]
+  },
+  {
+   "kind": "duplicate_attribute_titles",
+   "CN_EU_2025": {
+    "Overall product satisfaction": 5,
+    "Exterior styling": 5,
+    "Interior styling": 5,
+    "Quality of interior and materials used": 5,
+    "Level of equipment": 5,
+    "Safety": 5,
+    "Freedom from faults/ squeaks/ rattles": 5,
+    "Value for money": 5,
+    "Reliability": 5,
+    "All round visibility": 5,
+    "Easy to read and use instruments/ controls/ displays": 5,
+    "Smartphone integration/ connectivity": 5,
+    "Features of information and entertainment system including in-car apps": 5,
+    "Easy to use information and entertainment system including in-car apps": 5,
+    "Integrated navigation system": 5,
+    "Overall seating comfort": 5,
+    "Interior storage for small items": 5,
+    "Acceleration": 5,
+    "Roadholding": 5,
+    "Fuel economy/ energy efficiency": 5,
+    "Braking": 5,
+    "Sportiness": 5,
+    "Prestige/ manufacturer reputation": 5,
+    "Manoeuvrability": 5,
+    "Quality of ride": 5,
+    "Front interior roominess": 5,
+    "Rear interior roominess": 5,
+    "Ease of loading/ unloading luggage": 5,
+    "Luggage capacity": 5,
+    "Ease of entry into and out of car": 5,
+    "Environm. friendliness": 5,
+    "Heating/ ventilation/ air conditioning ": 5,
+    "Overall build quality": 5,
+    "Quietness when driving": 5,
+    "Driving position": 5,
+    "Connected services": 5,
+    "Interior versatility": 5
+   },
+   "US_2025": {
+    "Overall exterior styling": 2,
+    "Size/ proportions": 2,
+    "Appearance of tires/ wheels": 2,
+    "Exterior door handles": 2,
+    "Headlight/ taillight design": 2,
+    "Sound of doors/ trunk/ hatch shutting": 2,
+    "Overall driving performance": 2,
+    "Ground clearance": 2,
+    "Riding comfort": 2,
+    "Turning radius": 2,
+    "Handling/Maneuverability": 2,
+    "If applicable: 4WD/AWD performance": 2,
+    "Off-Road capability": 2,
+    "Overall power and pickup": 2,
+    "Acceleration from stop": 2,
+    "Passing capability": 2,
+    "Overall interior styling/ aesthetics": 2,
+    "Interior colors": 2,
+    "Interior trim and finish": 2,
+    "Interior lighting": 2,
+    "Overall interior workmanship": 2,
+    "Quality of seat materials": 2,
+    "Quality of interior materials": 2,
+    "Interior door handles": 2,
+    "Overall comfort of the seats": 2,
+    "Comfort of front seat": 2,
+    "Comfort of 2nd row seat": 2,
+    "Overall interior design / layout": 2,
+    "Ease of front seat entry": 2,
+    "Front seat roominess": 2,
+    "Ease of 2nd row seat entry": 2,
+    "2nd row seat roominess": 2,
+    "Passenger seating capacity": 2,
+    "Interior roominess": 2,
+    "Interior storage": 2,
+    "Trunk lid/ tailgate and liftgate operations": 2,
+    "Ease of loading/unloading cargo": 2,
+    "Cargo capacity/usefulness": 2,
+    "Instrument panel (IP)": 2,
+    "Cupholders": 2,
+    "Provides a sense of wellbeing": 2,
+    "Overall interior versatility/seat stowaway": 2,
+    "Driver seat adjustability": 2,
+    "Passenger seat adjustability": 2,
+    "Overall performance of climate control system": 2,
+    "Heater performance": 2,
+    "Air conditioner performance": 2,
+    "Operation of heater/ AC controls": 2,
+    "Overall performance of sound system": 2,
+    "Design and integration of speakers": 2,
+    "Audio clarity": 2,
+    "Bass performance": 2,
+    "Placement/ ease of reading and using controls": 2,
+    "Intuitiveness of controls": 2,
+    "Overall noise/vibration/harshness": 2,
+    "Overall vehicle sound": 2,
+    "Active noise cancellation": 2,
+    "Freedom from squeaks and rattles": 2,
+    "Sound of engine": 2,
+    "Freedom from wind and road noise": 2,
+    "Smoothness of transmission": 2,
+    "Overall impression of durability/reliability": 2,
+    "Solid vehicle construction": 2,
+    "Freedom from electrical problems": 2,
+    "Overall safety of the vehicle": 2,
+    "Front visibility": 2,
+    "Rear visibility": 2,
+    "Braking": 2,
+    "Warranty coverage": 2,
+    "Headlight function/ brightness": 2,
+    "Technical innovations": 2,
+    "Level of standard equipment": 2,
+    "Overall value for money": 2,
+    "Price/deal offered": 2,
+    "Future trade-in or resale value": 2,
+    "Gas or electric mileage (fuel economy)": 2,
+    "Economical to own (cost of ownership)": 2,
+    "Affordable to buy": 2,
+    "Overall brand image": 2,
+    "Reputation/prestige of manufacturer": 2,
+    "Overall vehicle image": 2,
+    "Overall driver assist features": 2,
+    "If applicable: Backup system (camera, sensors, etc.)": 2,
+    "Safety monitoring features (blid spot warning, lane departure warning, etc)": 2,
+    "Adaptive driving assists (lane keeping, cruise, braking)": 2,
+    "Overall driver-vehicle interaction (HMI)": 2,
+    "If applicable: Navigation system": 2,
+    "Bluetooth/ smartphone pairing": 2,
+    "WiFi hotspot in vehicle": 2,
+    "Mirroring of smartphone content on vehicle display": 2,
+    "Place for phone": 2,
+    "Phone charging": 2,
+    "Ease of reading and using screen interface": 2,
+    "Head-up Display": 2,
+    "Position/ integration of displays in dashboard": 2,
+    "Menu structure of infotainment system": 2,
+    "If applicable: Interactive information system (e.g., OnStar, mbrace, iDrive)": 2,
+    "Performance of voice recognition": 2,
+    "Vehicle's Mobile App": 2,
+    "Overall environmental friendliness": 2,
+    "If applicable: Flat tire preparedness (spare, run flat, etc.)": 2,
+    "If applicable: Sunroof/ moonroof": 2,
+    "If applicable: Ease of customization": 2
+   }
+  },
+  {
+   "kind": "us_tail_high_bottom_blocks",
+   "blocks": [
+    {
+     "title": "Phone charging",
+     "G60_i_hate_it": 0.013,
+     "G70_i_hate_it": 0.066
+    },
+    {
+     "title": "Ease of reading and using screen interface",
+     "G60_i_hate_it": 0.02,
+     "G70_i_hate_it": 0.05
+    },
+    {
+     "title": "Head-up Display",
+     "G60_i_hate_it": 0.005,
+     "G70_i_hate_it": 0.009
+    },
+    {
+     "title": "Position/ integration of displays in dashboard",
+     "G60_i_hate_it": 0.039,
+     "G70_i_hate_it": 0.054
+    },
+    {
+     "title": "Menu structure of infotainment system",
+     "G60_i_hate_it": 0.05,
+     "G70_i_hate_it": 0.078
+    },
+    {
+     "title": "If applicable: Interactive information system (e.g",
+     "G60_i_hate_it": 0.005,
+     "G70_i_hate_it": 0.078
+    },
+    {
+     "title": "Performance of voice recognition",
+     "G60_i_hate_it": 0.005,
+     "G70_i_hate_it": 0.065
+    },
+    {
+     "title": "Vehicle's Mobile App",
+     "G60_i_hate_it": 0.006,
+     "G70_i_hate_it": 0.066
+    },
+    {
+     "title": "Overall environmental friendliness",
+     "G60_i_hate_it": 0.002,
+     "G70_i_hate_it": 0.058
+    },
+    {
+     "title": "If applicable: Flat tire preparedness (spare, run ",
+     "G60_i_hate_it": 0.026,
+     "G70_i_hate_it": 0.169
+    },
+    {
+     "title": "If applicable: Sunroof/ moonroof",
+     "G60_i_hate_it": 0.013,
+     "G70_i_hate_it": 0.007
+    },
+    {
+     "title": "If applicable: Ease of customization",
+     "G60_i_hate_it": 0.002,
+     "G70_i_hate_it": 0.179
+    }
+   ]
+  }
+ ],
+ "US_rankings": {
+  "G60": {
+   "top15_top2box": [
+    [
+     "Reputation/prestige of manufacturer",
+     0.705
+    ],
+    [
+     "Headlight function/ brightness",
+     0.703
+    ],
+    [
+     "Handling/Maneuverability",
+     0.699
+    ],
+    [
+     "Overall brand image",
+     0.697
+    ],
+    [
+     "Appearance of tires/ wheels",
+     0.686
+    ],
+    [
+     "Riding comfort",
+     0.684
+    ],
+    [
+     "Front seat roominess",
+     0.683
+    ],
+    [
+     "Acceleration from stop",
+     0.679
+    ],
+    [
+     "Overall comfort of the seats",
+     0.666
+    ],
+    [
+     "Overall impression of durability/reliability",
+     0.66
+    ],
+    [
+     "Interior colors",
+     0.653
+    ],
+    [
+     "Comfort of front seat",
+     0.653
+    ],
+    [
+     "Overall driving performance",
+     0.648
+    ],
+    [
+     "Interior trim and finish",
+     0.643
+    ],
+    [
+     "Overall exterior styling",
+     0.638
+    ]
+   ],
+   "bottom15_top2box": [
+    [
+     "Performance of voice recognition",
+     0.385
+    ],
+    [
+     "Level of standard equipment",
+     0.383
+    ],
+    [
+     "WiFi hotspot in vehicle",
+     0.383
+    ],
+    [
+     "Overall value for money",
+     0.376
+    ],
+    [
+     "Price/deal offered",
+     0.363
+    ],
+    [
+     "Future trade-in or resale value",
+     0.359
+    ],
+    [
+     "Overall performance of climate control system",
+     0.357
+    ],
+    [
+     "Menu structure of infotainment system",
+     0.357
+    ],
+    [
+     "If applicable: Interactive information system (e.g., OnStar, mbrace, iDrive)",
+     0.357
+    ],
+    [
+     "If applicable: Flat tire preparedness (spare, run flat, etc.)",
+     0.353
+    ],
+    [
+     "Ground clearance",
+     0.345
+    ],
+    [
+     "Operation of heater/ AC controls",
+     0.289
+    ],
+    [
+     "Economical to own (cost of ownership)",
+     0.281
+    ],
+    [
+     "Affordable to buy",
+     0.197
+    ],
+    [
+     "Off-Road capability",
+     0.169
+    ]
+   ],
+   "top15_bottom2box_worst": [
+    [
+     "If applicable: Flat tire preparedness (spare, run flat, etc.)",
+     0.086
+    ],
+    [
+     "Phone charging",
+     0.077
+    ],
+    [
+     "WiFi hotspot in vehicle",
+     0.072
+    ],
+    [
+     "Menu structure of infotainment system",
+     0.067
+    ],
+    [
+     "Comfort of front seat",
+     0.064
+    ],
+    [
+     "Instrument panel (IP)",
+     0.063
+    ],
+    [
+     "Operation of heater/ AC controls",
+     0.06
+    ],
+    [
+     "Freedom from squeaks and rattles",
+     0.054
+    ],
+    [
+     "Placement/ ease of reading and using controls",
+     0.053
+    ],
+    [
+     "Position/ integration of displays in dashboard",
+     0.052
+    ],
+    [
+     "Interior door handles",
+     0.047
+    ],
+    [
+     "Overall performance of climate control system",
+     0.046
+    ],
+    [
+     "If applicable: Interactive information system (e.g., OnStar, mbrace, iDrive)",
+     0.045
+    ],
+    [
+     "Overall vehicle sound",
+     0.044
+    ],
+    [
+     "Future trade-in or resale value",
+     0.04
+    ]
+   ],
+   "n_attributes": 103
+  },
+  "G70": {
+   "top15_top2box": [
+    [
+     "2nd row seat roominess",
+     0.779
+    ],
+    [
+     "Front seat roominess",
+     0.766
+    ],
+    [
+     "Riding comfort",
+     0.749
+    ],
+    [
+     "Comfort of 2nd row seat",
+     0.736
+    ],
+    [
+     "Overall comfort of the seats",
+     0.661
+    ],
+    [
+     "Ease of 2nd row seat entry",
+     0.657
+    ],
+    [
+     "Reputation/prestige of manufacturer",
+     0.655
+    ],
+    [
+     "Acceleration from stop",
+     0.643
+    ],
+    [
+     "Overall driving performance",
+     0.642
+    ],
+    [
+     "Freedom from wind and road noise",
+     0.641
+    ],
+    [
+     "Sound of engine",
+     0.638
+    ],
+    [
+     "Passing capability",
+     0.636
+    ],
+    [
+     "Interior colors",
+     0.633
+    ],
+    [
+     "Quality of interior materials",
+     0.632
+    ],
+    [
+     "Solid vehicle construction",
+     0.631
+    ]
+   ],
+   "bottom15_top2box": [
+    [
+     "Menu structure of infotainment system",
+     0.319
+    ],
+    [
+     "Placement/ ease of reading and using controls",
+     0.298
+    ],
+    [
+     "WiFi hotspot in vehicle",
+     0.279
+    ],
+    [
+     "If applicable: Interactive information system (e.g., OnStar, mbrace, iDrive)",
+     0.278
+    ],
+    [
+     "If applicable: Ease of customization",
+     0.276
+    ],
+    [
+     "Overall value for money",
+     0.271
+    ],
+    [
+     "Off-Road capability",
+     0.269
+    ],
+    [
+     "If applicable: Flat tire preparedness (spare, run flat, etc.)",
+     0.269
+    ],
+    [
+     "Place for phone",
+     0.266
+    ],
+    [
+     "Warranty coverage",
+     0.261
+    ],
+    [
+     "Intuitiveness of controls",
+     0.249
+    ],
+    [
+     "Economical to own (cost of ownership)",
+     0.163
+    ],
+    [
+     "Price/deal offered",
+     0.143
+    ],
+    [
+     "Future trade-in or resale value",
+     0.132
+    ],
+    [
+     "Affordable to buy",
+     0.063
+    ]
+   ],
+   "top15_bottom2box_worst": [
+    [
+     "If applicable: Flat tire preparedness (spare, run flat, etc.)",
+     0.266
+    ],
+    [
+     "Future trade-in or resale value",
+     0.231
+    ],
+    [
+     "If applicable: Ease of customization",
+     0.185
+    ],
+    [
+     "WiFi hotspot in vehicle",
+     0.182
+    ],
+    [
+     "Affordable to buy",
+     0.168
+    ],
+    [
+     "Air conditioner performance",
+     0.161
+    ],
+    [
+     "Economical to own (cost of ownership)",
+     0.161
+    ],
+    [
+     "Menu structure of infotainment system",
+     0.152
+    ],
+    [
+     "Bluetooth/ smartphone pairing",
+     0.149
+    ],
+    [
+     "Instrument panel (IP)",
+     0.147
+    ],
+    [
+     "Overall performance of climate control system",
+     0.14
+    ],
+    [
+     "Technical innovations",
+     0.139
+    ],
+    [
+     "Freedom from electrical problems",
+     0.135
+    ],
+    [
+     "Price/deal offered",
+     0.127
+    ],
+    [
+     "Operation of heater/ AC controls",
+     0.125
+    ]
+   ],
+   "n_attributes": 103
+  }
+ },
+ "US_top2box_G60_minus_G70_largest": [
+  [
+   "2nd row seat roominess",
+   -0.306
+  ],
+  [
+   "Comfort of 2nd row seat",
+   -0.265
+  ],
+  [
+   "Place for phone",
+   0.264
+  ],
+  [
+   "Appearance of tires/ wheels",
+   0.262
+  ],
+  [
+   "Future trade-in or resale value",
+   0.227
+  ],
+  [
+   "Price/deal offered",
+   0.22
+  ],
+  [
+   "Bass performance",
+   0.206
+  ],
+  [
+   "Ease of 2nd row seat entry",
+   -0.199
+  ],
+  [
+   "Audio clarity",
+   0.199
+  ],
+  [
+   "Rear visibility",
+   0.19
+  ],
+  [
+   "Warranty coverage",
+   0.185
+  ],
+  [
+   "Phone charging",
+   0.179
+  ],
+  [
+   "Intuitiveness of controls",
+   0.173
+  ],
+  [
+   "Design and integration of speakers",
+   0.167
+  ],
+  [
+   "Mirroring of smartphone content on vehicle display",
+   0.166
+  ],
+  [
+   "If applicable: 4WD/AWD performance",
+   0.164
+  ],
+  [
+   "If applicable: Ease of customization",
+   0.161
+  ],
+  [
+   "Gas or electric mileage (fuel economy)",
+   0.159
+  ],
+  [
+   "Turning radius",
+   0.157
+  ],
+  [
+   "Cupholders",
+   0.149
+  ]
+ ],
+ "CN_EU_G70_China_minus_EU_sorted": [
+  [
+   "Front interior roominess",
+   7.687,
+   9.688,
+   -2.001
+  ],
+  [
+   "Rear interior roominess",
+   7.519,
+   9.406,
+   -1.887
+  ],
+  [
+   "Value for money",
+   8.287,
+   6.468,
+   1.819
+  ],
+  [
+   "Braking",
+   7.818,
+   9.603,
+   -1.785
+  ],
+  [
+   "Sportiness",
+   8.642,
+   6.971,
+   1.671
+  ],
+  [
+   "Overall product satisfaction",
+   9.636,
+   7.983,
+   1.654
+  ],
+  [
+   "Reliability",
+   8.218,
+   9.674,
+   -1.455
+  ],
+  [
+   "Ease of loading/ unloading luggage",
+   7.458,
+   8.667,
+   -1.209
+  ],
+  [
+   "Quality of ride",
+   8.623,
+   9.516,
+   -0.894
+  ],
+  [
+   "Quality of interior and materials used",
+   8.434,
+   9.113,
+   -0.679
+  ],
+  [
+   "Integrated navigation system",
+   8.178,
+   8.822,
+   -0.644
+  ],
+  [
+   "Manoeuvrability",
+   8.379,
+   8.968,
+   -0.589
+  ],
+  [
+   "Overall build quality",
+   9.36,
+   8.779,
+   0.58
+  ],
+  [
+   "Level of equipment",
+   9.816,
+   9.237,
+   0.579
+  ],
+  [
+   "Overall seating comfort",
+   8.722,
+   9.295,
+   -0.572
+  ],
+  [
+   "Connected services",
+   7.317,
+   7.862,
+   -0.544
+  ],
+  [
+   "Ease of entry into and out of car",
+   8.708,
+   9.249,
+   -0.541
+  ],
+  [
+   "Fuel economy/ energy efficiency",
+   8.184,
+   7.675,
+   0.508
+  ],
+  [
+   "Interior storage for small items",
+   8.408,
+   7.96,
+   0.448
+  ],
+  [
+   "Exterior styling",
+   8.788,
+   8.379,
+   0.409
+  ],
+  [
+   "Quietness when driving",
+   9.386,
+   9.779,
+   -0.393
+  ],
+  [
+   "Interior styling",
+   8.57,
+   8.92,
+   -0.35
+  ],
+  [
+   "Roadholding",
+   8.597,
+   8.936,
+   -0.339
+  ],
+  [
+   "Driving position",
+   8.797,
+   9.126,
+   -0.329
+  ],
+  [
+   "Safety",
+   8.975,
+   9.279,
+   -0.304
+  ],
+  [
+   "Interior versatility",
+   8.042,
+   8.323,
+   -0.281
+  ],
+  [
+   "Luggage capacity",
+   7.656,
+   7.407,
+   0.249
+  ],
+  [
+   "Easy to read and use instruments/ controls/ displays",
+   8.434,
+   8.193,
+   0.24
+  ],
+  [
+   "Freedom from faults/ squeaks/ rattles",
+   8.445,
+   8.614,
+   -0.169
+  ],
+  [
+   "All round visibility",
+   8.431,
+   8.298,
+   0.133
+  ],
+  [
+   "Acceleration",
+   8.827,
+   8.943,
+   -0.116
+  ],
+  [
+   "Easy to use information and entertainment system including in-car apps",
+   8.1,
+   7.986,
+   0.114
+  ],
+  [
+   "Features of information and entertainment system including in-car apps",
+   8.208,
+   8.29,
+   -0.082
+  ],
+  [
+   "Environm. friendliness",
+   7.44,
+   7.513,
+   -0.074
+  ],
+  [
+   "Smartphone integration/ connectivity",
+   8.426,
+   8.356,
+   0.07
+  ],
+  [
+   "Prestige/ manufacturer reputation",
+   9.165,
+   9.226,
+   -0.061
+  ],
+  [
+   "Heating/ ventilation/ air conditioning ",
+   8.822,
+   8.796,
+   0.026
+  ]
+ ],
+ "CN_EU_attributes": [
+  "Acceleration",
+  "All round visibility",
+  "Braking",
+  "Connected services",
+  "Driving position",
+  "Ease of entry into and out of car",
+  "Ease of loading/ unloading luggage",
+  "Easy to read and use instruments/ controls/ displays",
+  "Easy to use information and entertainment system including in-car apps",
+  "Environm. friendliness",
+  "Exterior styling",
+  "Features of information and entertainment system including in-car apps",
+  "Freedom from faults/ squeaks/ rattles",
+  "Front interior roominess",
+  "Fuel economy/ energy efficiency",
+  "Heating/ ventilation/ air conditioning ",
+  "Integrated navigation system",
+  "Interior storage for small items",
+  "Interior styling",
+  "Interior versatility",
+  "Level of equipment",
+  "Luggage capacity",
+  "Manoeuvrability",
+  "Overall build quality",
+  "Overall product satisfaction",
+  "Overall seating comfort",
+  "Prestige/ manufacturer reputation",
+  "Quality of interior and materials used",
+  "Quality of ride",
+  "Quietness when driving",
+  "Rear interior roominess",
+  "Reliability",
+  "Roadholding",
+  "Safety",
+  "Smartphone integration/ connectivity",
+  "Sportiness",
+  "Value for money"
+ ],
+ "CN_EU_blocks": [
+  "Overall product satisfaction",
+  "Exterior styling",
+  "Interior styling",
+  "Quality of interior and materials used",
+  "Level of equipment",
+  "Safety",
+  "Freedom from faults/ squeaks/ rattles",
+  "Value for money",
+  "Reliability",
+  "All round visibility",
+  "Easy to read and use instruments/ controls/ displays",
+  "Smartphone integration/ connectivity",
+  "Features of information and entertainment system including in-car apps",
+  "Easy to use information and entertainment system including in-car apps",
+  "Integrated navigation system",
+  "Overall seating comfort",
+  "Interior storage for small items",
+  "Acceleration",
+  "Roadholding",
+  "Fuel economy/ energy efficiency",
+  "Braking",
+  "Sportiness",
+  "Prestige/ manufacturer reputation",
+  "Manoeuvrability",
+  "Quality of ride",
+  "Front interior roominess",
+  "Rear interior roominess",
+  "Ease of loading/ unloading luggage",
+  "Luggage capacity",
+  "Ease of entry into and out of car",
+  "Environm. friendliness",
+  "Heating/ ventilation/ air conditioning ",
+  "Overall build quality",
+  "Quietness when driving",
+  "Driving position",
+  "Connected services",
+  "Interior versatility"
+ ]
+}

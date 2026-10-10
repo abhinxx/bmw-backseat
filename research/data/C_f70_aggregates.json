@@ -1,0 +1,2115 @@
+{
+ "model": "F70 (BMW 1 Series)",
+ "source_workbook": "BMW-Data/F70_feedback_hackathon.xlsx",
+ "sheet": "Feedback_Explorer",
+ "scripts": "research/scripts/C_01..C_07",
+ "dislike_definition": "Feedback Type in {Defect, Difficult to Use, Wants}",
+ "like_definition": "Feedback Type == 'Likes'",
+ "part1_profile": {
+  "rows": 4076,
+  "unique_ids": 2128,
+  "unique_comment_texts": 2128,
+  "rows_per_id_mean": 1.915,
+  "rows_per_id_distribution": {
+   "1": 1119,
+   "2": 535,
+   "3": 242,
+   "4": 113,
+   "5": 61,
+   "6": 26,
+   "7": 18,
+   "8": 9,
+   "9": 1,
+   "10": 3,
+   "11": 1
+  },
+  "duplication_examples": [
+   {
+    "ID": "F70-0002",
+    "rows": 2,
+    "identical_text": true,
+    "labels": [
+     [
+      "Likes",
+      "Body equipment, overall technology",
+      "Workmanship appeals"
+     ],
+     [
+      "Difficult to Use",
+      "Owner's Manual",
+      "Not user-friendly"
+     ]
+    ]
+   },
+   {
+    "ID": "F70-0003",
+    "rows": 2,
+    "identical_text": true,
+    "labels": [
+     [
+      "Likes",
+      "Impression of safety",
+      "Like: function"
+     ],
+     [
+      "nan",
+      "no_class_found",
+      "nan"
+     ]
+    ]
+   }
+  ],
+  "texts_shared_by_multiple_ids": 0,
+  "dist_source": {
+   "rows": {
+    "Source A": 4076
+   },
+   "unique_ids": {
+    "Source A": 2128
+   }
+  },
+  "dist_country": {
+   "rows": {
+    "GB": 2790,
+    "JP": 1026,
+    "SE": 121,
+    "FR": 75,
+    "AU": 30,
+    "DK": 13,
+    "FI": 11,
+    "KR": 5,
+    "ZA": 5
+   },
+   "unique_ids": {
+    "GB": 1293,
+    "JP": 672,
+    "SE": 71,
+    "FR": 53,
+    "AU": 16,
+    "FI": 8,
+    "DK": 8,
+    "KR": 4,
+    "ZA": 3
+   }
+  },
+  "dist_engine": {
+   "rows": {
+    "ICE": 4076
+   },
+   "unique_ids": {
+    "ICE": 2128
+   }
+  },
+  "dist_feedback_type": {
+   "rows": {
+    "Likes": 1630,
+    "nan": 1087,
+    "Difficult to Use": 595,
+    "Defect": 491,
+    "Wants": 273
+   },
+   "unique_ids": {
+    "Likes": 1168,
+    "nan": 300,
+    "Difficult to Use": 276,
+    "Defect": 238,
+    "Wants": 146
+   }
+  },
+  "dist_brand": {
+   "rows": {
+    "[BMW]": 4076
+   },
+   "unique_ids": {
+    "[BMW]": 2128
+   }
+  },
+  "dist_sales_desc": {
+   "rows": {
+    "[BMW 1 Series]": 4076
+   },
+   "unique_ids": {
+    "[BMW 1 Series]": 2128
+   }
+  },
+  "xtab_source_country_unique": {
+   "AU": {
+    "Source A": 16
+   },
+   "DK": {
+    "Source A": 8
+   },
+   "FI": {
+    "Source A": 8
+   },
+   "FR": {
+    "Source A": 53
+   },
+   "GB": {
+    "Source A": 1293
+   },
+   "JP": {
+    "Source A": 672
+   },
+   "KR": {
+    "Source A": 4
+   },
+   "SE": {
+    "Source A": 71
+   },
+   "ZA": {
+    "Source A": 3
+   }
+  },
+  "xtab_source_country_rows": {
+   "AU": {
+    "Source A": 30
+   },
+   "DK": {
+    "Source A": 13
+   },
+   "FI": {
+    "Source A": 11
+   },
+   "FR": {
+    "Source A": 75
+   },
+   "GB": {
+    "Source A": 2790
+   },
+   "JP": {
+    "Source A": 1026
+   },
+   "KR": {
+    "Source A": 5
+   },
+   "SE": {
+    "Source A": 121
+   },
+   "ZA": {
+    "Source A": 5
+   }
+  },
+  "xtab_country_engine_unique": {
+   "ICE": {
+    "AU": 16,
+    "DK": 8,
+    "FI": 8,
+    "FR": 53,
+    "GB": 1293,
+    "JP": 672,
+    "KR": 4,
+    "SE": 71,
+    "ZA": 3
+   }
+  },
+  "xtab_country_engine_rows": {
+   "ICE": {
+    "AU": 30,
+    "DK": 13,
+    "FI": 11,
+    "FR": 75,
+    "GB": 2790,
+    "JP": 1026,
+    "KR": 5,
+    "SE": 121,
+    "ZA": 5
+   }
+  },
+  "dist_derivate": {
+   "rows": {
+    "F70": 4076
+   },
+   "unique_ids": {
+    "F70": 2128
+   }
+  }
+ },
+ "part2_taxonomy": {
+  "consistency_Country": {
+   "max_per_id": 1,
+   "ids_inconsistent": 0
+  },
+  "consistency_Source": {
+   "max_per_id": 1,
+   "ids_inconsistent": 0
+  },
+  "consistency_Engine Type": {
+   "max_per_id": 1,
+   "ids_inconsistent": 0
+  },
+  "consistency_Derivate (e-code)": {
+   "max_per_id": 1,
+   "ids_inconsistent": 0
+  },
+  "consistency_Sales Description": {
+   "max_per_id": 1,
+   "ids_inconsistent": 0
+  },
+  "country_unique_ids": {
+   "GB": 1293,
+   "JP": 672,
+   "SE": 71,
+   "FR": 53,
+   "AU": 16,
+   "FI": 8,
+   "DK": 8,
+   "KR": 4,
+   "ZA": 3
+  },
+  "feedback_type_unique_id_pairs": {
+   "Likes": 1284,
+   "nan": 1087,
+   "Difficult to Use": 462,
+   "Defect": 372,
+   "Wants": 249
+  },
+  "id_sentiment_mix": {
+   "no_class_found_only": 300,
+   "both_like_and_negative": 273,
+   "likes_only": 1011,
+   "negative_only": 544
+  },
+  "total_unique_ids": 2128,
+  "top25_level2": [
+   {
+    "level2": "no_class_found",
+    "unique_ids": 1087,
+    "unique_ids_likes": 0,
+    "unique_ids_negative": 0
+   },
+   {
+    "level2": "Drivetrain",
+    "unique_ids": 527,
+    "unique_ids_likes": 424,
+    "unique_ids_negative": 115
+   },
+   {
+    "level2": "Drive, driving dynamics and chassis, overall technology",
+    "unique_ids": 475,
+    "unique_ids_likes": 475,
+    "unique_ids_negative": 0
+   },
+   {
+    "level2": "Handling / Riding",
+    "unique_ids": 215,
+    "unique_ids_likes": 179,
+    "unique_ids_negative": 37
+   },
+   {
+    "level2": "Touch screen, operation",
+    "unique_ids": 137,
+    "unique_ids_likes": 20,
+    "unique_ids_negative": 119
+   },
+   {
+    "level2": "ConnectedDrive and Infotainment, overall technology",
+    "unique_ids": 119,
+    "unique_ids_likes": 27,
+    "unique_ids_negative": 96
+   },
+   {
+    "level2": "Body equipment, overall technology",
+    "unique_ids": 98,
+    "unique_ids_likes": 54,
+    "unique_ids_negative": 45
+   },
+   {
+    "level2": "Seats",
+    "unique_ids": 96,
+    "unique_ids_likes": 51,
+    "unique_ids_negative": 46
+   },
+   {
+    "level2": "Owner's Manual",
+    "unique_ids": 64,
+    "unique_ids_likes": 3,
+    "unique_ids_negative": 61
+   },
+   {
+    "level2": "Impression of safety",
+    "unique_ids": 59,
+    "unique_ids_likes": 47,
+    "unique_ids_negative": 12
+   },
+   {
+    "level2": "Exterior design",
+    "unique_ids": 56,
+    "unique_ids_likes": 56,
+    "unique_ids_negative": 0
+   },
+   {
+    "level2": "My Modes / driving experience",
+    "unique_ids": 46,
+    "unique_ids_likes": 30,
+    "unique_ids_negative": 17
+   },
+   {
+    "level2": "Cushioning / damping vehicle",
+    "unique_ids": 42,
+    "unique_ids_likes": 16,
+    "unique_ids_negative": 27
+   },
+   {
+    "level2": "General enquiry: customer feedback",
+    "unique_ids": 40,
+    "unique_ids_likes": 0,
+    "unique_ids_negative": 40
+   },
+   {
+    "level2": "Transmission",
+    "unique_ids": 40,
+    "unique_ids_likes": 16,
+    "unique_ids_negative": 24
+   },
+   {
+    "level2": "Driver assistance, automated driving, overall technology",
+    "unique_ids": 39,
+    "unique_ids_likes": 20,
+    "unique_ids_negative": 19
+   },
+   {
+    "level2": "Audio mode, sound",
+    "unique_ids": 35,
+    "unique_ids_likes": 6,
+    "unique_ids_negative": 30
+   },
+   {
+    "level2": "Navigation",
+    "unique_ids": 33,
+    "unique_ids_likes": 5,
+    "unique_ids_negative": 29
+   },
+   {
+    "level2": "Exterior rearview mirror",
+    "unique_ids": 32,
+    "unique_ids_likes": 8,
+    "unique_ids_negative": 24
+   },
+   {
+    "level2": "Interior design",
+    "unique_ids": 29,
+    "unique_ids_likes": 26,
+    "unique_ids_negative": 3
+   },
+   {
+    "level2": "Braking",
+    "unique_ids": 28,
+    "unique_ids_likes": 7,
+    "unique_ids_negative": 21
+   },
+   {
+    "level2": "Exterior",
+    "unique_ids": 28,
+    "unique_ids_likes": 15,
+    "unique_ids_negative": 13
+   },
+   {
+    "level2": "Wheels / tires",
+    "unique_ids": 27,
+    "unique_ids_likes": 1,
+    "unique_ids_negative": 26
+   },
+   {
+    "level2": "Luggage compartment",
+    "unique_ids": 25,
+    "unique_ids_likes": 7,
+    "unique_ids_negative": 18
+   },
+   {
+    "level2": "Engine acoustics / engine sound",
+    "unique_ids": 23,
+    "unique_ids_likes": 9,
+    "unique_ids_negative": 14
+   }
+  ],
+  "level2_count_total": 120,
+  "unclassified": {
+   "rows_no_class_found": 1087,
+   "ids_with_any_no_class_row": 1087,
+   "ids_where_every_row_unclassified": 300,
+   "pct_of_unique_ids_any_unclassified": 51.1,
+   "pct_ids_fully_unclassified": 14.1
+  },
+  "top15_dislike_themes_overall": [
+   {
+    "theme": "Touch screen, operation",
+    "unique_ids": 119
+   },
+   {
+    "theme": "Drivetrain",
+    "unique_ids": 115
+   },
+   {
+    "theme": "ConnectedDrive and Infotainment, overall technology",
+    "unique_ids": 96
+   },
+   {
+    "theme": "Owner's Manual",
+    "unique_ids": 61
+   },
+   {
+    "theme": "Seats",
+    "unique_ids": 46
+   },
+   {
+    "theme": "Body equipment, overall technology",
+    "unique_ids": 45
+   },
+   {
+    "theme": "General enquiry: customer feedback",
+    "unique_ids": 40
+   },
+   {
+    "theme": "Handling / Riding",
+    "unique_ids": 37
+   },
+   {
+    "theme": "Audio mode, sound",
+    "unique_ids": 30
+   },
+   {
+    "theme": "Navigation",
+    "unique_ids": 29
+   },
+   {
+    "theme": "Cushioning / damping vehicle",
+    "unique_ids": 27
+   },
+   {
+    "theme": "Wheels / tires",
+    "unique_ids": 26
+   },
+   {
+    "theme": "Exterior rearview mirror",
+    "unique_ids": 24
+   },
+   {
+    "theme": "Transmission",
+    "unique_ids": 24
+   },
+   {
+    "theme": "Braking",
+    "unique_ids": 21
+   }
+  ],
+  "top15_like_themes_overall": [
+   {
+    "theme": "Drive, driving dynamics and chassis, overall technology",
+    "unique_ids": 475
+   },
+   {
+    "theme": "Drivetrain",
+    "unique_ids": 424
+   },
+   {
+    "theme": "Handling / Riding",
+    "unique_ids": 179
+   },
+   {
+    "theme": "Exterior design",
+    "unique_ids": 56
+   },
+   {
+    "theme": "Body equipment, overall technology",
+    "unique_ids": 54
+   },
+   {
+    "theme": "Seats",
+    "unique_ids": 51
+   },
+   {
+    "theme": "Impression of safety",
+    "unique_ids": 47
+   },
+   {
+    "theme": "My Modes / driving experience",
+    "unique_ids": 30
+   },
+   {
+    "theme": "ConnectedDrive and Infotainment, overall technology",
+    "unique_ids": 27
+   },
+   {
+    "theme": "Interior design",
+    "unique_ids": 26
+   },
+   {
+    "theme": "Driver assistance, automated driving, overall technology",
+    "unique_ids": 20
+   },
+   {
+    "theme": "Touch screen, operation",
+    "unique_ids": 20
+   },
+   {
+    "theme": "Vehicle safety, overall technology",
+    "unique_ids": 17
+   },
+   {
+    "theme": "Cushioning / damping vehicle",
+    "unique_ids": 16
+   },
+   {
+    "theme": "Transmission",
+    "unique_ids": 16
+   }
+  ],
+  "countries_ge30": [
+   "GB",
+   "JP",
+   "SE",
+   "FR"
+  ],
+  "themes_by_country": {
+   "GB": {
+    "unique_ids": 1293,
+    "top15_dislikes": [
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 103
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 77
+     },
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 69
+     },
+     {
+      "theme": "Owner's Manual",
+      "unique_ids": 56
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 37
+     },
+     {
+      "theme": "General enquiry: customer feedback",
+      "unique_ids": 33
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 27
+     },
+     {
+      "theme": "Transmission",
+      "unique_ids": 22
+     },
+     {
+      "theme": "Wheels / tires",
+      "unique_ids": 21
+     },
+     {
+      "theme": "Cushioning / damping vehicle",
+      "unique_ids": 20
+     },
+     {
+      "theme": "Exterior rearview mirror",
+      "unique_ids": 20
+     },
+     {
+      "theme": "Audio mode, sound",
+      "unique_ids": 19
+     },
+     {
+      "theme": "Driver assistance, automated driving, overall technology",
+      "unique_ids": 18
+     },
+     {
+      "theme": "Navigation",
+      "unique_ids": 16
+     },
+     {
+      "theme": "Vehicle, climatization",
+      "unique_ids": 16
+     }
+    ],
+    "top15_likes": [
+     {
+      "theme": "Drive, driving dynamics and chassis, overall technology",
+      "unique_ids": 355
+     },
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 210
+     },
+     {
+      "theme": "Handling / Riding",
+      "unique_ids": 57
+     },
+     {
+      "theme": "Exterior design",
+      "unique_ids": 41
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 40
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 37
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 24
+     },
+     {
+      "theme": "My Modes / driving experience",
+      "unique_ids": 23
+     },
+     {
+      "theme": "Interior design",
+      "unique_ids": 18
+     },
+     {
+      "theme": "Impression of safety",
+      "unique_ids": 16
+     },
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 16
+     },
+     {
+      "theme": "Transmission",
+      "unique_ids": 15
+     },
+     {
+      "theme": "Driver assistance, automated driving, overall technology",
+      "unique_ids": 11
+     },
+     {
+      "theme": "Interior comfort",
+      "unique_ids": 10
+     },
+     {
+      "theme": "Vehicle safety, overall technology",
+      "unique_ids": 8
+     }
+    ]
+   },
+   "JP": {
+    "unique_ids": 672,
+    "top15_dislikes": [
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 41
+     },
+     {
+      "theme": "Handling / Riding",
+      "unique_ids": 23
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 14
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 14
+     },
+     {
+      "theme": "Navigation",
+      "unique_ids": 13
+     },
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 11
+     },
+     {
+      "theme": "Audio mode, sound",
+      "unique_ids": 7
+     },
+     {
+      "theme": "Braking",
+      "unique_ids": 7
+     },
+     {
+      "theme": "Cushioning / damping vehicle",
+      "unique_ids": 6
+     },
+     {
+      "theme": "Engine acoustics / engine sound",
+      "unique_ids": 6
+     },
+     {
+      "theme": "Door, open / close",
+      "unique_ids": 5
+     },
+     {
+      "theme": "Impression of safety",
+      "unique_ids": 5
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 5
+     },
+     {
+      "theme": "USB port",
+      "unique_ids": 5
+     },
+     {
+      "theme": "Exterior rearview mirror",
+      "unique_ids": 4
+     }
+    ],
+    "top15_likes": [
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 195
+     },
+     {
+      "theme": "Handling / Riding",
+      "unique_ids": 119
+     },
+     {
+      "theme": "Drive, driving dynamics and chassis, overall technology",
+      "unique_ids": 74
+     },
+     {
+      "theme": "Impression of safety",
+      "unique_ids": 26
+     },
+     {
+      "theme": "Exterior design",
+      "unique_ids": 14
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 11
+     },
+     {
+      "theme": "Cushioning / damping vehicle",
+      "unique_ids": 10
+     },
+     {
+      "theme": "Driver assistance, automated driving, overall technology",
+      "unique_ids": 9
+     },
+     {
+      "theme": "Exterior",
+      "unique_ids": 8
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 8
+     },
+     {
+      "theme": "Vehicle safety, overall technology",
+      "unique_ids": 8
+     },
+     {
+      "theme": "Interior design",
+      "unique_ids": 7
+     },
+     {
+      "theme": "Engine acoustics / engine sound",
+      "unique_ids": 6
+     },
+     {
+      "theme": "My Modes / driving experience",
+      "unique_ids": 5
+     },
+     {
+      "theme": "Space / spatial impression",
+      "unique_ids": 4
+     }
+    ]
+   },
+   "SE": {
+    "unique_ids": 71,
+    "top15_dislikes": [
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 4
+     },
+     {
+      "theme": "General enquiry: customer feedback",
+      "unique_ids": 4
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 3
+     },
+     {
+      "theme": "Audio mode, sound",
+      "unique_ids": 2
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 2
+     },
+     {
+      "theme": "ConnectedDrive services (smartphone) technology overall",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Owner's Manual",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Trunk lid",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Wheels / tires",
+      "unique_ids": 2
+     },
+     {
+      "theme": "(Active) cruise control",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Air conditioning, overall technology",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Heated steering wheel",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Instrument panel",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Lane departure warning",
+      "unique_ids": 1
+     }
+    ],
+    "top15_likes": [
+     {
+      "theme": "Drive, driving dynamics and chassis, overall technology",
+      "unique_ids": 21
+     },
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 8
+     },
+     {
+      "theme": "Impression of safety",
+      "unique_ids": 4
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 4
+     },
+     {
+      "theme": "Handling / Riding",
+      "unique_ids": 2
+     },
+     {
+      "theme": "My Modes / driving experience",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Steering wheel",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Exterior",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Interior design",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Parking Assistant",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Steering",
+      "unique_ids": 1
+     }
+    ]
+   },
+   "FR": {
+    "unique_ids": 53,
+    "top15_dislikes": [
+     {
+      "theme": "Audio mode, sound",
+      "unique_ids": 2
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Cushioning / damping vehicle",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Door, front",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Exhaust system",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Floor mat",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Impression of safety",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Instrument cluster",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Instrument panel",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Intelligent Personal Assistant",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Parking Assistant",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Radiator grille",
+      "unique_ids": 1
+     }
+    ],
+    "top15_likes": [
+     {
+      "theme": "Drive, driving dynamics and chassis, overall technology",
+      "unique_ids": 13
+     },
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 5
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 2
+     },
+     {
+      "theme": "Braking",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Cushioning / damping vehicle",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Exterior",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Exterior design",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Impression of safety",
+      "unique_ids": 1
+     },
+     {
+      "theme": "Interior mirror, garage door opener",
+      "unique_ids": 1
+     }
+    ]
+   }
+  }
+ },
+ "quotes": {
+  "Touch screen, operation": [
+   {
+    "ID": "F70-1107",
+    "Country": "AU",
+    "feedback_type": "Difficult to Use",
+    "level3": "Size not user friendly",
+    "quote": "i absolutely adore my 118. i really enjoy how smooth the steering wheel feels and how nicely the car drives overall. i like all the features on the 118, especially the cameras that show the street ..."
+   },
+   {
+    "ID": "F70-0817",
+    "Country": "JP",
+    "feedback_type": "Defect",
+    "level3": "Malfunction",
+    "quote": "i am happy with how the car performs and with the driving itself, but i feel the control system and software still need work. in particular, these areas are below what i could recommend. [controls ..."
+   }
+  ],
+  "Drivetrain": [
+   {
+    "ID": "F70-1235",
+    "Country": "GB",
+    "feedback_type": "Defect",
+    "level3": "Malfunction",
+    "quote": "as a daily driver it is very nice and has plenty of punch when you ask for it, but as a sporty car it feels too sterile - very fast yet no character, no proper noise apart from the fake stuff. maki..."
+   },
+   {
+    "ID": "F70-1584",
+    "Country": "GB",
+    "feedback_type": "Difficult to Use",
+    "level3": "Drive power/driving performance not OK",
+    "quote": "last 7 cars were bmws, but because the new 1-series launch was delayed my previous car ended up being a mercedes. very pleased to be back in a bmw! overall i am really happy with this car, so the p..."
+   }
+  ],
+  "ConnectedDrive and Infotainment, overall technology": [
+   {
+    "ID": "F70-0817",
+    "Country": "JP",
+    "feedback_type": "Difficult to Use",
+    "level3": "Not user-friendly",
+    "quote": "i am happy with how the car performs and with the driving itself, but i feel the control system and software still need work. in particular, these areas are below what i could recommend. [controls ..."
+   },
+   {
+    "ID": "F70-2109",
+    "Country": "GB",
+    "feedback_type": "Difficult to Use",
+    "level3": "Not user-friendly",
+    "quote": "this is my first petrol 1 series after having had four previous bmw 1 series sport models, and while i do enjoy how it drives, there are some things that really annoy me. the biggest frustration is..."
+   }
+  ],
+  "Owner's Manual": [
+   {
+    "ID": "F70-0186",
+    "Country": "GB",
+    "feedback_type": "Wants",
+    "level3": "Customer request: function",
+    "quote": "i would really have liked the option of a manual gearbox, and that would have pushed my rating higher, but as with many brands it seems bmw no longer offers this to buyers. overall the car is great..."
+   },
+   {
+    "ID": "F70-1703",
+    "Country": "GB",
+    "feedback_type": "Wants",
+    "level3": "Customer request: function",
+    "quote": "my issue is that i find modern technology hard to cope with. it all feels very complicated. it ended up taking about 3 months before i got an owner's handbook, and that only arrived after i kept on..."
+   }
+  ],
+  "Seats": [
+   {
+    "ID": "F70-2068",
+    "Country": "JP",
+    "feedback_type": "Defect",
+    "level3": "Damage",
+    "quote": "too many issues 1. the rubber gasket on the rear door, even though it is a new car, was already damaged and leaking. 2. the mirrors on this new car make a squeaky noise whenever opening or closing...."
+   },
+   {
+    "ID": "F70-1817",
+    "Country": "GB",
+    "feedback_type": "Wants",
+    "level3": "Customer request: function",
+    "quote": "gearbox has a weird glitch coming up to junctions, it wont drop into the lowest gear until i actually press the throttle, which then makes the car lurch forward in a jerky way. the bmw maps have co..."
+   }
+  ],
+  "Body equipment, overall technology": [
+   {
+    "ID": "F70-1107",
+    "Country": "AU",
+    "feedback_type": "Wants",
+    "level3": "Customer request: function",
+    "quote": "i absolutely adore my 118. i really enjoy how smooth the steering wheel feels and how nicely the car drives overall. i like all the features on the 118, especially the cameras that show the street ..."
+   },
+   {
+    "ID": "F70-2050",
+    "Country": "GB",
+    "feedback_type": "Difficult to Use",
+    "level3": "Not user-friendly",
+    "quote": "the inability to properly control the driving modes is really annoying. the disappearance of buttons and the idrive wheel to manage things is a pain. the touch screen itself is very good, but it pu..."
+   }
+  ],
+  "General enquiry: customer feedback": [
+   {
+    "ID": "F70-0788",
+    "Country": "GB",
+    "feedback_type": "Difficult to Use",
+    "level3": "Information / accuracy insufficient",
+    "quote": "overall this m135 is a big step down from my old 128ti, nowhere near as good. it just isnt as nice to drive, it tends to understeer and is awkward to manoeuvre slowly, especially parking, because t..."
+   },
+   {
+    "ID": "F70-2037",
+    "Country": "GB",
+    "feedback_type": "Difficult to Use",
+    "level3": "Information / accuracy insufficient",
+    "quote": "the car itself has attractive lines and drives well, but the support from the dealership before the purchase and after collection was not acceptable. i had to go back several times with complaints ..."
+   }
+  ],
+  "Handling / Riding": [
+   {
+    "ID": "F70-1817",
+    "Country": "GB",
+    "feedback_type": "Wants",
+    "level3": "Customer request: usability",
+    "quote": "gearbox has a weird glitch coming up to junctions, it wont drop into the lowest gear until i actually press the throttle, which then makes the car lurch forward in a jerky way. the bmw maps have co..."
+   },
+   {
+    "ID": "F70-2037",
+    "Country": "GB",
+    "feedback_type": "Defect",
+    "level3": "Malfunction",
+    "quote": "the car itself has attractive lines and drives well, but the support from the dealership before the purchase and after collection was not acceptable. i had to go back several times with complaints ..."
+   }
+  ],
+  "Audio mode, sound": [
+   {
+    "ID": "F70-2050",
+    "Country": "GB",
+    "feedback_type": "Defect",
+    "level3": "Noise",
+    "quote": "the inability to properly control the driving modes is really annoying. the disappearance of buttons and the idrive wheel to manage things is a pain. the touch screen itself is very good, but it pu..."
+   },
+   {
+    "ID": "F70-0373",
+    "Country": "GB",
+    "feedback_type": "Defect",
+    "level3": "Noise",
+    "quote": "i'm happy with how the car looks, but there are a few things i don't like compared with my old bmws (2015 1 series and 2016 2 series). the rear view mirror feels very distorted and kind of zoomed i..."
+   }
+  ],
+  "Navigation": [
+   {
+    "ID": "F70-0085",
+    "Country": "GB",
+    "feedback_type": "Defect",
+    "level3": "Malfunction",
+    "quote": "after my husband changed his phone he has not been able to load the bmw app, and even though he has asked for help he just keeps getting passed around. on the day we collected the car it was not re..."
+   },
+   {
+    "ID": "F70-0216",
+    "Country": "GB",
+    "feedback_type": "Defect",
+    "level3": "Malfunction",
+    "quote": "overall it is a good car but i do have issues: drivetrain - it behaves more like a plain fwd than a rear-biased 4wd and you can feel torque steer. dashboard controls - getting rid of the physical b..."
+   }
+  ]
+ },
+ "features": {
+  "level2_labels_available": [
+   "(Active) cruise control",
+   "Adjustment of lower lumbar support",
+   "Air conditioning, overall technology",
+   "Air conditioning, setting",
+   "All-round view",
+   "Ambient light",
+   "Android Auto",
+   "Anti-theft alarm system",
+   "Apple CarPlay",
+   "Audio mode, sound",
+   "Automatic engine start-stop function (MSA)",
+   "Automatic-hold",
+   "Back-up Assistant",
+   "Blind spot monitoring",
+   "Blower function",
+   "Body equipment, overall technology",
+   "Braking",
+   "CD / DVD changer, playback",
+   "Center armrest, front",
+   "Center console, front",
+   "Comfort Access",
+   "ConnectedDrive and Infotainment, overall technology",
+   "ConnectedDrive services (smartphone) technology overall",
+   "Controller operation",
+   "Cupholder",
+   "Cushioning / damping vehicle",
+   "Digital Key",
+   "Door, front",
+   "Door, open / close",
+   "Drive, driving dynamics and chassis, overall technology",
+   "Driver assistance, automated driving, overall technology",
+   "Driver profile",
+   "Drivetrain",
+   "Electric Range",
+   "Engine acoustics / engine sound",
+   "Exhaust system",
+   "Exterior",
+   "Exterior design",
+   "Exterior lighting",
+   "Exterior rearview mirror",
+   "Floor mat",
+   "Fuel tank",
+   "General enquiry: customer feedback",
+   "Glove box",
+   "Handling / Riding",
+   "Head-Up Display",
+   "Headrest, adjust",
+   "Headrests, rear",
+   "Heated steering wheel",
+   "High voltage battery",
+   "High-voltage charging power socket",
+   "Impression of safety",
+   "Instrument cluster",
+   "Instrument panel",
+   "Intelligent Personal Assistant",
+   "Intelligent Personal Assistant, activation word",
+   "Interior",
+   "Interior acoustics",
+   "Interior comfort",
+   "Interior design",
+   "Interior mirror, garage door opener",
+   "Lane departure warning",
+   "Luggage compartment",
+   "Manage / pair mobile device (Bluetooth)",
+   "Map update",
+   "Mobile device, wireless charging",
+   "Multi-function steering wheel operation",
+   "My BMW App / MINI App",
+   "My Modes / driving experience",
+   "Navigation",
+   "Operate selector lever",
+   "Outer door handle, front",
+   "Owner's Manual",
+   "Panorama glass roof",
+   "Park Distance Control (PDC)",
+   "Parking Assistant",
+   "Parking brake",
+   "Pedals, operate",
+   "Personal eSIM",
+   "Priorities for telephones",
+   "RSC tire",
+   "Radiator grille",
+   "Radio function",
+   "Real Time Traffic Information (RTTI)",
+   "Rear view camera",
+   "Rear-end collision warning",
+   "Remote Engine Start (My BMW App / MINI App)",
+   "Remote Services & Remote Keyless Entry (My BMW App/MINI App)",
+   "Remote Software Upgrade/RSU",
+   "Resting state after door opening",
+   "Route optimized for charging",
+   "Seat belts",
+   "Seat massage",
+   "Seating, ventilate / heat",
+   "Seats",
+   "Side window, open / close",
+   "Space / spatial impression",
+   "Speed Limit Assistant",
+   "Steering",
+   "Steering wheel",
+   "Storage compartments",
+   "Tire pressure control",
+   "Touch Command",
+   "Touch screen, operation",
+   "Transmission",
+   "Trunk lid",
+   "Trunk lid, open / close",
+   "USB port",
+   "Upholstery / interior trim",
+   "Vehicle interior, lighting",
+   "Vehicle key",
+   "Vehicle safety, overall technology",
+   "Vehicle, access and exit",
+   "Vehicle, climatization",
+   "Vehicle, lock / unlock",
+   "Voice control / speech recognition",
+   "Wheels / tires",
+   "WiFi hotspot",
+   "no_class_found",
+   "non-contact trunk lid opening"
+  ],
+  "features": {
+   "rear_seat_comfort_space": {
+    "taxonomy": {
+     "unique_ids": 154,
+     "like": 74,
+     "negative": 84,
+     "by_country": {
+      "GB": 121,
+      "JP": 22,
+      "SE": 7
+     }
+    },
+    "keyword": {
+     "unique_ids": 23,
+     "like": 11,
+     "negative": 16,
+     "by_country": {
+      "GB": 18
+     }
+    },
+    "combined_union": {
+     "unique_ids": 166,
+     "like": 107,
+     "negative": 114,
+     "overlap_tax_and_kw": 11,
+     "by_country": {
+      "GB": 132,
+      "JP": 22,
+      "SE": 7
+     }
+    },
+    "kw_matched": 23
+   },
+   "seat_heating": {
+    "taxonomy": {
+     "unique_ids": 23,
+     "like": 6,
+     "negative": 17,
+     "by_country": {
+      "GB": 20
+     }
+    },
+    "keyword": {
+     "unique_ids": 19,
+     "like": 11,
+     "negative": 16,
+     "by_country": {
+      "GB": 16
+     }
+    },
+    "combined_union": {
+     "unique_ids": 30,
+     "like": 17,
+     "negative": 25,
+     "overlap_tax_and_kw": 12,
+     "by_country": {
+      "GB": 25
+     }
+    },
+    "kw_matched": 19
+   },
+   "exterior_colour_paint": {
+    "taxonomy": {
+     "unique_ids": 83,
+     "like": 71,
+     "negative": 13,
+     "by_country": {
+      "GB": 57,
+      "JP": 23
+     }
+    },
+    "keyword": {
+     "unique_ids": 45,
+     "like": 35,
+     "negative": 23,
+     "by_country": {
+      "GB": 40,
+      "JP": 3
+     }
+    },
+    "combined_union": {
+     "unique_ids": 113,
+     "like": 97,
+     "negative": 41,
+     "overlap_tax_and_kw": 15,
+     "by_country": {
+      "FR": 3,
+      "GB": 83,
+      "JP": 25
+     }
+    },
+    "kw_matched": 45
+   },
+   "performance_power": {
+    "taxonomy": {
+     "unique_ids": 593,
+     "like": 452,
+     "negative": 162,
+     "by_country": {
+      "AU": 4,
+      "FR": 6,
+      "GB": 324,
+      "JP": 243,
+      "KR": 3,
+      "SE": 12
+     }
+    },
+    "keyword": {
+     "unique_ids": 346,
+     "like": 282,
+     "negative": 136,
+     "by_country": {
+      "FR": 4,
+      "GB": 194,
+      "JP": 140,
+      "SE": 4
+     }
+    },
+    "combined_union": {
+     "unique_ids": 665,
+     "like": 520,
+     "negative": 280,
+     "overlap_tax_and_kw": 274,
+     "by_country": {
+      "AU": 4,
+      "FR": 8,
+      "GB": 376,
+      "JP": 260,
+      "KR": 3,
+      "SE": 13
+     }
+    },
+    "kw_matched": 346
+   },
+   "digital_idrive_infotainment_controls": {
+    "taxonomy": {
+     "unique_ids": 325,
+     "like": 85,
+     "negative": 256,
+     "by_country": {
+      "AU": 3,
+      "FR": 6,
+      "GB": 256,
+      "JP": 51,
+      "SE": 7
+     }
+    },
+    "keyword": {
+     "unique_ids": 300,
+     "like": 150,
+     "negative": 255,
+     "by_country": {
+      "AU": 3,
+      "FR": 3,
+      "GB": 255,
+      "JP": 32,
+      "SE": 6
+     }
+    },
+    "combined_union": {
+     "unique_ids": 427,
+     "like": 219,
+     "negative": 343,
+     "overlap_tax_and_kw": 198,
+     "by_country": {
+      "AU": 4,
+      "FR": 7,
+      "GB": 340,
+      "JP": 64,
+      "SE": 10
+     }
+    },
+    "kw_matched": 300
+   },
+   "driver_assistance": {
+    "taxonomy": {
+     "unique_ids": 95,
+     "like": 36,
+     "negative": 62,
+     "by_country": {
+      "GB": 75,
+      "JP": 14,
+      "SE": 4
+     }
+    },
+    "keyword": {
+     "unique_ids": 63,
+     "like": 45,
+     "negative": 45,
+     "by_country": {
+      "GB": 52,
+      "JP": 9
+     }
+    },
+    "combined_union": {
+     "unique_ids": 115,
+     "like": 79,
+     "negative": 81,
+     "overlap_tax_and_kw": 43,
+     "by_country": {
+      "GB": 90,
+      "JP": 19,
+      "SE": 4
+     }
+    },
+    "kw_matched": 63
+   },
+   "price_value": {
+    "taxonomy": {
+     "unique_ids": 44,
+     "like": 21,
+     "negative": 23,
+     "by_country": {
+      "GB": 28,
+      "JP": 14
+     }
+    },
+    "keyword": {
+     "unique_ids": 166,
+     "like": 97,
+     "negative": 94,
+     "by_country": {
+      "GB": 100,
+      "JP": 57,
+      "SE": 6
+     }
+    },
+    "combined_union": {
+     "unique_ids": 176,
+     "like": 104,
+     "negative": 100,
+     "overlap_tax_and_kw": 34,
+     "by_country": {
+      "GB": 108,
+      "JP": 59,
+      "SE": 6
+     }
+    },
+    "kw_matched": 166
+   }
+  }
+ },
+ "features_by_country_split": {
+  "rear_seat_comfort_space": {
+   "GB": {
+    "ids": 132,
+    "like": 82,
+    "negative": 97
+   },
+   "JP": {
+    "ids": 22,
+    "like": 16,
+    "negative": 11
+   },
+   "SE": {
+    "ids": 7,
+    "like": 5,
+    "negative": 3
+   }
+  },
+  "seat_heating": {
+   "GB": {
+    "ids": 25,
+    "like": 14,
+    "negative": 21
+   }
+  },
+  "exterior_colour_paint": {
+   "GB": {
+    "ids": 83,
+    "like": 69,
+    "negative": 34
+   },
+   "JP": {
+    "ids": 25,
+    "like": 23,
+    "negative": 5
+   }
+  },
+  "performance_power": {
+   "GB": {
+    "ids": 376,
+    "like": 279,
+    "negative": 188
+   },
+   "JP": {
+    "ids": 260,
+    "like": 219,
+    "negative": 81
+   },
+   "SE": {
+    "ids": 13,
+    "like": 8,
+    "negative": 6
+   },
+   "FR": {
+    "ids": 8,
+    "like": 7,
+    "negative": 3
+   }
+  },
+  "digital_idrive_infotainment_controls": {
+   "GB": {
+    "ids": 340,
+    "like": 182,
+    "negative": 274
+   },
+   "JP": {
+    "ids": 64,
+    "like": 27,
+    "negative": 53
+   },
+   "SE": {
+    "ids": 10,
+    "like": 7,
+    "negative": 5
+   },
+   "FR": {
+    "ids": 7,
+    "like": 1,
+    "negative": 6
+   }
+  },
+  "driver_assistance": {
+   "GB": {
+    "ids": 90,
+    "like": 60,
+    "negative": 69
+   },
+   "JP": {
+    "ids": 19,
+    "like": 16,
+    "negative": 7
+   }
+  },
+  "price_value": {
+   "GB": {
+    "ids": 108,
+    "like": 51,
+    "negative": 74
+   },
+   "JP": {
+    "ids": 59,
+    "like": 46,
+    "negative": 21
+   },
+   "SE": {
+    "ids": 6,
+    "like": 5,
+    "negative": 3
+   }
+  }
+ },
+ "segments": {
+  "valence_segments": {
+   "praise_only": 1011,
+   "complaint_only": 544,
+   "unclassified_only": 300,
+   "mixed_praise_and_complaint": 273
+  },
+  "valence_x_country": {
+   "AU": {
+    "complaint_only": 4,
+    "mixed_praise_and_complaint": 1,
+    "praise_only": 7,
+    "unclassified_only": 4
+   },
+   "DK": {
+    "complaint_only": 0,
+    "mixed_praise_and_complaint": 1,
+    "praise_only": 6,
+    "unclassified_only": 1
+   },
+   "FI": {
+    "complaint_only": 2,
+    "mixed_praise_and_complaint": 0,
+    "praise_only": 4,
+    "unclassified_only": 2
+   },
+   "FR": {
+    "complaint_only": 15,
+    "mixed_praise_and_complaint": 4,
+    "praise_only": 22,
+    "unclassified_only": 12
+   },
+   "GB": {
+    "complaint_only": 389,
+    "mixed_praise_and_complaint": 206,
+    "praise_only": 524,
+    "unclassified_only": 174
+   },
+   "JP": {
+    "complaint_only": 119,
+    "mixed_praise_and_complaint": 54,
+    "praise_only": 408,
+    "unclassified_only": 91
+   },
+   "KR": {
+    "complaint_only": 0,
+    "mixed_praise_and_complaint": 0,
+    "praise_only": 3,
+    "unclassified_only": 1
+   },
+   "SE": {
+    "complaint_only": 15,
+    "mixed_praise_and_complaint": 7,
+    "praise_only": 35,
+    "unclassified_only": 14
+   },
+   "ZA": {
+    "complaint_only": 0,
+    "mixed_praise_and_complaint": 0,
+    "praise_only": 2,
+    "unclassified_only": 1
+   }
+  },
+  "overlay_segments": {
+   "S1_digital_friction": {
+    "unique_ids": 295,
+    "pct_of_2128": 13.9,
+    "by_country": {
+     "GB": 237,
+     "JP": 43,
+     "FR": 6,
+     "SE": 5,
+     "FI": 2,
+     "AU": 2
+    }
+   },
+   "S2_quality_defect_reporter": {
+    "unique_ids": 372,
+    "pct_of_2128": 17.5,
+    "by_country": {
+     "GB": 289,
+     "JP": 59,
+     "SE": 13,
+     "FR": 9,
+     "DK": 1,
+     "FI": 1
+    }
+   },
+   "S3_feature_requester": {
+    "unique_ids": 249,
+    "pct_of_2128": 11.7,
+    "by_country": {
+     "GB": 194,
+     "JP": 45,
+     "FR": 4,
+     "SE": 3,
+     "AU": 2,
+     "FI": 1
+    }
+   },
+   "S4_driving_dynamics_advocate": {
+    "unique_ids": 998,
+    "pct_of_2128": 46.9,
+    "by_country": {
+     "GB": 562,
+     "JP": 368,
+     "SE": 30,
+     "FR": 19,
+     "DK": 7,
+     "FI": 4
+    }
+   },
+   "S5_hard_to_use_reporter": {
+    "unique_ids": 462,
+    "pct_of_2128": 21.7,
+    "by_country": {
+     "GB": 334,
+     "JP": 100,
+     "SE": 13,
+     "FR": 9,
+     "AU": 4,
+     "FI": 1
+    }
+   },
+   "S6_detailed_longform_reviewer": {
+    "unique_ids": 532,
+    "pct_of_2128": 25.0,
+    "by_country": {
+     "GB": 432,
+     "JP": 73,
+     "SE": 13,
+     "FR": 10,
+     "FI": 1,
+     "DK": 1
+    }
+   },
+   "S7_manual_docs_struggler": {
+    "unique_ids": 61,
+    "pct_of_2128": 2.9,
+    "by_country": {
+     "GB": 56,
+     "JP": 3,
+     "SE": 2
+    }
+   }
+  },
+  "text_len_p75_chars": 272.25,
+  "overlay_overlaps": {
+   "S1_digital_friction&S2_quality_defect_reporter": 142,
+   "S1_digital_friction&S3_feature_requester": 84,
+   "S1_digital_friction&S4_driving_dynamics_advocate": 95,
+   "S1_digital_friction&S5_hard_to_use_reporter": 231,
+   "S1_digital_friction&S6_detailed_longform_reviewer": 181,
+   "S1_digital_friction&S7_manual_docs_struggler": 61,
+   "S2_quality_defect_reporter&S3_feature_requester": 76,
+   "S2_quality_defect_reporter&S4_driving_dynamics_advocate": 83,
+   "S2_quality_defect_reporter&S5_hard_to_use_reporter": 143,
+   "S2_quality_defect_reporter&S6_detailed_longform_reviewer": 240,
+   "S2_quality_defect_reporter&S7_manual_docs_struggler": 20,
+   "S3_feature_requester&S4_driving_dynamics_advocate": 81,
+   "S3_feature_requester&S5_hard_to_use_reporter": 89,
+   "S3_feature_requester&S6_detailed_longform_reviewer": 153,
+   "S3_feature_requester&S7_manual_docs_struggler": 30,
+   "S4_driving_dynamics_advocate&S5_hard_to_use_reporter": 129,
+   "S4_driving_dynamics_advocate&S6_detailed_longform_reviewer": 204,
+   "S4_driving_dynamics_advocate&S7_manual_docs_struggler": 25,
+   "S5_hard_to_use_reporter&S6_detailed_longform_reviewer": 248,
+   "S5_hard_to_use_reporter&S7_manual_docs_struggler": 51,
+   "S6_detailed_longform_reviewer&S7_manual_docs_struggler": 44
+  },
+  "country_theme_prevalence": {
+   "GB": {
+    "country_unique_ids": 1293,
+    "top_negative_themes": [
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 103,
+      "pct_of_country_ids": 8.0
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 77,
+      "pct_of_country_ids": 6.0
+     },
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 69,
+      "pct_of_country_ids": 5.3
+     },
+     {
+      "theme": "Owner's Manual",
+      "unique_ids": 56,
+      "pct_of_country_ids": 4.3
+     },
+     {
+      "theme": "Seats",
+      "unique_ids": 37,
+      "pct_of_country_ids": 2.9
+     },
+     {
+      "theme": "General enquiry: customer feedback",
+      "unique_ids": 33,
+      "pct_of_country_ids": 2.6
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 27,
+      "pct_of_country_ids": 2.1
+     },
+     {
+      "theme": "Transmission",
+      "unique_ids": 22,
+      "pct_of_country_ids": 1.7
+     },
+     {
+      "theme": "Wheels / tires",
+      "unique_ids": 21,
+      "pct_of_country_ids": 1.6
+     },
+     {
+      "theme": "Audio mode, sound",
+      "unique_ids": 19,
+      "pct_of_country_ids": 1.5
+     },
+     {
+      "theme": "Cushioning / damping vehicle",
+      "unique_ids": 20,
+      "pct_of_country_ids": 1.5
+     },
+     {
+      "theme": "Exterior rearview mirror",
+      "unique_ids": 20,
+      "pct_of_country_ids": 1.5
+     }
+    ]
+   },
+   "JP": {
+    "country_unique_ids": 672,
+    "top_negative_themes": [
+     {
+      "theme": "Drivetrain",
+      "unique_ids": 41,
+      "pct_of_country_ids": 6.1
+     },
+     {
+      "theme": "Handling / Riding",
+      "unique_ids": 23,
+      "pct_of_country_ids": 3.4
+     },
+     {
+      "theme": "Body equipment, overall technology",
+      "unique_ids": 14,
+      "pct_of_country_ids": 2.1
+     },
+     {
+      "theme": "ConnectedDrive and Infotainment, overall technology",
+      "unique_ids": 14,
+      "pct_of_country_ids": 2.1
+     },
+     {
+      "theme": "Navigation",
+      "unique_ids": 13,
+      "pct_of_country_ids": 1.9
+     },
+     {
+      "theme": "Touch screen, operation",
+      "unique_ids": 11,
+      "pct_of_country_ids": 1.6
+     }
+    ]
+   },
+   "SE": {
+    "country_unique_ids": 71,
+    "top_negative_themes": []
+   },
+   "FR": {
+    "country_unique_ids": 53,
+    "top_negative_themes": []
+   }
+  },
+  "country_like_prevalence": {
+   "GB": [
+    {
+     "theme": "Drive, driving dynamics and chassis, overall technology",
+     "unique_ids": 355,
+     "pct_of_country_ids": 27.5
+    },
+    {
+     "theme": "Drivetrain",
+     "unique_ids": 210,
+     "pct_of_country_ids": 16.2
+    },
+    {
+     "theme": "Handling / Riding",
+     "unique_ids": 57,
+     "pct_of_country_ids": 4.4
+    },
+    {
+     "theme": "Exterior design",
+     "unique_ids": 41,
+     "pct_of_country_ids": 3.2
+    },
+    {
+     "theme": "Body equipment, overall technology",
+     "unique_ids": 40,
+     "pct_of_country_ids": 3.1
+    },
+    {
+     "theme": "Seats",
+     "unique_ids": 37,
+     "pct_of_country_ids": 2.9
+    },
+    {
+     "theme": "ConnectedDrive and Infotainment, overall technology",
+     "unique_ids": 24,
+     "pct_of_country_ids": 1.9
+    },
+    {
+     "theme": "My Modes / driving experience",
+     "unique_ids": 23,
+     "pct_of_country_ids": 1.8
+    },
+    {
+     "theme": "Interior design",
+     "unique_ids": 18,
+     "pct_of_country_ids": 1.4
+    },
+    {
+     "theme": "Impression of safety",
+     "unique_ids": 16,
+     "pct_of_country_ids": 1.2
+    }
+   ],
+   "JP": [
+    {
+     "theme": "Drivetrain",
+     "unique_ids": 195,
+     "pct_of_country_ids": 29.0
+    },
+    {
+     "theme": "Handling / Riding",
+     "unique_ids": 119,
+     "pct_of_country_ids": 17.7
+    },
+    {
+     "theme": "Drive, driving dynamics and chassis, overall technology",
+     "unique_ids": 74,
+     "pct_of_country_ids": 11.0
+    },
+    {
+     "theme": "Impression of safety",
+     "unique_ids": 26,
+     "pct_of_country_ids": 3.9
+    },
+    {
+     "theme": "Exterior design",
+     "unique_ids": 14,
+     "pct_of_country_ids": 2.1
+    },
+    {
+     "theme": "Body equipment, overall technology",
+     "unique_ids": 11,
+     "pct_of_country_ids": 1.6
+    },
+    {
+     "theme": "Cushioning / damping vehicle",
+     "unique_ids": 10,
+     "pct_of_country_ids": 1.5
+    }
+   ]
+  }
+ },
+ "quality": {
+  "id_min": "F70-0001",
+  "id_max": "F70-2128",
+  "id_expected_count": 2128,
+  "id_actual_count": 2128,
+  "id_gaps": 0,
+  "empty_or_nan_texts": 0,
+  "rows_nan_feedback_type": 1087,
+  "rows_nan_level2": 0,
+  "text_len_per_id": {
+   "mean": 213.5,
+   "median": 140.0,
+   "p25": 78.0,
+   "p75": 272.25,
+   "max": 1554,
+   "min": 15,
+   "lt30_chars": 46
+  },
+  "cjk_by_country": {
+   "AU": {
+    "ids": 16,
+    "cjk_texts": 0
+   },
+   "DK": {
+    "ids": 8,
+    "cjk_texts": 0
+   },
+   "FI": {
+    "ids": 8,
+    "cjk_texts": 0
+   },
+   "FR": {
+    "ids": 53,
+    "cjk_texts": 0
+   },
+   "GB": {
+    "ids": 1293,
+    "cjk_texts": 0
+   },
+   "JP": {
+    "ids": 672,
+    "cjk_texts": 5
+   },
+   "KR": {
+    "ids": 4,
+    "cjk_texts": 0
+   },
+   "SE": {
+    "ids": 71,
+    "cjk_texts": 0
+   },
+   "ZA": {
+    "ids": 3,
+    "cjk_texts": 0
+   }
+  },
+  "gb_nonascii_ids": 20,
+  "general_enquiry": {
+   "rows": 40,
+   "unique_ids": 40,
+   "negative_ids": 40
+  },
+  "rows_like": 1630,
+  "ids_like": 1284,
+  "ids_negative": 817
+ }
+}

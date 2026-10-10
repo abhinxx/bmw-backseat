@@ -1,0 +1,220 @@
+{
+ "rows": 4076,
+ "unique_ids": 2128,
+ "unique_comment_texts": 2128,
+ "rows_per_id_mean": 1.915,
+ "rows_per_id_distribution": {
+  "1": 1119,
+  "2": 535,
+  "3": 242,
+  "4": 113,
+  "5": 61,
+  "6": 26,
+  "7": 18,
+  "8": 9,
+  "9": 1,
+  "10": 3,
+  "11": 1
+ },
+ "duplication_examples": [
+  {
+   "ID": "F70-0002",
+   "rows": 2,
+   "identical_text": true,
+   "labels": [
+    [
+     "Likes",
+     "Body equipment, overall technology",
+     "Workmanship appeals"
+    ],
+    [
+     "Difficult to Use",
+     "Owner's Manual",
+     "Not user-friendly"
+    ]
+   ]
+  },
+  {
+   "ID": "F70-0003",
+   "rows": 2,
+   "identical_text": true,
+   "labels": [
+    [
+     "Likes",
+     "Impression of safety",
+     "Like: function"
+    ],
+    [
+     "nan",
+     "no_class_found",
+     "nan"
+    ]
+   ]
+  }
+ ],
+ "texts_shared_by_multiple_ids": 0,
+ "dist_source": {
+  "rows": {
+   "Source A": 4076
+  },
+  "unique_ids": {
+   "Source A": 2128
+  }
+ },
+ "dist_country": {
+  "rows": {
+   "GB": 2790,
+   "JP": 1026,
+   "SE": 121,
+   "FR": 75,
+   "AU": 30,
+   "DK": 13,
+   "FI": 11,
+   "KR": 5,
+   "ZA": 5
+  },
+  "unique_ids": {
+   "GB": 1293,
+   "JP": 672,
+   "SE": 71,
+   "FR": 53,
+   "AU": 16,
+   "FI": 8,
+   "DK": 8,
+   "KR": 4,
+   "ZA": 3
+  }
+ },
+ "dist_engine": {
+  "rows": {
+   "ICE": 4076
+  },
+  "unique_ids": {
+   "ICE": 2128
+  }
+ },
+ "dist_feedback_type": {
+  "rows": {
+   "Likes": 1630,
+   "nan": 1087,
+   "Difficult to Use": 595,
+   "Defect": 491,
+   "Wants": 273
+  },
+  "unique_ids": {
+   "Likes": 1168,
+   "nan": 300,
+   "Difficult to Use": 276,
+   "Defect": 238,
+   "Wants": 146
+  }
+ },
+ "dist_brand": {
+  "rows": {
+   "[BMW]": 4076
+  },
+  "unique_ids": {
+   "[BMW]": 2128
+  }
+ },
+ "dist_sales_desc": {
+  "rows": {
+   "[BMW 1 Series]": 4076
+  },
+  "unique_ids": {
+   "[BMW 1 Series]": 2128
+  }
+ },
+ "xtab_source_country_unique": {
+  "AU": {
+   "Source A": 16
+  },
+  "DK": {
+   "Source A": 8
+  },
+  "FI": {
+   "Source A": 8
+  },
+  "FR": {
+   "Source A": 53
+  },
+  "GB": {
+   "Source A": 1293
+  },
+  "JP": {
+   "Source A": 672
+  },
+  "KR": {
+   "Source A": 4
+  },
+  "SE": {
+   "Source A": 71
+  },
+  "ZA": {
+   "Source A": 3
+  }
+ },
+ "xtab_source_country_rows": {
+  "AU": {
+   "Source A": 30
+  },
+  "DK": {
+   "Source A": 13
+  },
+  "FI": {
+   "Source A": 11
+  },
+  "FR": {
+   "Source A": 75
+  },
+  "GB": {
+   "Source A": 2790
+  },
+  "JP": {
+   "Source A": 1026
+  },
+  "KR": {
+   "Source A": 5
+  },
+  "SE": {
+   "Source A": 121
+  },
+  "ZA": {
+   "Source A": 5
+  }
+ },
+ "xtab_country_engine_unique": {
+  "ICE": {
+   "AU": 16,
+   "DK": 8,
+   "FI": 8,
+   "FR": 53,
+   "GB": 1293,
+   "JP": 672,
+   "KR": 4,
+   "SE": 71,
+   "ZA": 3
+  }
+ },
+ "xtab_country_engine_rows": {
+  "ICE": {
+   "AU": 30,
+   "DK": 13,
+   "FI": 11,
+   "FR": 75,
+   "GB": 2790,
+   "JP": 1026,
+   "KR": 5,
+   "SE": 121,
+   "ZA": 5
+  }
+ },
+ "dist_derivate": {
+  "rows": {
+   "F70": 4076
+  },
+  "unique_ids": {
+   "F70": 2128
+  }
+ }
+}

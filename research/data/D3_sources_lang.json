@@ -1,0 +1,1060 @@
+{
+ "ft_prefix_crosstab": {
+  "F70": {
+   "Defect": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 491
+   },
+   "Difficult to Use": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 595
+   },
+   "Likes": {
+    "Dislike:": 0,
+    "Like:": 1472,
+    "other": 158
+   },
+   "Wants": {
+    "Dislike:": 23,
+    "Like:": 0,
+    "other": 250
+   },
+   "_mismatch_Like_not_Likes": 0,
+   "_mismatch_Dislike_not_neg_usecase": 23
+  },
+  "G60": {
+   "<NULL>": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 6
+   },
+   "Defect": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 435
+   },
+   "Difficult to Use": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 1306
+   },
+   "Likes": {
+    "Dislike:": 0,
+    "Like:": 1514,
+    "other": 437
+   },
+   "Wants": {
+    "Dislike:": 18,
+    "Like:": 0,
+    "other": 564
+   },
+   "_mismatch_Like_not_Likes": 0,
+   "_mismatch_Dislike_not_neg_usecase": 18
+  },
+  "G70": {
+   "<NULL>": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 12
+   },
+   "Defect": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 481
+   },
+   "Difficult to Use": {
+    "Dislike:": 0,
+    "Like:": 0,
+    "other": 1119
+   },
+   "Likes": {
+    "Dislike:": 0,
+    "Like:": 1430,
+    "other": 460
+   },
+   "Wants": {
+    "Dislike:": 12,
+    "Like:": 0,
+    "other": 506
+   },
+   "_mismatch_Like_not_Likes": 0,
+   "_mismatch_Dislike_not_neg_usecase": 12
+  }
+ },
+ "source_by_model": {
+  "F70|Source A": {
+   "comments": 2128,
+   "median_len": 140.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.5422932330827067,
+   "countries": {
+    "GB": 1293,
+    "JP": 672,
+    "SE": 71,
+    "FR": 53,
+    "AU": 16,
+    "FI": 8,
+    "DK": 8,
+    "KR": 4,
+    "ZA": 3
+   },
+   "feedback_type_mix": {
+    "Likes": 1168,
+    "<NULL>": 300,
+    "Difficult to Use": 276,
+    "Defect": 238,
+    "Wants": 146
+   },
+   "engine_mix": {
+    "ICE": 2128
+   },
+   "example_ids": [
+    "F70-0001",
+    "F70-0002",
+    "F70-0003"
+   ]
+  },
+  "G60|Source A": {
+   "comments": 854,
+   "median_len": 164.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.6042154566744731,
+   "countries": {
+    "US": 464,
+    "KR": 205,
+    "JP": 53,
+    "GB": 36,
+    "SE": 28,
+    "DK": 20,
+    "CA": 18,
+    "FI": 9,
+    "NO": 8,
+    "FR": 8,
+    "AU": 3,
+    "LV": 1,
+    "ES": 1
+   },
+   "feedback_type_mix": {
+    "Likes": 382,
+    "<NULL>": 240,
+    "Difficult to Use": 102,
+    "Wants": 65,
+    "Defect": 65
+   },
+   "engine_mix": {
+    "ICE": 499,
+    "BEVE": 267,
+    "PHEV": 88
+   },
+   "example_ids": [
+    "G60-0004",
+    "G60-0008",
+    "G60-0017"
+   ]
+  },
+  "G60|Source B": {
+   "comments": 2626,
+   "median_len": 142.0,
+   "agent_transcribed_share": 0.8038842345773038,
+   "first_person_share": 0.0178979436405179,
+   "countries": {
+    "US": 2626
+   },
+   "feedback_type_mix": {
+    "Likes": 1329,
+    "Difficult to Use": 762,
+    "Wants": 406,
+    "Defect": 129
+   },
+   "engine_mix": {
+    "ICE": 1479,
+    "BEVE": 899,
+    "PHEV": 248
+   },
+   "example_ids": [
+    "G60-0002",
+    "G60-0005",
+    "G60-0006"
+   ]
+  },
+  "G60|Source C": {
+   "comments": 384,
+   "median_len": 202.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.8984375,
+   "countries": {
+    "US": 384
+   },
+   "feedback_type_mix": {
+    "Difficult to Use": 253,
+    "<NULL>": 70,
+    "Defect": 61
+   },
+   "engine_mix": {
+    "ICE": 210,
+    "BEVE": 142,
+    "PHEV": 32
+   },
+   "example_ids": [
+    "G60-0001",
+    "G60-0003",
+    "G60-0067"
+   ]
+  },
+  "G60|Source D": {
+   "comments": 136,
+   "median_len": 111.5,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 1.0,
+   "countries": {
+    "US": 136
+   },
+   "feedback_type_mix": {
+    "<NULL>": 136
+   },
+   "engine_mix": {
+    "ICE": 71,
+    "BEVE": 55,
+    "PHEV": 10
+   },
+   "example_ids": [
+    "G60-0020",
+    "G60-0065",
+    "G60-0071"
+   ]
+  },
+  "G70|Source A": {
+   "comments": 695,
+   "median_len": 142.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.5827338129496403,
+   "countries": {
+    "US": 487,
+    "KR": 137,
+    "JP": 40,
+    "CA": 8,
+    "GB": 8,
+    "FR": 3,
+    "AU": 2,
+    "DK": 2,
+    "SE": 2,
+    "FI": 2,
+    "ZA": 2,
+    "NO": 1,
+    "ES": 1
+   },
+   "feedback_type_mix": {
+    "Likes": 276,
+    "<NULL>": 240,
+    "Defect": 68,
+    "Difficult to Use": 60,
+    "Wants": 51
+   },
+   "engine_mix": {
+    "ICE": 443,
+    "BEVE": 191,
+    "PHEV": 61
+   },
+   "example_ids": [
+    "G70-0007",
+    "G70-0008",
+    "G70-0011"
+   ]
+  },
+  "G70|Source B": {
+   "comments": 2853,
+   "median_len": 136.0,
+   "agent_transcribed_share": 0.7634069400630915,
+   "first_person_share": 0.02663862600771118,
+   "countries": {
+    "US": 2853
+   },
+   "feedback_type_mix": {
+    "Likes": 1466,
+    "Difficult to Use": 769,
+    "Wants": 403,
+    "Defect": 215
+   },
+   "engine_mix": {
+    "ICE": 1838,
+    "BEVE": 815,
+    "PHEV": 200
+   },
+   "example_ids": [
+    "G70-0001",
+    "G70-0002",
+    "G70-0003"
+   ]
+  },
+  "G70|Source C": {
+   "comments": 314,
+   "median_len": 194.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.8949044585987261,
+   "countries": {
+    "US": 314
+   },
+   "feedback_type_mix": {
+    "Difficult to Use": 181,
+    "<NULL>": 74,
+    "Defect": 59
+   },
+   "engine_mix": {
+    "ICE": 198,
+    "BEVE": 87,
+    "PHEV": 29
+   },
+   "example_ids": [
+    "G70-0009",
+    "G70-0020",
+    "G70-0038"
+   ]
+  },
+  "G70|Source D": {
+   "comments": 138,
+   "median_len": 115.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 1.0,
+   "countries": {
+    "US": 138
+   },
+   "feedback_type_mix": {
+    "<NULL>": 138
+   },
+   "engine_mix": {
+    "ICE": 89,
+    "BEVE": 36,
+    "PHEV": 13
+   },
+   "example_ids": [
+    "G70-0037",
+    "G70-0044",
+    "G70-0053"
+   ]
+  }
+ },
+ "source_pooled": {
+  "Source A": {
+   "comments": 3677,
+   "median_len": 144.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.564,
+   "top_countries": {
+    "GB": 1337,
+    "US": 951,
+    "JP": 765,
+    "KR": 346,
+    "SE": 101,
+    "FR": 64
+   },
+   "feedback_type_mix": {
+    "Likes": 1826,
+    "<NULL>": 780,
+    "Difficult to Use": 438,
+    "Defect": 371,
+    "Wants": 262
+   },
+   "sample_texts": [
+    "because it handles easily and the cabin feels comfortable inside.",
+    "overall my new car has been a pleasure to drive. the mild hybrid setup has made the start/stop much smoother, and both acceleration and fuel use have improved. ",
+    "luxurious feel to the drive."
+   ]
+  },
+  "Source B": {
+   "comments": 5479,
+   "median_len": 139.0,
+   "agent_transcribed_share": 0.783,
+   "first_person_share": 0.022,
+   "top_countries": {
+    "US": 5479
+   },
+   "feedback_type_mix": {
+    "Likes": 2795,
+    "Difficult to Use": 1531,
+    "Wants": 809,
+    "Defect": 344
+   },
+   "sample_texts": [
+    "Customer stated they really enjoy the personal assistant and appreciate being able to use it much like siri.",
+    "Customer inquired about the recording duration for the Drive Recorder. Writer explained that when the vehicle detects an impact, the system begins recording and",
+    "Customer stated she really enjoys the comfort of the vehicle."
+   ]
+  },
+  "Source C": {
+   "comments": 698,
+   "median_len": 198.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 0.897,
+   "top_countries": {
+    "US": 698
+   },
+   "feedback_type_mix": {
+    "Difficult to Use": 434,
+    "<NULL>": 144,
+    "Defect": 120
+   },
+   "sample_texts": [
+    "I had a very serious problem with Head-up display - DTU/display difficult to see: \"In the daytime it is hard to make out the head up display, especially with na",
+    "I had a minor problem with Built-in Bluetooth system - Frequent pairing/connectivity issues: \"Display shows a message saying the blue tooth is outdated\". Descri",
+    "What is the primary reason for your nps rating?\n: \"I have had several BMWs and they have all been positive experiences\""
+   ]
+  },
+  "Source D": {
+   "comments": 274,
+   "median_len": 113.0,
+   "agent_transcribed_share": 0.0,
+   "first_person_share": 1.0,
+   "top_countries": {
+    "US": 274
+   },
+   "feedback_type_mix": {
+    "<NULL>": 274
+   },
+   "sample_texts": [
+    "Everything. That is the one thing I love most about the driving feel of my vehicle.",
+    "Strong.. That is the one thing I love most about the engine/motor of my vehicle.",
+    "Everything works nicely together. That is the one thing I love most about the driving feel of my vehicle."
+   ]
+  }
+ },
+ "language_by_model": {
+  "F70": {
+   "en": 1725,
+   "en?": 272,
+   "other/unknown": 126,
+   "ja/zh": 5
+  },
+  "G60": {
+   "en": 3320,
+   "en?": 521,
+   "other/unknown": 152,
+   "sv": 3,
+   "sv?": 2,
+   "fr?": 1,
+   "fr": 1
+  },
+  "G70": {
+   "en": 3301,
+   "en?": 561,
+   "other/unknown": 137,
+   "ko": 1
+  }
+ },
+ "language_by_country": {
+  "F70": {
+   "AU": {
+    "en": 13,
+    "en?": 2,
+    "other/unknown": 1
+   },
+   "DK": {
+    "en": 5,
+    "en?": 3
+   },
+   "FI": {
+    "en": 6,
+    "en?": 2
+   },
+   "FR": {
+    "en": 36,
+    "en?": 11,
+    "other/unknown": 6
+   },
+   "GB": {
+    "en": 1120,
+    "en?": 121,
+    "other/unknown": 52
+   },
+   "JP": {
+    "en": 487,
+    "en?": 121,
+    "other/unknown": 59,
+    "ja/zh": 5
+   },
+   "KR": {
+    "en": 2,
+    "other/unknown": 1,
+    "en?": 1
+   },
+   "SE": {
+    "en": 54,
+    "en?": 10,
+    "other/unknown": 7
+   },
+   "ZA": {
+    "en": 2,
+    "en?": 1
+   }
+  },
+  "G60": {
+   "AU": {
+    "en": 3
+   },
+   "CA": {
+    "en": 14,
+    "en?": 2,
+    "other/unknown": 2
+   },
+   "DK": {
+    "en": 18,
+    "en?": 2
+   },
+   "ES": {
+    "en": 1
+   },
+   "FI": {
+    "en": 6,
+    "en?": 2,
+    "other/unknown": 1
+   },
+   "FR": {
+    "en": 7,
+    "fr": 1
+   },
+   "GB": {
+    "en": 32,
+    "en?": 4
+   },
+   "JP": {
+    "en": 45,
+    "other/unknown": 4,
+    "en?": 4
+   },
+   "KR": {
+    "en": 138,
+    "en?": 40,
+    "other/unknown": 27
+   },
+   "LV": {
+    "en": 1
+   },
+   "NO": {
+    "en": 7,
+    "other/unknown": 1
+   },
+   "SE": {
+    "en": 23,
+    "en?": 3,
+    "other/unknown": 1,
+    "sv": 1
+   },
+   "US": {
+    "en": 3025,
+    "en?": 464,
+    "other/unknown": 116,
+    "sv?": 2,
+    "sv": 2,
+    "fr?": 1
+   }
+  },
+  "G70": {
+   "AU": {
+    "en?": 1,
+    "en": 1
+   },
+   "CA": {
+    "en": 7,
+    "other/unknown": 1
+   },
+   "DK": {
+    "en": 1,
+    "en?": 1
+   },
+   "ES": {
+    "en": 1
+   },
+   "FI": {
+    "en": 2
+   },
+   "FR": {
+    "en": 2,
+    "en?": 1
+   },
+   "GB": {
+    "en": 7,
+    "en?": 1
+   },
+   "JP": {
+    "en": 28,
+    "en?": 6,
+    "other/unknown": 6
+   },
+   "KR": {
+    "en": 87,
+    "en?": 31,
+    "other/unknown": 18,
+    "ko": 1
+   },
+   "NO": {
+    "en": 1
+   },
+   "SE": {
+    "en": 1,
+    "en?": 1
+   },
+   "US": {
+    "en": 3161,
+    "en?": 519,
+    "other/unknown": 112
+   },
+   "ZA": {
+    "en": 2
+   }
+  }
+ },
+ "coverage_matrix": {
+  "table": {
+   "('F70', 'AU')": {
+    "Source A": 16,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'DK')": {
+    "Source A": 8,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'FI')": {
+    "Source A": 8,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'FR')": {
+    "Source A": 53,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'GB')": {
+    "Source A": 1293,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'JP')": {
+    "Source A": 672,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'KR')": {
+    "Source A": 4,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'SE')": {
+    "Source A": 71,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('F70', 'ZA')": {
+    "Source A": 3,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'AU')": {
+    "Source A": 3,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'CA')": {
+    "Source A": 18,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'DK')": {
+    "Source A": 20,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'ES')": {
+    "Source A": 1,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'FI')": {
+    "Source A": 9,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'FR')": {
+    "Source A": 8,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'GB')": {
+    "Source A": 36,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'JP')": {
+    "Source A": 53,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'KR')": {
+    "Source A": 205,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'LV')": {
+    "Source A": 1,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'NO')": {
+    "Source A": 8,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'SE')": {
+    "Source A": 28,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G60', 'US')": {
+    "Source A": 464,
+    "Source B": 2626,
+    "Source C": 384,
+    "Source D": 136
+   },
+   "('G70', 'AU')": {
+    "Source A": 2,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'CA')": {
+    "Source A": 8,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'DK')": {
+    "Source A": 2,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'ES')": {
+    "Source A": 1,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'FI')": {
+    "Source A": 2,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'FR')": {
+    "Source A": 3,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'GB')": {
+    "Source A": 8,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'JP')": {
+    "Source A": 40,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'KR')": {
+    "Source A": 137,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'NO')": {
+    "Source A": 1,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'SE')": {
+    "Source A": 2,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   },
+   "('G70', 'US')": {
+    "Source A": 487,
+    "Source B": 2853,
+    "Source C": 314,
+    "Source D": 138
+   },
+   "('G70', 'ZA')": {
+    "Source A": 2,
+    "Source B": 0,
+    "Source C": 0,
+    "Source D": 0
+   }
+  },
+  "thin_cells_lt30": [
+   "('F70', 'AU')|Source A:16",
+   "('F70', 'DK')|Source A:8",
+   "('F70', 'FI')|Source A:8",
+   "('F70', 'KR')|Source A:4",
+   "('F70', 'ZA')|Source A:3",
+   "('G60', 'AU')|Source A:3",
+   "('G60', 'CA')|Source A:18",
+   "('G60', 'DK')|Source A:20",
+   "('G60', 'ES')|Source A:1",
+   "('G60', 'FI')|Source A:9",
+   "('G60', 'FR')|Source A:8",
+   "('G60', 'LV')|Source A:1",
+   "('G60', 'NO')|Source A:8",
+   "('G60', 'SE')|Source A:28",
+   "('G70', 'AU')|Source A:2",
+   "('G70', 'CA')|Source A:8",
+   "('G70', 'DK')|Source A:2",
+   "('G70', 'ES')|Source A:1",
+   "('G70', 'FI')|Source A:2",
+   "('G70', 'FR')|Source A:3",
+   "('G70', 'GB')|Source A:8",
+   "('G70', 'NO')|Source A:1",
+   "('G70', 'SE')|Source A:2",
+   "('G70', 'ZA')|Source A:2"
+  ],
+  "zero_cells": [
+   "('F70', 'AU')|Source B:0",
+   "('F70', 'AU')|Source C:0",
+   "('F70', 'AU')|Source D:0",
+   "('F70', 'DK')|Source B:0",
+   "('F70', 'DK')|Source C:0",
+   "('F70', 'DK')|Source D:0",
+   "('F70', 'FI')|Source B:0",
+   "('F70', 'FI')|Source C:0",
+   "('F70', 'FI')|Source D:0",
+   "('F70', 'FR')|Source B:0",
+   "('F70', 'FR')|Source C:0",
+   "('F70', 'FR')|Source D:0",
+   "('F70', 'GB')|Source B:0",
+   "('F70', 'GB')|Source C:0",
+   "('F70', 'GB')|Source D:0",
+   "('F70', 'JP')|Source B:0",
+   "('F70', 'JP')|Source C:0",
+   "('F70', 'JP')|Source D:0",
+   "('F70', 'KR')|Source B:0",
+   "('F70', 'KR')|Source C:0",
+   "('F70', 'KR')|Source D:0",
+   "('F70', 'SE')|Source B:0",
+   "('F70', 'SE')|Source C:0",
+   "('F70', 'SE')|Source D:0",
+   "('F70', 'ZA')|Source B:0",
+   "('F70', 'ZA')|Source C:0",
+   "('F70', 'ZA')|Source D:0",
+   "('G60', 'AU')|Source B:0",
+   "('G60', 'AU')|Source C:0",
+   "('G60', 'AU')|Source D:0",
+   "('G60', 'CA')|Source B:0",
+   "('G60', 'CA')|Source C:0",
+   "('G60', 'CA')|Source D:0",
+   "('G60', 'DK')|Source B:0",
+   "('G60', 'DK')|Source C:0",
+   "('G60', 'DK')|Source D:0",
+   "('G60', 'ES')|Source B:0",
+   "('G60', 'ES')|Source C:0",
+   "('G60', 'ES')|Source D:0",
+   "('G60', 'FI')|Source B:0",
+   "('G60', 'FI')|Source C:0",
+   "('G60', 'FI')|Source D:0",
+   "('G60', 'FR')|Source B:0",
+   "('G60', 'FR')|Source C:0",
+   "('G60', 'FR')|Source D:0",
+   "('G60', 'GB')|Source B:0",
+   "('G60', 'GB')|Source C:0",
+   "('G60', 'GB')|Source D:0",
+   "('G60', 'JP')|Source B:0",
+   "('G60', 'JP')|Source C:0",
+   "('G60', 'JP')|Source D:0",
+   "('G60', 'KR')|Source B:0",
+   "('G60', 'KR')|Source C:0",
+   "('G60', 'KR')|Source D:0",
+   "('G60', 'LV')|Source B:0",
+   "('G60', 'LV')|Source C:0",
+   "('G60', 'LV')|Source D:0",
+   "('G60', 'NO')|Source B:0",
+   "('G60', 'NO')|Source C:0",
+   "('G60', 'NO')|Source D:0",
+   "('G60', 'SE')|Source B:0",
+   "('G60', 'SE')|Source C:0",
+   "('G60', 'SE')|Source D:0",
+   "('G70', 'AU')|Source B:0",
+   "('G70', 'AU')|Source C:0",
+   "('G70', 'AU')|Source D:0",
+   "('G70', 'CA')|Source B:0",
+   "('G70', 'CA')|Source C:0",
+   "('G70', 'CA')|Source D:0",
+   "('G70', 'DK')|Source B:0",
+   "('G70', 'DK')|Source C:0",
+   "('G70', 'DK')|Source D:0",
+   "('G70', 'ES')|Source B:0",
+   "('G70', 'ES')|Source C:0",
+   "('G70', 'ES')|Source D:0",
+   "('G70', 'FI')|Source B:0",
+   "('G70', 'FI')|Source C:0",
+   "('G70', 'FI')|Source D:0",
+   "('G70', 'FR')|Source B:0",
+   "('G70', 'FR')|Source C:0",
+   "('G70', 'FR')|Source D:0",
+   "('G70', 'GB')|Source B:0",
+   "('G70', 'GB')|Source C:0",
+   "('G70', 'GB')|Source D:0",
+   "('G70', 'JP')|Source B:0",
+   "('G70', 'JP')|Source C:0",
+   "('G70', 'JP')|Source D:0",
+   "('G70', 'KR')|Source B:0",
+   "('G70', 'KR')|Source C:0",
+   "('G70', 'KR')|Source D:0",
+   "('G70', 'NO')|Source B:0",
+   "('G70', 'NO')|Source C:0",
+   "('G70', 'NO')|Source D:0",
+   "('G70', 'SE')|Source B:0",
+   "('G70', 'SE')|Source C:0",
+   "('G70', 'SE')|Source D:0",
+   "('G70', 'ZA')|Source B:0",
+   "('G70', 'ZA')|Source C:0",
+   "('G70', 'ZA')|Source D:0"
+  ]
+ },
+ "synthetic_signals": {
+  "F70": {
+   "comments": 2128,
+   "nps_prompt_frame": 0,
+   "one_comment_frame": 0,
+   "agent_stated_frame": 0,
+   "top_leading5word_prefixes": {
+    "really happy with the car": 10,
+    "i really like the car": 8,
+    "i do like the car": 7,
+    "i'm very happy with the": 5,
+    "i really like this car": 5,
+    "really nice car to drive": 5,
+    "for me this is the": 4,
+    "the car itself is very": 4
+   },
+   "top_exact_texts": {},
+   "top_trailing6word": {
+    "": 69,
+    "and the fuel economy is good": 4
+   },
+   "id_format_sample": [
+    "F70-0001",
+    "F70-0002",
+    "F70-2127",
+    "F70-2128"
+   ],
+   "id_sequential": false,
+   "sales_description_top": {
+    "[BMW 1 Series]": 2128
+   }
+  },
+  "G60": {
+   "comments": 4000,
+   "nps_prompt_frame": 37,
+   "one_comment_frame": 27,
+   "agent_stated_frame": 2111,
+   "top_leading5word_prefixes": {
+    "i had a problem with": 85,
+    "i had a minor problem": 84,
+    "i had a serious problem": 64,
+    "customer stated he would like": 50,
+    "i had a very minor": 50,
+    "customer stated he is pleased": 39,
+    "i had a very serious": 37,
+    "what is the primary reason": 37
+   },
+   "top_exact_texts": {
+    "what is the primary reason for your nps rating?\n: \"outstanding vehicle\"": 2
+   },
+   "top_trailing6word": {
+    "": 31,
+    "about the interior of my vehicle": 30,
+    "the driving feel of my vehicle": 25,
+    "getting in out of my vehicle": 22,
+    "the infotainment system in my vehicle": 19,
+    "the engine motor of my vehicle": 13
+   },
+   "id_format_sample": [
+    "G60-0001",
+    "G60-0002",
+    "G60-3999",
+    "G60-4000"
+   ],
+   "id_sequential": false,
+   "sales_description_top": {
+    "[BMW 5 Series]": 4000
+   }
+  },
+  "G70": {
+   "comments": 4000,
+   "nps_prompt_frame": 35,
+   "one_comment_frame": 27,
+   "agent_stated_frame": 2178,
+   "top_leading5word_prefixes": {
+    "i had a problem with": 68,
+    "customer stated he would like": 58,
+    "i had a minor problem": 51,
+    "i had a serious problem": 48,
+    "i had a very serious": 46,
+    "i had a very minor": 38,
+    "customer stated he is pleased": 38,
+    "customer stated he is very": 35
+   },
+   "top_exact_texts": {
+    "customer stated the vehicle feels very comfortable.": 3,
+    "customer stated he appreciates how smooth the vehicle rides.": 2,
+    "customer stated she enjoys the way it drives.": 2,
+    "customer stated he is pleased with the ipa.": 2,
+    "customer stated the vehicle is very comfortable.": 2,
+    "customer stated the car drives like an absolute dream.": 2
+   },
+   "top_trailing6word": {
+    "": 45,
+    "about the interior of my vehicle": 23,
+    "the engine motor of my vehicle": 22,
+    "the driving comfort of my vehicle": 22,
+    "getting in out of my vehicle": 22,
+    "the infotainment system in my vehicle": 19
+   },
+   "id_format_sample": [
+    "G70-0001",
+    "G70-0002",
+    "G70-3999",
+    "G70-4000"
+   ],
+   "id_sequential": false,
+   "sales_description_top": {
+    "[BMW 7 Series]": 4000
+   }
+  }
+ }
+}

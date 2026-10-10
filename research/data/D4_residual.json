@@ -1,0 +1,139 @@
+{
+ "id_contiguity": {
+  "F70": {
+   "min": 1,
+   "max": 2128,
+   "n_unique": 2128,
+   "contiguous_1_to_max": true,
+   "gaps": []
+  },
+  "G60": {
+   "min": 1,
+   "max": 4000,
+   "n_unique": 4000,
+   "contiguous_1_to_max": true,
+   "gaps": []
+  },
+  "G70": {
+   "min": 1,
+   "max": 4000,
+   "n_unique": 4000,
+   "contiguous_1_to_max": true,
+   "gaps": []
+  }
+ },
+ "null_patterns": {
+  "F70": {
+   "FT_null_by_source": {
+    "Source A": 1087
+   },
+   "level2_null_by_source": {},
+   "level3_null_by_source": {
+    "Source A": 1087
+   },
+   "FT_null_and_level2_null": 0,
+   "sourceD_FT_nonnull": 0
+  },
+  "G60": {
+   "FT_null_by_source": {
+    "Source A": 525,
+    "Source D": 136,
+    "Source C": 70
+   },
+   "level2_null_by_source": {
+    "Source D": 136,
+    "Source C": 64
+   },
+   "level3_null_by_source": {
+    "Source A": 525,
+    "Source D": 136,
+    "Source C": 64
+   },
+   "FT_null_and_level2_null": 200,
+   "sourceD_FT_nonnull": 0
+  },
+  "G70": {
+   "FT_null_by_source": {
+    "Source A": 470,
+    "Source D": 138,
+    "Source C": 74
+   },
+   "level2_null_by_source": {
+    "Source D": 138,
+    "Source C": 62
+   },
+   "level3_null_by_source": {
+    "Source A": 470,
+    "Source D": 138,
+    "Source C": 62
+   },
+   "FT_null_and_level2_null": 200,
+   "sourceD_FT_nonnull": 0
+  }
+ },
+ "level3_prefix_grammar": {
+  "F70": {
+   "Like:": 1472,
+   "<no-colon>": 1236,
+   "Customer request:": 246,
+   "Dislike:": 23,
+   "Response characteristics:": 8,
+   "Installation:": 2,
+   "Vehicle equipment:": 2
+  },
+  "G60": {
+   "<no-colon>": 2175,
+   "Like:": 1514,
+   "Customer request:": 546,
+   "Dislike:": 18,
+   "Vehicle equipment:": 11,
+   "Response characteristics:": 8,
+   "Installation:": 2,
+   "Leak:": 2,
+   "Installation and set-up:": 1,
+   "Locking, detent:": 1,
+   "Cavity sealant:": 1,
+   "Opening, closing:": 1
+  },
+  "G70": {
+   "<no-colon>": 2069,
+   "Like:": 1430,
+   "Customer request:": 483,
+   "Dislike:": 12,
+   "Vehicle equipment:": 8,
+   "Leak:": 6,
+   "Response characteristics:": 6,
+   "Opening, closing:": 4,
+   "Locking, detent:": 1,
+   "Cavity sealant:": 1
+  }
+ },
+ "per_id_attribute_consistency": {
+  "F70": {
+   "IDs_varying_Country": 0,
+   "IDs_varying_Source": 0,
+   "IDs_varying_EngineType": 0
+  },
+  "G60": {
+   "IDs_varying_Country": 0,
+   "IDs_varying_Source": 0,
+   "IDs_varying_EngineType": 0
+  },
+  "G70": {
+   "IDs_varying_Country": 0,
+   "IDs_varying_Source": 0,
+   "IDs_varying_EngineType": 0
+  }
+ },
+ "no_class_level2_counts": {
+  "F70": 1087,
+  "G60": 525,
+  "G70": 470
+ },
+ "unique_comments_dedup_rule": "first row per (Model, ID)",
+ "comments_per_model": {
+  "F70": 2128,
+  "G60": 4000,
+  "G70": 4000
+ }
+}

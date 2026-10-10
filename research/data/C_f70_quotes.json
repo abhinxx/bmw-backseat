@@ -1,0 +1,162 @@
+{
+ "Touch screen, operation": [
+  {
+   "ID": "F70-1107",
+   "Country": "AU",
+   "feedback_type": "Difficult to Use",
+   "level3": "Size not user friendly",
+   "quote": "i absolutely adore my 118. i really enjoy how smooth the steering wheel feels and how nicely the car drives overall. i like all the features on the 118, especially the cameras that show the street ..."
+  },
+  {
+   "ID": "F70-0817",
+   "Country": "JP",
+   "feedback_type": "Defect",
+   "level3": "Malfunction",
+   "quote": "i am happy with how the car performs and with the driving itself, but i feel the control system and software still need work. in particular, these areas are below what i could recommend. [controls ..."
+  }
+ ],
+ "Drivetrain": [
+  {
+   "ID": "F70-1235",
+   "Country": "GB",
+   "feedback_type": "Defect",
+   "level3": "Malfunction",
+   "quote": "as a daily driver it is very nice and has plenty of punch when you ask for it, but as a sporty car it feels too sterile - very fast yet no character, no proper noise apart from the fake stuff. maki..."
+  },
+  {
+   "ID": "F70-1584",
+   "Country": "GB",
+   "feedback_type": "Difficult to Use",
+   "level3": "Drive power/driving performance not OK",
+   "quote": "last 7 cars were bmws, but because the new 1-series launch was delayed my previous car ended up being a mercedes. very pleased to be back in a bmw! overall i am really happy with this car, so the p..."
+  }
+ ],
+ "ConnectedDrive and Infotainment, overall technology": [
+  {
+   "ID": "F70-0817",
+   "Country": "JP",
+   "feedback_type": "Difficult to Use",
+   "level3": "Not user-friendly",
+   "quote": "i am happy with how the car performs and with the driving itself, but i feel the control system and software still need work. in particular, these areas are below what i could recommend. [controls ..."
+  },
+  {
+   "ID": "F70-2109",
+   "Country": "GB",
+   "feedback_type": "Difficult to Use",
+   "level3": "Not user-friendly",
+   "quote": "this is my first petrol 1 series after having had four previous bmw 1 series sport models, and while i do enjoy how it drives, there are some things that really annoy me. the biggest frustration is..."
+  }
+ ],
+ "Owner's Manual": [
+  {
+   "ID": "F70-0186",
+   "Country": "GB",
+   "feedback_type": "Wants",
+   "level3": "Customer request: function",
+   "quote": "i would really have liked the option of a manual gearbox, and that would have pushed my rating higher, but as with many brands it seems bmw no longer offers this to buyers. overall the car is great..."
+  },
+  {
+   "ID": "F70-1703",
+   "Country": "GB",
+   "feedback_type": "Wants",
+   "level3": "Customer request: function",
+   "quote": "my issue is that i find modern technology hard to cope with. it all feels very complicated. it ended up taking about 3 months before i got an owner's handbook, and that only arrived after i kept on..."
+  }
+ ],
+ "Seats": [
+  {
+   "ID": "F70-2068",
+   "Country": "JP",
+   "feedback_type": "Defect",
+   "level3": "Damage",
+   "quote": "too many issues 1. the rubber gasket on the rear door, even though it is a new car, was already damaged and leaking. 2. the mirrors on this new car make a squeaky noise whenever opening or closing...."
+  },
+  {
+   "ID": "F70-1817",
+   "Country": "GB",
+   "feedback_type": "Wants",
+   "level3": "Customer request: function",
+   "quote": "gearbox has a weird glitch coming up to junctions, it wont drop into the lowest gear until i actually press the throttle, which then makes the car lurch forward in a jerky way. the bmw maps have co..."
+  }
+ ],
+ "Body equipment, overall technology": [
+  {
+   "ID": "F70-1107",
+   "Country": "AU",
+   "feedback_type": "Wants",
+   "level3": "Customer request: function",
+   "quote": "i absolutely adore my 118. i really enjoy how smooth the steering wheel feels and how nicely the car drives overall. i like all the features on the 118, especially the cameras that show the street ..."
+  },
+  {
+   "ID": "F70-2050",
+   "Country": "GB",
+   "feedback_type": "Difficult to Use",
+   "level3": "Not user-friendly",
+   "quote": "the inability to properly control the driving modes is really annoying. the disappearance of buttons and the idrive wheel to manage things is a pain. the touch screen itself is very good, but it pu..."
+  }
+ ],
+ "General enquiry: customer feedback": [
+  {
+   "ID": "F70-0788",
+   "Country": "GB",
+   "feedback_type": "Difficult to Use",
+   "level3": "Information / accuracy insufficient",
+   "quote": "overall this m135 is a big step down from my old 128ti, nowhere near as good. it just isnt as nice to drive, it tends to understeer and is awkward to manoeuvre slowly, especially parking, because t..."
+  },
+  {
+   "ID": "F70-2037",
+   "Country": "GB",
+   "feedback_type": "Difficult to Use",
+   "level3": "Information / accuracy insufficient",
+   "quote": "the car itself has attractive lines and drives well, but the support from the dealership before the purchase and after collection was not acceptable. i had to go back several times with complaints ..."
+  }
+ ],
+ "Handling / Riding": [
+  {
+   "ID": "F70-1817",
+   "Country": "GB",
+   "feedback_type": "Wants",
+   "level3": "Customer request: usability",
+   "quote": "gearbox has a weird glitch coming up to junctions, it wont drop into the lowest gear until i actually press the throttle, which then makes the car lurch forward in a jerky way. the bmw maps have co..."
+  },
+  {
+   "ID": "F70-2037",
+   "Country": "GB",
+   "feedback_type": "Defect",
+   "level3": "Malfunction",
+   "quote": "the car itself has attractive lines and drives well, but the support from the dealership before the purchase and after collection was not acceptable. i had to go back several times with complaints ..."
+  }
+ ],
+ "Audio mode, sound": [
+  {
+   "ID": "F70-2050",
+   "Country": "GB",
+   "feedback_type": "Defect",
+   "level3": "Noise",
+   "quote": "the inability to properly control the driving modes is really annoying. the disappearance of buttons and the idrive wheel to manage things is a pain. the touch screen itself is very good, but it pu..."
+  },
+  {
+   "ID": "F70-0373",
+   "Country": "GB",
+   "feedback_type": "Defect",
+   "level3": "Noise",
+   "quote": "i'm happy with how the car looks, but there are a few things i don't like compared with my old bmws (2015 1 series and 2016 2 series). the rear view mirror feels very distorted and kind of zoomed i..."
+  }
+ ],
+ "Navigation": [
+  {
+   "ID": "F70-0085",
+   "Country": "GB",
+   "feedback_type": "Defect",
+   "level3": "Malfunction",
+   "quote": "after my husband changed his phone he has not been able to load the bmw app, and even though he has asked for help he just keeps getting passed around. on the day we collected the car it was not re..."
+  },
+  {
+   "ID": "F70-0216",
+   "Country": "GB",
+   "feedback_type": "Defect",
+   "level3": "Malfunction",
+   "quote": "overall it is a good car but i do have issues: drivetrain - it behaves more like a plain fwd than a rear-biased 4wd and you can feel torque steer. dashboard controls - getting rid of the physical b..."
+  }
+ ]
+}
