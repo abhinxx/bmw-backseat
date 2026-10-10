@@ -516,6 +516,24 @@
   {
    "status": "ok",
    "io": {
+    "research/scripts/F_check_visual.py": [
+     "read"
+    ],
+    "research/data/F_items.json": [
+     "read"
+    ],
+    "research/data/F_variants.json": [
+     "read"
+    ],
+    "research/data/.trace_out.json": [
+     "write"
+    ]
+   },
+   "script": "research/scripts/F_check_visual.py"
+  },
+  {
+   "status": "ok",
+   "io": {
     "research/scripts/F_dump_raw.py": [
      "read"
     ],
@@ -564,6 +582,42 @@
   {
    "status": "ok",
    "io": {
+    "research/scripts/F_parse_pricelists.py": [
+     "read"
+    ],
+    "BMW-Data/F70_OptionList.PDF": [
+     "read"
+    ],
+    "BMW-Data/G60_OptionList.PDF": [
+     "read"
+    ],
+    "BMW-Data/G70_OptionList.PDF": [
+     "read"
+    ],
+    "research/data/F_packages.json": [
+     "write"
+    ],
+    "research/data/F_items.json": [
+     "write"
+    ],
+    "research/data/F_variants.json": [
+     "write"
+    ],
+    "research/data/F_parse_log.json": [
+     "write"
+    ],
+    "research/data/F_options.csv": [
+     "write"
+    ],
+    "research/data/.trace_out.json": [
+     "write"
+    ]
+   },
+   "script": "research/scripts/F_parse_pricelists.py"
+  },
+  {
+   "status": "ok",
+   "io": {
     "research/scripts/F_probe_matrix.py": [
      "read"
     ],
@@ -602,6 +656,27 @@
     ]
    },
    "script": "research/scripts/F_show_pages.py"
+  },
+  {
+   "status": "ok",
+   "io": {
+    "research/scripts/F_summary.py": [
+     "read"
+    ],
+    "research/data/F_items.json": [
+     "read"
+    ],
+    "research/data/F_focus_features.json": [
+     "write"
+    ],
+    "research/data/F_focus_features.md": [
+     "write"
+    ],
+    "research/data/.trace_out.json": [
+     "write"
+    ]
+   },
+   "script": "research/scripts/F_summary.py"
   }
  ],
  "outputs_changed_on_rerun": [

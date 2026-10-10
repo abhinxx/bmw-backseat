@@ -36,8 +36,12 @@ All paths relative to the repo root. `d/` = `research/data/`. Raw inputs in `BMW
 | F1 | `BMW-Data/F70_OptionList.PDF`, `G60_…PDF`, `G70_…PDF` | `research/scripts/F_dump_raw.py` | `d/F_raw_F70.txt`, `F_raw_G60.txt`, `F_raw_G70.txt`, `d/F_pagemap_raw.json` |
 | F2 | `BMW-Data/F70_OptionList.PDF` | `research/scripts/F_probe_matrix.py` | none (probe) |
 | F3 | `d/F_raw_F70.txt` | `research/scripts/F_show_pages.py` | none (probe) |
-| F4 | `BMW-Data/F70_OptionList.PDF` | `research/scripts/F_extract_options.py` | **FAILS** (TypeError, never worked) |
-| F5 | (none) | `research/scripts/F_probe_rows.py` | **FAILS** (IndexError; needs args) |
+| F4 | `BMW-Data/F70_OptionList.PDF` | `research/scripts/F_extract_options.py` | **FAILS** (TypeError, never worked; superseded by F6) |
+| F5 | (none) | `research/scripts/F_probe_rows.py` | **FAILS** (IndexError; needs args; abandoned probe) |
+| F6 | `BMW-Data/F70_OptionList.PDF`, `G60_…PDF`, `G70_…PDF` | `research/scripts/F_parse_pricelists.py` (parent agent) | `d/F_items.json`, `d/F_options.csv`, `d/F_variants.json`, `d/F_packages.json`, `d/F_parse_log.json` |
+| F7 | `d/F_items.json`, `d/F_variants.json` | `research/scripts/F_check_visual.py` | none (42/42 visual checks pass) |
+| F8 | `d/F_items.json` | `research/scripts/F_summary.py` | `d/F_focus_features.json`, `d/F_focus_features.md` |
+| Z1 | every script above | `research/scripts/Z_trace_io.py` | `d/Z_io_trace.json` (this table's source) |
 
 (1) `d/A_g60_feedback_explorer.csv` was exported from `BMW-Data/G60_feedback_hackathon.xlsx` by inline
 code, not a saved script. Verified: identical to the workbook, 60,060 / 60,060 cells.
