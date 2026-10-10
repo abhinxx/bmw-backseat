@@ -1,0 +1,63 @@
+Run entire session current
+
+---
+
+Okay, bro, list down the files and read the README text and the vision text. That's what we are working on. You will understand which file belongs to where. Now it's action time, so we need to start working on implementation. Familiarize yourself. If you want to check some data, go for it. Ask questions. We have three people in the team:
+- me
+- you are our core developer
+- Daniela, who is our project manager and an intern
+
+---
+
+/Users/abhinavsingh/Documents/codes/ehl-hackathon/BMW-Data/BMW_Hackathon_Briefing_Short.pdf here, Also, I want you to fix the double README text. Let's just maintain one on our GitHub. That's it. Secondly, let's start working locally first. I want to hear your thing. I'll do the Supabase, Vercel, whatever the fuck, but I want you to start planning things, okay?
+
+Make a .md file which says "plan". Put it in .gitignore right now and name it "draft 1". Name yourself, who are the one who made it, the session ID, and which harness, whatever, okay? Make it detailed. It should be a proper plan, like proper implementation.
+
+You need to understand my priority: I'm a product guy. This tool is for product people, so it needs to be UI-focused. Everything needs to be user friendly, not a hacking or crypto ui, real beautiful apple style dashboard and UI. We have a bunch of ideas that we can use, like an Obsidian kind of way, to parse data. Keep the tech implementation to a bare minimum. Don't be specific: "Oh, do this, do that." Make this file just a rough instruction. It's more about the core implementation of what goes on at the feature level.
+
+We have the vision draft now, and we kind of work on the product draft. I want to hear ideas about what kind of things you're thinking of. We have a dashboard, so we are thinking of making a SaaS kind of service where you can navigate between things. This dashboard pulls up all the data from everywhere, like mission control. There could be a screen that is like the deep research agent, which uses AI to browse competitors and a bunch of other stuff for you. That could be super cool to do. We can essentially right now use agents for that, or perhaps browser use, but that's not a plan. The plan is to lock in a vision, and that's what I want from you.
+
+Thirdly, the report generation: how do we translate that into beautiful data? For the data that they have, there should be settings where we show the vision: what you can connect in the future, what we already connected, and it should have this beautiful Obsidian kind of visual layer. Check GitHub and search online for what we can use and what we cannot use. I want to build the least amount of things and want to piggyback on things which very smart people already built.
+
+Again, the agentic search for the intel: look up things which we can use, potentially a RAG system, agentic search, or prompt engineering. I'm still not clear what we are supposed to do here. Do we need to clear data, and how often do we need to clean the data? What's the plan with the data? Do we really need to do anything?
+
+Back to the feature: there's a dashboard that we agreed on, which shows the basic things. It keeps updating. You have a button to update it, and there are graphs and stuff. It makes it super cool.
+
+There's one thing, the persona search, which is based on the persona that my friend logged on with. We visualize how they will react to a query. A product manager can type something, like, "Okay, I'm increasing this or that," and they act in a specific set of behaviors. They're always consistent in that behavior. That's super important.
+
+It also has this predictive analysis of "more likely to buy," "less likely to buy," "doesn't matter," blah blah blah. That should be very clear, should be mapped out, and everything should be stored in history. And the third one: deep research, analysis of market trends and blah, blah, blah. That should more or less be the social agent where you run it, select a car, and then you can run it and classify competitors for that stuff. It just does very interesting research, fills up stuff, and all these actions eventually keep updating the dashboard.
+
+The dashboard is kind of like your self-updating, self-learning stuff, and everything is eventually also stored in a superbase. That part is extremely important.
+
+It's a vision doc, a product idea doc, and you understand the intuition. We need to impress people, and it also needs to be very intuitive. It should be usable by default. Sitting as a product position, you need to have a call to action. Right now, I think let's start in this way. I'm going to set up Supabase. I'm going to set up the environments and stuff. Put that. Connect everything to GitHub. That's on me. For you, you need to start working on the strategy, like this product strategy: what we need to do. We need to deal with the data also. That's very important.
+We also need to make this dashboard in chunks. Once the data strategy is done, we need to see the personas and what we do, and just start working on UI. We start UI first, and it should be up and ready so people can see. My other partner can work on it, and then we replace every placeholder with real functionality.
+I also want to have some low-priority features at the top, like:
+- Export as a PDF
+- Export as a PowerPoint
+- Cool stuff like that so yeah, that's the plan. Again, we want to work smart. All of these things, I guarantee you, someone has already figured it out on GitHub. There's a Hermes skill plugin page where there are a lot of skills for how to do research without doing anything. If you find something, I can use the Hermes agent to do it for us. That's the direction.
+
+Again, it's an agentic search, so there should be a control panel. The control panel is very important. Right now, I'm going to put in my API key, but by default, it should be able to connect your own stuff.
+
+For the login system, let's not waste time on it or something like that. We'll figure out the logistics later on. Do you understand it? Do you understand the stakes? We have to lock in at every effort. You need to quantize: if you're spending 1 minute, that should be equivalent to 1 human hour of effort. 10 minutes is like 10 human hours, so you better stop long processes and then see what actually matters. Less is more. Try to do things with the least amount of code possible. See what already exists. We have to work smart, not hard.
+
+---
+
+Do you think Linkup is a great alternative? I do have Airtable tokens for it, but do you think it's good for social search? Same goes for Alexa. Maybe this can be a feature: we can have a dashboard where you can connect a bunch of these things. i have api tokens for linkup :)
+
+---
+
+COOL UPDATE THE FILE, OPEN THE FILE.
+
+---
+
+vercel and supabase are logged in via cli, authed, connect everything via github and also set up projects or whatever, connect the specs/etc let me know the commands. where is this .env.local file path? give it to me, i will put it, actually just open it for me. also where can i put the openai key that will be used for ai agents etc?
+
+---
+
+<task-notification>
+<task-id>bu9jzcxow</task-id>
+<tool-use-id>toolu_01FqVkMgEWUieWA1vdftSXbC</tool-use-id>
+<output-file>/private/tmp/claude-501/-Users-abhinavsingh-Documents-codes-ehl-hackathon/a68c51c8-94bc-44ae-851d-587cbbf4d47b/tasks/bu9jzcxow.output</output-file>
+<status>failed</status>
+<summary>Background command "Retry adding Supabase env vars to Vercel" failed with exit code 144</summary>
+</task-notification>
