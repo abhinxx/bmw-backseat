@@ -24,3 +24,4 @@ data/
 # working drafts (local only)
 PLAN-draft-*.md
 .vercel
+HANDOVER.md
