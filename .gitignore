@@ -7,3 +7,7 @@ BMW-Data/
 # intermediate pickles / raw dumps are regenerable by scripts
 research/data/*.pkl
 research/data/*_feedback_explorer.csv
+research/data/F_pages/
+research/data/*_err.txt
+research/data/G_t.json
+research/data/G_nhtsa_tmp.json
