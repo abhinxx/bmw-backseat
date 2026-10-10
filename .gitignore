@@ -20,7 +20,6 @@ backups/
 node_modules/
 data/
 .env*
-!.env.example
 # working drafts (local only)
 PLAN-draft-*.md
 .vercel
