@@ -1,4 +1,4 @@
-import { FlaskConical, Gauge, Globe, History, ListChecks } from "lucide-react"
+import { FlaskConical, Gauge, Globe, History, ListChecks, Settings, Workflow } from "lucide-react"
 
 // Single source for the sidebar, the top bar title and the ⌘K menu.
 export const NAV = [
@@ -32,6 +32,8 @@ export const NAV = [
     icon: History,
     purpose: "Every simulation, research run and decision, in order. The audit trail.",
   },
+  { href: "/workflow", title: "Workflow", icon: Workflow, purpose: "From evidence to scored requirements and mandatory human review." },
+  { href: "/settings", title: "Settings", icon: Settings, purpose: "Your name, AI key, sources, method and integrations." },
 ] as const
 
 export const navFor = (pathname: string) =>

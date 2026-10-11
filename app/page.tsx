@@ -10,9 +10,11 @@ import { DevTimeline } from "@/components/dev-timeline"
 import { ThemeChart, topThemeBars } from "@/components/dashboard/theme-chart"
 import { OutsideView } from "@/components/outside-view"
 import { WhatChanged } from "@/components/what-changed"
-import { countOutside, countRuns, missionControl, outsideView, type Bucket } from "@/lib/data"
+import { countOutside, missionControl, outsideView, type Bucket } from "@/lib/data"
 import { SUGGESTED_WHAT_IFS } from "@/lib/nav"
 import { marketOf, vehicleOf } from "@/lib/scope"
+import { listRequirements } from "@/lib/requirements/data"
+import { openRequirementCount } from "@/lib/requirements/ui"
 
 const n = (x: number) => x.toLocaleString("en-US")
 const k = (x: number) => (x >= 1000 ? `${Math.round(x / 1000)}k` : n(x))
@@ -38,11 +40,11 @@ export default async function MissionControl({
   const vehicle = vehicleOf(v)
   const market = marketOf(m)
   const scope = `v=${vehicle.id}&m=${market.id}`
-  const [d, outside, runs, evidence] = await Promise.all([
+  const [d, outside, evidence, requirements] = await Promise.all([
     missionControl(vehicle.id, market.id),
     outsideView(vehicle.id, market.id),
-    countRuns(vehicle.id),
     countOutside(vehicle.id),
+    listRequirements(vehicle.id),
   ])
 
   const one = market.id !== "all" ? (market.id as Bucket) : null
@@ -70,10 +72,10 @@ export default async function MissionControl({
         : "No overall score for this market in the study",
     },
     {
-      label: "What-if runs",
+      label: "Open requirements",
       kind: "calculated",
-      value: n(runs),
-      note: `Saved simulations for the ${vehicle.name}`,
+      value: n(openRequirementCount(requirements, market.id)),
+      note: "Proposed or in review · awaiting your decision",
     },
     {
       label: "Outside evidence",
@@ -106,7 +108,7 @@ export default async function MissionControl({
               <Provenance kind={t.kind} />
             </CardHeader>
             <CardContent className="space-y-1.5">
-              <p className="text-3xl font-semibold tracking-tight tabular-nums">{t.value}</p>
+              <p className="text-3xl font-semibold tracking-tight tabular-nums">{t.label === "Open requirements" ? <Link href={`/requirements?${scope}`} className="hover:text-primary" aria-label={`${t.value} open requirements`}>{t.value}</Link> : t.value}</p>
               <p className="text-xs text-muted-foreground">{t.note}</p>
               {t.warn && <CoverageWarning>{t.warn}</CoverageWarning>}
             </CardContent>
