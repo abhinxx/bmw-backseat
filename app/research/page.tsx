@@ -33,8 +33,8 @@ export default async function Research({
       <ResearchClient
         vehicle={{ id: vehicle.id, name: vehicle.name }}
         market={market.id}
-        missions={Object.entries(MISSIONS).map(([id, x]) => ({ id, label: x.label }))}
-        depths={Object.entries(DEPTHS).map(([id, x]) => ({ id, label: `${x.label} · ${x.queries} search${x.queries > 1 ? "es" : ""}` }))}
+        missions={Object.entries(MISSIONS).map(([id, x]) => ({ id, label: x.label, hint: x.hint.charAt(0).toUpperCase() + x.hint.slice(1) }))}
+        depths={Object.entries(DEPTHS).map(([id, x]) => ({ id, label: `${x.label} · ${x.queries} search${x.queries > 1 ? "es" : ""}`, hint: x.hint }))}
         features={Object.fromEntries(FEATURES.map((f) => [f.id, f.name]))}
         initialQuestion={q ?? ""}
         initialRun={initialRun}

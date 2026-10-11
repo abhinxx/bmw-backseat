@@ -10,11 +10,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { channelOf } from "@/lib/channels"
+import { channelOf, PLATFORMS } from "@/lib/channels"
 import type { ResearchFinding, ResearchRun } from "@/lib/research"
 import { cn } from "@/lib/utils"
 
-type Option = { id: string; label: string }
+type Option = { id: string; label: string; hint?: string }
+
+const PLATFORM_LABEL: Record<string, string> = Object.fromEntries(Object.entries(PLATFORMS).map(([id, p]) => [id, p.label]))
 
 // Colour only where it means something: the relation to BMW's own customers. Everything else is neutral.
 const RELATION: Record<string, { label: string; text: string; dot: string; hint: string }> = {
@@ -56,7 +58,7 @@ export function ResearchClient({
   initialRun: ResearchRun | null
 }) {
   const router = useRouter()
-  const [mission, setMission] = useState(initialRun?.mission ?? (initialQuestion ? "free" : "competitors"))
+  const [mission, setMission] = useState(initialRun?.mission ?? "free")
   const [depth, setDepth] = useState(initialRun?.depth ?? "standard")
   const [question, setQuestion] = useState(initialRun?.question ?? initialQuestion)
   const [run, setRun] = useState<ResearchRun | null>(initialRun)
@@ -91,13 +93,13 @@ export function ResearchClient({
         <CardContent className="space-y-4">
           <div className="flex flex-wrap gap-3">
             <Select value={mission} onValueChange={setMission}>
-              <SelectTrigger className="w-[220px]" aria-label="Mission">
+              <SelectTrigger className="w-[220px]" aria-label="Focus">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 {missions.map((x) => (
                   <SelectItem key={x.id} value={x.id}>
-                    {x.label}
+                    Focus: {x.label}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -115,6 +117,9 @@ export function ResearchClient({
               </SelectContent>
             </Select>
           </div>
+          <p className="text-xs text-muted-foreground">
+            {missions.find((x) => x.id === mission)?.hint}. {depths.find((x) => x.id === depth)?.hint}.
+          </p>
           <Textarea
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
@@ -168,7 +173,7 @@ export function ResearchClient({
           <Card className="mt-4">
             <CardContent>
               <EmptyState icon={Globe} title="No research run open">
-                Pick a mission, ask a question, run it. Every run is saved in History.
+                Ask a question and run it. Focus only steers the searches; every run is saved in History.
               </EmptyState>
             </CardContent>
           </Card>
@@ -259,7 +264,7 @@ function FindingCard({ f, features }: { f: ResearchFinding; features: Record<str
             {rel.label}
           </span>
         )}
-        {f.feature_id && <span className="text-muted-foreground">{features[f.feature_id] ?? f.feature_id}</span>}
+        {(f.feature_id || f.topic) && <span className="text-muted-foreground">{f.feature_id ? features[f.feature_id] ?? f.feature_id : f.topic}</span>}
         {(f.market || f.published_date) && <span className="text-muted-foreground">{[f.market, f.published_date].filter(Boolean).join(" · ")}</span>}
       </div>
       <p className="text-[15px] leading-snug font-medium">{f.claim}</p>
@@ -303,6 +308,13 @@ function RunLog({ run }: { run: ResearchRun }) {
         <p className="text-center text-xs text-muted-foreground">
           {social} of {run.findings.length} findings come from social media or owner forums.
         </p>
+        {run.findings.length < 5 && (
+          <p className="rounded-xl bg-secondary p-3 text-xs text-muted-foreground">
+            Only {run.findings.length} finding{run.findings.length === 1 ? "" : "s"} survived the quote check
+            {run.queries.some((q) => q.followup) ? ", including a follow-up round on more platforms" : ""}. That is what the web had on this
+            question; nothing was padded.
+          </p>
+        )}
         {run.dropped.length === 0 ? (
           <p className="flex items-start gap-2 rounded-xl bg-observed/10 p-3 text-xs text-observed">
             <ShieldCheck className="mt-0.5 size-3.5 shrink-0" /> Every kept quote was found word for word in its page.
@@ -316,8 +328,8 @@ function RunLog({ run }: { run: ResearchRun }) {
         )}
         <section className="space-y-2.5">
           <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Searches</h4>
-          {run.queries.map((q) => (
-            <div key={q.q} className="space-y-0.5 text-xs">
+          {run.queries.map((q, i) => (
+            <div key={i} className="space-y-0.5 text-xs">
               <p>
                 <span
                   className={cn(
@@ -325,8 +337,9 @@ function RunLog({ run }: { run: ResearchRun }) {
                     q.channel === "social" ? "bg-simulated/10 text-simulated" : "bg-secondary text-muted-foreground"
                   )}
                 >
-                  {q.channel === "social" ? "Social" : "Web"}
+                  {q.channel === "social" ? (q.platform ? PLATFORM_LABEL[q.platform] ?? "Social" : "Social") : "Web"}
                 </span>
+                {q.followup && <span className="mr-1.5 text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">Follow-up</span>}
                 {q.q}
               </p>
               <p className="text-muted-foreground">

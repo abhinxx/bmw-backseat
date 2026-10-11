@@ -3,22 +3,22 @@
 
 export type Channel = { id: string; label: string; social: boolean; dot: string }
 
-// Searched for "social" queries. Probed with Linkup on 2026-10-11: these return usable page text.
-// YouTube returns titles/descriptions only; Instagram, Weibo and Xiaohongshu returned little or nothing, so they are left out.
-export const SOCIAL_DOMAINS = [
-  "reddit.com",
-  "x.com",
-  "twitter.com",
-  "facebook.com",
-  "tiktok.com",
-  "youtube.com",
-  "bimmerpost.com",
-  "bimmerfest.com",
-  "mbworld.org",
-  "audizine.com",
-  "autohome.com.cn",
-  "dongchedi.com",
-]
+// Social searches each target ONE platform group, so Reddit cannot crowd out the rest.
+// Probed with Linkup on 2026-10-11: these return usable page text. YouTube returns titles/descriptions only;
+// Instagram, Weibo and Xiaohongshu returned little or nothing, so they are left out.
+export const PLATFORMS = {
+  reddit: { label: "Reddit", domains: ["reddit.com"] },
+  forums: { label: "Owner forums", domains: ["bimmerpost.com", "bimmerfest.com", "mbworld.org", "audizine.com", "motor-talk.de"] },
+  x: { label: "X", domains: ["x.com", "twitter.com"] },
+  video: { label: "YouTube and TikTok", domains: ["youtube.com", "tiktok.com"] },
+  facebook: { label: "Facebook", domains: ["facebook.com"] },
+  china: { label: "Chinese car communities", domains: ["autohome.com.cn", "dongchedi.com"] },
+} as const
+export type PlatformId = keyof typeof PLATFORMS
+// Order the server uses when it must pick (or add) a platform.
+export const PLATFORM_ORDER: PlatformId[] = ["reddit", "forums", "x", "video", "china", "facebook"]
+
+export const SOCIAL_DOMAINS = Object.values(PLATFORMS).flatMap((p) => [...p.domains])
 
 const RULES: [RegExp, Omit<Channel, "social"> & { social?: boolean }][] = [
   [/(^|\.)reddit\.com$/, { id: "reddit", label: "Reddit", dot: "bg-[#ff4500]" }],
@@ -28,7 +28,7 @@ const RULES: [RegExp, Omit<Channel, "social"> & { social?: boolean }][] = [
   [/(^|\.)(youtube\.com|youtu\.be)$/, { id: "youtube", label: "YouTube", dot: "bg-[#ff0000]" }],
   [/(^|\.)instagram\.com$/, { id: "instagram", label: "Instagram", dot: "bg-[#e1306c]" }],
   [/(^|\.)(autohome\.com\.cn|dongchedi\.com|weibo\.com|xiaohongshu\.com)$/, { id: "cn-social", label: "China social", dot: "bg-[#e60012]" }],
-  [/(bimmerpost|bimmerfest|mbworld|audizine|forum)/, { id: "forum", label: "Owner forum", dot: "bg-simulated" }],
+  [/(bimmerpost|bimmerfest|mbworld|audizine|motor-talk|forum)/, { id: "forum", label: "Owner forum", dot: "bg-simulated" }],
 ]
 
 const BY_TYPE: Record<string, Channel> = {

@@ -129,16 +129,19 @@ flowchart LR
 
 ## 7. Research Agent (live)
 
-Code: `lib/research.ts`, `app/api/research/route.ts`, `components/research-client.tsx`. Tables: `research_run`, `research_finding`. Prompt version `research-v3`.
+Code: `lib/research.ts`, `app/api/research/route.ts`, `components/research-client.tsx`. Tables: `research_run`, `research_finding`. Prompt version `research-v4`.
 
 The model never browses. Linkup searches the web and returns page text; the model reads only that text. No browser, no scraping.
 
 ```mermaid
 flowchart TB
-  PM["PM: mission, depth, question"] --> P["Model plans 1 / 3 / 4 searches (quick / standard / deep)"]
-  P --> S["Linkup search, 5 results each, page text returned"]
-  S --> X["Model extracts findings from that text only: claim, verbatim quote, page ID, feature, stance, source type"]
+  PM["PM: focus, depth, question"] --> C["Context from our DB: this car's rivals, top complaint themes"]
+  C --> P["Model plans 1 / 3 / 4 searches; each social search targets ONE platform"]
+  P --> S["Linkup search, 6 results each, page text returned, junk domains filtered"]
+  S --> X["Model reads the pages in batches of 8: claim, verbatim quote, page ID, feature or topic, stance, whose car"]
   X --> V{"Server: quote found word for word in that page?"}
+  V -- "fewer than 5 kept" --> F["One follow-up round on 2 unsearched social platforms"]
+  F --> X
   V -- "no" --> D["Dropped, reason logged"]
   V -- "yes" --> R["Server rule: relation to BMW feedback for that feature"]
   R --> H["History: run, every search, every page shown, every finding, every drop"]
@@ -151,12 +154,12 @@ Rules:
 2. Web findings never change dashboard numbers. Counts come from BMW data only. Findings appear beside them, labelled External, with source link.
 3. Findings are mapped with the same 16-feature map as What-If, so a finding about rear-seat heating lands next to the rear-comfort evidence.
 4. A quote that is not in the page Linkup returned is dropped and logged.
-5. Linkup calls per run are capped by depth (1, 3 or 4), 5 results each, at most 15 pages shown to the model.
+5. Linkup calls per run are capped by depth (1, 3 or 4, plus at most 2 follow-up searches when fewer than 5 findings survive; never on Quick), 6 results each, at most 24 pages in the first read and 12 more in the follow-up. A run keeps at most 12 findings, owners' own words first. Under 5, the page says so; nothing is padded.
 6. The relation label is a fixed rule, not the model: BMW's own comment counts for the feature are stored with each finding.
    - Fewer than 5 BMW comments on the feature: **new signal**.
    - Facts without opinion (specs, prices, a rival offering a feature, any official spec page): **context**.
    - Opinions: **agrees** if at least 20% of BMW's comments on that feature point the same way (praise for praise; complaints + wishes for complaints), else **contradicts**.
 
-Sources, and why: Linkup returns the page text, so every quote can be checked. OpenAI's own web search returns citations but not the page text, so quotes could not be verified; not used. Reddit is reached through Linkup (`includeDomains` for the owner mission); the Hermes Reddit skill is for offline collection only (about 1 request per minute without credentials).
+Sources, and why: Linkup returns the page text, so every quote can be checked. OpenAI's own web search returns citations but not the page text, so quotes could not be verified; not used. Reddit is reached through Linkup (`includeDomains` per platform); the Hermes Reddit skill is for offline collection only (about 1 request per minute without credentials).
 
-Social first (`research-v3`): every search is tagged social or web. Social searches run only on Reddit, X, Facebook, TikTok, YouTube, owner forums (Bimmerpost, Bimmerfest, MBWorld, Audizine) and Chinese car communities (Autohome, Dongchedi); list in `lib/channels.ts`, probed with Linkup. Instagram, Weibo and Xiaohongshu are left out because Linkup returns almost no text from them. Standard and deep runs always include at least one social search (except Trends); "Social and owner voices" is social only. Each finding records whose car it is about (the BMW, a named rival, or the market); only claims about the BMW get the agrees / contradicts label. The channel tag (Reddit, X, Owner forum, Press...) is read from the URL, not from the model.
+Mixed sources (`research-v4`): every search targets either "web" (press, reviews, maker pages, studies) or ONE social platform group: Reddit, owner forums (Bimmerpost, Bimmerfest, MBWorld, Audizine, motor-talk), X, YouTube/TikTok, Facebook, Chinese car communities (Autohome, Dongchedi); list in `lib/channels.ts`, probed with Linkup. One platform per search stops Reddit from crowding out the rest. Instagram, Weibo and Xiaohongshu are left out because Linkup returns almost no text from them. Standard and deep runs always mix at least one web and one social search; the "Owner voices" focus is social only. Focus (Open question, Owner voices, Competitors, Press and reviews, Market trends) only steers the planner. The planner gets this car's rival list from our comparison table, so "top three competitors" means the first three rivals there. Findings that match none of the 16 features carry a short topic label instead. Each finding records whose car it is about (the BMW, a named rival, or the market); only claims about the BMW get the agrees / contradicts label. The channel tag (Reddit, X, Owner forum, Press...) is read from the URL, not from the model.
