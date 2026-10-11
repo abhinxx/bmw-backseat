@@ -69,6 +69,7 @@ export async function missionControl(v: VehicleId, m: MarketId) {
     sales2025: salesBy(2025),
     sales2030: salesBy(2030),
     feedbackBy,
+    countryFeedback: must(coverage, "feedback_coverage") as { country: string | null; comments: number }[],
     satisfaction,
     themes: (must(themes, "feedback_themes") as ThemeRow[]).map((t) => ({ ...t, comments: Number(t.comments) })),
   }
