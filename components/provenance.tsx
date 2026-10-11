@@ -25,6 +25,11 @@ const KINDS = {
     hint: "A model-based interpretation of evidence, not a customer vote.",
     cls: "text-simulated bg-simulated/10",
   },
+  external: {
+    label: "External",
+    hint: "From a public source outside BMW, with its link and date. Shown beside BMW data, never mixed into its numbers.",
+    cls: "text-chart-1 bg-chart-1/10",
+  },
 } as const
 
 export type ProvenanceKind = keyof typeof KINDS
