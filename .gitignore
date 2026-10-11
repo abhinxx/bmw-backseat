@@ -3,7 +3,7 @@ __pycache__/
 .DS_Store
 node_modules/
 # raw hackathon data: keep out of git until confirmed shareable
-BMW-Data/
+/BMW-Data/
 # intermediate pickles / raw dumps are regenerable by scripts
 research/data/*.pkl
 research/data/*_feedback_explorer.csv
@@ -13,12 +13,12 @@ research/data/G_t.json
 research/data/G_nhtsa_tmp.json
 
 # internal: research outputs and handover notes stay local (share directly with teammate)
-research/
+/research/
 # local backups
-backups/
+/backups/
 
 node_modules/
-data/
+/data/
 .env*
 # working drafts (local only)
 PLAN-draft-*.md
