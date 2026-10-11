@@ -119,6 +119,19 @@ v3→v3.1 delta: Q3 verdict-vs-cited-sentiment flags 5→3 and Q3 returned 1 hon
 - **v3** (`aaf1a8b6`) — slightly_more_likely: R: "The back seat feels short on amenities: it has no climate control or heated seats, which seems wrong for a car at this price." E: "The clearest direct signal is G60-2227, which explicitly calls out missing rear heated seats; three shown want comments also raise rear climate amenities [G60-0236][G60-1238][G60-2827]. The slice has 12 negative and 6 want comments overall… second-row comfort is rated 47.1% top-2-box [STUDY-1]…"
 - **Q3 EU-2 v3.1** (`7f04c492`) — slightly_more_likely: R: "The range really needs to improve, but €2,000 more is a hard sell when the car already feels expensive." E: "The slice has 16 negative versus 8 positive comments… direct complaints [G60-0034][G60-0325][G60-1032]… one explicitly calls the car insanely expensive [G60-1746], making the price increase a meaningful counterweight." (v2 said NEE with no counts.)
 
+## v3.2 (orchestrator review fix)
+
+Review found a cost-blind bias in v3.1: across all 36 v3.1 verdicts, zero were "less likely", even for "Raise the price by €2,000 for more range". China segments said "I don't see a reason to pay more" yet scored no_effect. The worked example also contradicted the rubric (a segment "outnumbered by satisfied owners" labelled slightly_more_likely).
+
+Changes: a PRICE rule (when the customer pays more, a feature the segment does not clearly ask for is slightly_less_likely or less_likely, not no_effect), and the worked example replaced by a price trade-off that ends slightly_less_likely. `PROMPT_VERSION = "whatif-v3.2"`.
+
+| Question | v3.1 | v3.2 |
+|---|---|---|
+| Raise the price by €2,000 for more range | 5 more · 3 none · 0 less · 1 NEE (`7f04c492`) | 4 more · 0 none · 5 less · 0 NEE (`fcb5abd8`) |
+| Make rear-seat heating standard on every trim (no price, control) | n/a | 7 more · 1 none · 0 less · 1 NEE (`f3d750d1`) |
+
+The range-hungry US and EU segments still lean towards buying; the segments happy with today's range, and China, now lean away from paying more. The control without a price stays positive, so the rule does not flip normal changes.
+
 ## Remaining limits (honest)
 
 - **The sentiment-contradiction metric is biased.** For changes that fix a problem, citing negative comments about the status quo *supports* the verdict; the metric counts comment sentiment, not support direction. Residual "contradictions" (Q1: 4) are largely this artifact, not new failure.

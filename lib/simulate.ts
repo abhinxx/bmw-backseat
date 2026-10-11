@@ -22,7 +22,7 @@ import EU3 from "@/personas/EU-3.json"
 
 export const MODEL = "gpt-6-luna"
 const REASONING_EFFORT = "medium"
-export const PROMPT_VERSION = "whatif-v3.1"
+export const PROMPT_VERSION = "whatif-v3.2"
 const MIN_COMMENTS = 3
 
 const admin = () =>
@@ -286,12 +286,13 @@ async function react(persona: (typeof PERSONA_FILES)[number], change: Change, fe
       `REACTION: 1-2 sentences in this segment's voice, grounded in what a cited comment actually says. No invented details: no family, children, weather, commute, competitors, prices or numbers unless an evidence item says them. No ID tags inside the text; never break character to talk about "the evidence" or "the comments".\n` +
       `REASON: 1-2 sentences in an analyst's voice for the product manager: name the deciding evidence IDs and the counts that tipped the verdict (which comment IDs, how many comments want this). Never just restate the verdict — say what decided it.\n` +
       `ASSUMPTIONS: at most 2 forward-looking assumptions your verdict depends on, specific to this change and segment (never restate the change or say generic things like "it works as described"). Empty list when the verdict rests only on evidence.\n` +
-      `CONFIDENCE: high = many matching comments all one way; medium = a few comments or study only, one way; low = thin or conflicting.\n\n` +
+      `CONFIDENCE: high = many matching comments all one way; medium = a few comments or study only, one way; low = thin or conflicting.\n` +
+      `PRICE: when the customer pays more (price impact above 0), the price is a cost every segment feels. Weigh the support for the feature against it: a feature this segment does not clearly ask for, at a higher price, is slightly_less_likely or less_likely, not no_effect. Price complaints in the slice count against the change.\n\n` +
       `WORKED EXAMPLE (invented, for form only):\n` +
-      `Change: panoramic sunroof standard on all trims. Segment evidence: 9 comments praising roof silence [G60-111][G60-112], 4 complaining the standard roof feels dark [G60-201][G60-202], study [STUDY-1] rating cabin brightness low in this market.\n` +
-      `verdict: slightly_more_likely — real requests for light, but the loud praise is for other roof qualities. supporting_ids: G60-201, G60-202, STUDY-1; opposing_ids: G60-111, G60-112.\n` +
-      `reaction: "The standard roof always feels dim inside — more light from the glass would genuinely please us, even if the quiet roof we have is fine."\n` +
-      `reason: "Two of thirteen segment comments ask for more cabin light [G60-201][G60-202] and the survey rates brightness low [STUDY-1], while nine praise the current roof's quietness [G60-111][G60-112] — real support, but outnumbered by satisfied owners."`,
+      `Change: panoramic glass roof standard on all trims, customer price impact +1200 EUR. Segment evidence: 2 comments asking for a brighter cabin [G60-201][G60-202]; 7 comments saying the car is already too expensive [G60-111][G60-112]; study [STUDY-1] rating cabin brightness well in this market.\n` +
+      `verdict: slightly_less_likely — some demand for light, but this segment's louder complaint is price and the market already rates brightness well. supporting_ids: G60-111, G60-112, STUDY-1; opposing_ids: G60-201, G60-202.\n` +
+      `reaction: "A brighter cabin would be nice, but this car already costs too much; I would not pay more for a glass roof."\n` +
+      `reason: "Seven segment comments complain about price [G60-111][G60-112] against two asking for more light [G60-201][G60-202], and the survey already rates brightness well [STUDY-1]: the added cost outweighs thin demand."`,
     `Proposed change: ${change.summary} (feature: ${feature.name}; change type: ${change.change_type}; customer price impact: ${change.cost_impact_eur ?? "not stated"} EUR)\n\nEVIDENCE\n${evidenceText}`,
     "verdict",
     {
