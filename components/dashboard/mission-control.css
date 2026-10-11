@@ -1,0 +1,255 @@
+/* Mission Control only. The rest of the app keeps its existing design system. */
+.mission-control { --mc-ink: var(--foreground); --mc-muted: var(--muted-foreground); --mc-paper: var(--card); --mc-line: var(--border); --mc-blue: var(--primary); color: var(--mc-ink); margin-top: -14px; }
+.mission-control button, .mc-garage button { cursor: pointer; }
+.mission-control button:disabled { cursor: wait; }
+.mission-control button:focus-visible, .mission-control a:focus-visible, .mc-garage button:focus-visible { outline: 2px solid var(--primary); outline-offset: 5px; }
+.mc-eyebrow { display: block; color: var(--muted-foreground); font-size: 10px; line-height: 1.5; font-weight: 600; letter-spacing: .12em; }
+.mc-eyebrow > span { padding: 0 5px; opacity: .5; }
+.mc-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 22px; }
+.mc-vehicle-chooser { display: flex; align-items: center; text-align: left; min-height: 88px; width: 385px; gap: 16px; padding: 12px 19px 12px 10px; background: var(--mc-paper); border: 1px solid var(--mc-line); border-radius: 20px; box-shadow: 0 3px 12px #00000003; transition: border-color .2s, box-shadow .2s; }
+.mc-vehicle-chooser:hover { border-color: var(--mc-blue); box-shadow: 0 5px 20px #00000007; }
+.mc-vehicle-chooser > svg { margin-left: auto; }
+.mc-chooser-thumbnail { position: relative; width: 112px; height: 62px; flex-shrink: 0; }
+.mc-chooser-thumbnail img { object-fit: contain; }
+.mc-chooser-thumbnail > svg { width: 70px; height: 50px; color: var(--mc-muted); }
+.mc-vehicle-chooser strong { display: block; font-size: 23px; line-height: 1.3; letter-spacing: -.045em; font-weight: 600; }
+.mc-chooser-meta { display: block; color: var(--muted-foreground); font-size: 11px; line-height: 1.8; }
+.mc-chooser-meta > span { padding: 0 5px; }
+.mc-market-switch > p { margin-bottom: 9px; }
+.mc-segmented { display: flex; align-items: center; gap: 3px; padding: 4px; background: var(--muted); border-radius: 12px; }
+.mc-segmented button { border-radius: 9px; padding: 9px 13px; font-size: 12px; font-weight: 500; white-space: nowrap; color: var(--muted-foreground); min-height: 36px; transition: color .15s, background .15s, box-shadow .15s; }
+.mc-segmented button[aria-pressed=true] { color: var(--foreground); background: var(--card); box-shadow: 0 2px 5px #0000000a; }
+.mc-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: white; background: var(--primary); border-radius: 100px; padding: 12px 19px; font-size: 12px; font-weight: 500; min-height: 44px; white-space: nowrap; transition: filter .2s, transform .2s; }
+.mc-primary:hover { filter: brightness(1.07); transform: translateY(-1px); }
+.mc-text-link { display: inline-flex; gap: 7px; align-items: center; color: var(--primary); font-size: 12px; font-weight: 500; }
+.mc-text-link:hover { text-decoration: underline; }
+
+/* A studio scene, not a marketing hero: real customer context surrounds the car. */
+.mc-scene { height: 482px; position: relative; overflow: hidden; border-radius: 26px; border: 1px solid var(--mc-line); background: radial-gradient(ellipse at 51% 56%, #ffffff 5%, #edf0f4 100%); transition: opacity .2s; }
+.dark .mc-scene { background: radial-gradient(ellipse at 51% 56%, #2c3038 0%, #16181d 85%); }
+.mc-updating { opacity: .45; }
+.mc-scene-heading { position: relative; display: flex; align-items: flex-start; justify-content: space-between; padding: 28px 31px; z-index: 4; }
+.mc-scene-heading h1 { margin: 7px 0 8px; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.08; font-weight: 600; letter-spacing: -.055em; }
+.mc-scene-heading > div > p:last-child { color: var(--mc-muted); font-size: 14px; }
+.mc-scene-heading > a { margin-top: 19px; }
+.mc-car-stage { position: absolute; left: 10%; top: 138px; width: 80%; height: 294px; z-index: 2; animation: mc-arrive .5s ease-out both; }
+.mc-car-stage img { object-fit: contain; filter: drop-shadow(0 21px 17px #242c3522); }
+.mc-orbit { position: absolute; z-index: 3; padding: 14px 17px; width: 167px; border-radius: 18px; border: 1px solid var(--mc-line); background: var(--mc-paper); box-shadow: 0 8px 28px #15243c05; }
+.mc-feedback { left: 30px; top: 156px; }
+.mc-study { right: 30px; top: 156px; }
+.mc-orbit-label { display: flex; gap: 6px; align-items: center; font-size: 11px; font-weight: 500; color: var(--mc-muted); }
+.mc-orbit > strong { display: block; font-size: 29px; font-weight: 600; letter-spacing: -.055em; margin-top: 7px; }
+.mc-orbit > span:not(.mc-orbit-label) { display: block; font-size: 10px; color: var(--mc-muted); }
+.mc-orbit small { display: block; font-size: 10px; color: var(--mc-muted); margin-top: 8px; }
+.mc-orbit small.mc-warning { color: #a56720; }
+.dark .mc-orbit small.mc-warning { color: #dbb97f; }
+.mc-study-values { display: flex; gap: 20px; padding-top: 7px; }
+.mc-study-values a { display: flex; flex-direction: column; }
+.mc-study-values strong { font-size: 29px; font-weight: 600; letter-spacing: -.045em; }
+.mc-study-values a:hover strong { color: var(--primary); }
+.mc-study-values span { color: var(--mc-muted); font-size: 10px; }
+.mc-no-score { margin-top: 10px; font-size: 13px; line-height: 1.5; }
+.mc-scene-bottom { position: absolute; bottom: 40px; left: 31px; right: 31px; display: flex; justify-content: space-between; z-index: 3; }
+.mc-scene-bottom strong { display: block; font-size: 23px; font-weight: 600; letter-spacing: -.045em; margin-top: 3px; }
+.mc-scene-bottom strong > span { font-size: 11px; font-weight: 400; letter-spacing: -.01em; color: var(--mc-muted); }
+.mc-horizon { text-align: right; }
+.mc-image-note { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; color: var(--mc-muted); font-size: 9px; }
+.mc-car-placeholder { height: 100%; display: flex; flex-direction: column; gap: 8px; justify-content: center; align-items: center; color: var(--mc-muted); }
+.mc-car-placeholder p { font-size: 24px; font-weight: 500; }
+.mc-car-placeholder span { font-size: 11px; }
+
+/* Topic tiles have one job: reveal the evidence beneath a named customer issue. */
+.mc-topics-section { margin-top: 31px; }
+.mc-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; margin-bottom: 17px; }
+.mc-section-heading h2 { font-size: 23px; line-height: 1.15; font-weight: 600; letter-spacing: -.04em; margin-top: 7px; }
+.mc-mode { background: transparent; padding: 3px; border: 1px solid var(--mc-line); }
+.mc-mode button { font-size: 11px; padding: 7px 11px; }
+.mc-mode button[aria-pressed=true] { background: var(--muted); box-shadow: none; }
+.mc-topic-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.mc-topic-card { display: flex; flex-direction: column; justify-content: space-between; text-align: left; background: var(--mc-paper); border: 1px solid var(--mc-line); border-radius: 18px; min-height: 172px; padding: 15px; transition: transform .2s, border-color .2s; }
+.mc-topic-card:hover { transform: translateY(-4px); border-color: var(--mc-blue); }
+.mc-topic-top { display: flex; justify-content: space-between; align-items: center; }
+.mc-topic-index { font-size: 10px; color: var(--mc-muted); font-variant-numeric: tabular-nums; }
+.mc-topic-top > svg { width: 29px; height: 29px; color: var(--mc-muted); }
+.mc-topic-card h3 { margin-top: 20px; margin-bottom: 14px; font-size: 13px; line-height: 1.35; font-weight: 500; letter-spacing: -.02em; }
+.mc-topic-count { display: flex; flex-wrap: wrap; align-items: center; column-gap: 5px; }
+.mc-topic-count strong { font-size: 21px; line-height: 1; letter-spacing: -.04em; font-weight: 600; }
+.mc-topic-count > span { font-size: 9px; color: var(--mc-muted); }
+.mc-topic-count > svg { margin-left: auto; color: var(--mc-muted); }
+.mc-caption { font-size: 10px; line-height: 1.55; color: var(--muted-foreground); margin-top: 11px; }
+.mc-empty { padding: 38px 25px; border: 1px solid var(--mc-line); border-radius: 20px; background: var(--mc-paper); }
+.mc-empty > svg { color: var(--mc-muted); }
+.mc-empty h3 { font-size: 18px; margin-top: 13px; letter-spacing: -.03em; }
+.mc-empty p { font-size: 13px; color: var(--mc-muted); margin-top: 5px; }
+.mc-empty a { display: inline-flex; gap: 8px; align-items: center; color: var(--mc-blue); font-size: 12px; margin-top: 15px; }
+
+/* Paired proportional circles replace the bar charts. All values remain inspectable. */
+.mc-landscape { display: grid; grid-template-columns: 1.35fr 1fr; gap: 19px; margin-top: 29px; }
+.mc-map-panel, .mc-voice-panel { border-radius: 23px; border: 1px solid var(--mc-line); background: var(--mc-paper); padding: 26px; }
+.mc-map-panel .mc-section-heading { align-items: flex-start; margin-bottom: 2px; }
+.mc-map-panel .mc-section-heading > svg { color: var(--mc-muted); }
+.mc-map-panel h2 { font-size: 25px; }
+.mc-world { position: relative; aspect-ratio: 2.3; margin: 15px -8px 0; }
+.mc-world-land { position: absolute; inset: 0; background: #dee3e9; mask: url(/mission-world.svg) center / 100% 100% no-repeat; }
+.dark .mc-world-land { background: #363c46; }
+.mc-map-marker { position: absolute; width: 70px; height: 70px; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; }
+.mc-map-sales { width: max(3px, var(--sales-size)); height: max(3px, var(--sales-size)); position: absolute; background: var(--primary); opacity: .38; border-radius: 50%; }
+.mc-map-voice { width: max(2px, var(--voice-size)); height: max(2px, var(--voice-size)); position: absolute; border: 1.5px solid var(--foreground); border-radius: 50%; opacity: .7; }
+.mc-map-marker[aria-pressed=true] { outline: 1px dashed var(--primary); outline-offset: 3px; }
+.mc-map-label { position: absolute; top: 56px; font-size: 10px; font-weight: 600; color: var(--foreground); }
+.mc-map-legend { display: flex; align-items: center; gap: 14px; font-size: 10px; color: var(--mc-muted); margin-bottom: 21px; }
+.mc-map-legend > span { display: flex; align-items: center; gap: 6px; }
+.mc-map-legend small { margin-left: auto; font-size: 9px; }
+.mc-sales-dot { display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); opacity: .6; }
+.mc-voice-dot { display: block; width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--foreground); }
+.mc-market-pairs { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--mc-line); padding-top: 17px; gap: 12px; }
+.mc-market-pairs button { text-align: left; padding: 4px; border-radius: 6px; }
+.mc-market-pairs button:hover { background: var(--muted); }
+.mc-market-pairs button > span { display: block; font-size: 11px; font-weight: 500; margin-bottom: 10px; }
+.mc-market-pairs strong { display: block; font-size: 20px; letter-spacing: -.04em; font-weight: 600; }
+.mc-market-pairs strong:first-of-type { color: var(--primary); }
+.mc-market-pairs strong > span { font-size: 10px; font-weight: 400; color: var(--mc-muted); letter-spacing: -.01em; }
+.mc-voice-panel { display: flex; flex-direction: column; }
+.mc-quote-mark { color: var(--primary); margin: 24px 0 15px; }
+.mc-voice-panel > blockquote { font-size: 20px; line-height: 1.43; letter-spacing: -.025em; font-weight: 400; flex: 1; }
+.mc-voice-source { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 25px; font-size: 10px; }
+.mc-voice-source > span { color: var(--mc-muted); }
+.mc-voice-source a { display: inline-flex; gap: 5px; align-items: center; color: var(--primary); }
+.mc-voice-panel > h3 { margin-top: 32px; font-size: 24px; line-height: 1.25; letter-spacing: -.04em; }
+.mc-voice-panel > p:not(.mc-caption) { color: var(--mc-muted); font-size: 13px; margin: 12px 0; }
+.mc-coverage-note { display: flex; align-items: flex-start; gap: 10px; padding-top: 20px; margin-top: 21px; border-top: 1px solid var(--mc-line); }
+.mc-coverage-note > svg { flex-shrink: 0; color: var(--mc-muted); }
+.mc-coverage-note strong { font-size: 11px; font-weight: 500; }
+.mc-coverage-note p { font-size: 11px; color: var(--mc-muted); line-height: 1.55; margin-top: 4px; }
+
+/* Signals are brief. The long source lists, history and illustrative plan live in drawers. */
+.mc-signals { margin-top: 32px; }
+.mc-signal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+.mc-signal { padding: 17px 0; border-top: 1px solid var(--mc-line); display: flex; flex-direction: column; gap: 13px; }
+.mc-signal .mc-eyebrow { font-size: 9px; line-height: 1.5; }
+.mc-signal h3 { font-size: 13px; font-weight: 500; line-height: 1.5; letter-spacing: -.015em; flex: 1; }
+.mc-signal > span:last-child { display: flex; justify-content: space-between; font-size: 10px; color: var(--mc-muted); }
+.mc-signal:hover h3 { color: var(--primary); }
+.mc-footer { margin-top: 29px; padding-top: 18px; border-top: 1px solid var(--mc-line); display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--mc-muted); font-size: 10px; }
+.mc-footer > span, .mc-footer button { display: inline-flex; align-items: center; gap: 6px; }
+.mc-footer > div { display: flex; gap: 20px; }
+.mc-footer button { padding: 8px 0; min-height: 36px; }
+.mc-footer button:hover { color: var(--foreground); }
+
+/* Portal surfaces retain theme tokens, focus trapping and Escape via the existing Radix sheets. */
+.mc-garage[data-slot=sheet-content] { max-height: 90dvh; overflow-y: auto; padding: 25px max(28px, calc((100vw - 1200px) / 2)); border-radius: 0 0 30px 30px; background: var(--background); }
+.mc-garage [data-slot=sheet-header] { padding: 8px 0 20px; }
+.mc-garage [data-slot=sheet-title] { font-size: 34px; letter-spacing: -.045em; margin: 6px 0; }
+.mc-garage [data-slot=sheet-description] { font-size: 14px; }
+.mc-garage-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 19px; }
+.mc-garage-car { border: 1px solid var(--border); border-radius: 22px; background: var(--card); padding: 20px; text-align: left; transition: border-color .2s, transform .2s; }
+.mc-garage-car:hover { transform: translateY(-3px); border-color: var(--primary); }
+.mc-garage-car[aria-pressed=true] { border-color: var(--primary); }
+.mc-garage-art { position: relative; display: block; height: 183px; }
+.mc-garage-art img { object-fit: contain; }
+.mc-garage-name { display: flex; justify-content: space-between; align-items: center; margin: 14px 0 3px; }
+.mc-garage-name strong { font-size: 28px; font-weight: 600; letter-spacing: -.045em; }
+.mc-garage-name svg { color: var(--primary); }
+.mc-no-render { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; color: var(--muted-foreground); font-size: 11px; }
+.mc-garage-note { font-size: 11px; color: var(--muted-foreground); padding: 6px 0 15px; }
+.mc-detail-sheet[data-slot=sheet-content][data-side=right] { width: min(600px, 100vw); max-width: 600px; overflow-y: auto; }
+.mc-detail-sheet [data-slot=sheet-header] { padding: 36px 29px 15px; }
+.mc-detail-sheet [data-slot=sheet-title] { font-size: 28px; letter-spacing: -.045em; line-height: 1.1; padding: 8px 0; }
+.mc-drawer-content { padding: 0 29px 35px; }
+.mc-drawer-content > [data-slot=card] { margin-top: 10px; }
+.mc-drawer-content [data-slot=card-content] { display: block; }
+.mc-drawer-content [data-slot=card-content] > div { margin-bottom: 20px; }
+.mc-drawer-label { padding-top: 21px; margin-bottom: 16px; font-size: 11px; font-weight: 600; }
+.mc-evidence-quote { display: block; padding: 17px 0; border-bottom: 1px solid var(--border); }
+.mc-evidence-quote blockquote { font-size: 17px; line-height: 1.6; letter-spacing: -.02em; white-space: pre-line; }
+.mc-evidence-quote > p { margin: 12px 0 8px; font-size: 11px; color: var(--muted-foreground); }
+.mc-evidence-quote a, .mc-evidence-link > span { display: inline-flex; gap: 5px; align-items: center; font-size: 11px; color: var(--primary); }
+.mc-evidence-link > p { font-size: 14px; color: var(--foreground); }
+.mc-drawer-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 30px; }
+@keyframes mc-arrive { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1250px) {
+  .mc-vehicle-chooser { width: 345px; }
+  .mc-chooser-thumbnail { width: 84px; }
+  .mc-segmented button { padding-left: 10px; padding-right: 10px; }
+  .mc-topic-grid { grid-template-columns: repeat(3, 1fr); }
+  .mc-topic-card { min-height: 151px; }
+  .mc-topic-card h3 { font-size: 14px; margin-top: 15px; }
+  .mc-landscape { grid-template-columns: 1.2fr 1fr; }
+  .mc-map-panel, .mc-voice-panel { padding: 22px; }
+  .mc-map-legend { flex-wrap: wrap; gap: 9px; }
+  .mc-map-legend small { margin-left: 0; }
+}
+@media (max-width: 1000px) {
+  .mc-toolbar { gap: 15px; align-items: flex-start; flex-direction: column; }
+  .mc-market-switch { align-self: stretch; margin-top: 0; }
+  .mc-market-switch > p { display: block; }
+  .mc-market-switch .mc-segmented button { flex: 1; }
+  .mc-vehicle-chooser { width: 310px; }
+  .mc-vehicle-chooser strong { font-size: 20px; }
+  .mc-landscape { grid-template-columns: 1fr; }
+  .mc-world { max-height: 230px; }
+  .mc-car-stage { left: 5%; width: 90%; }
+  .mc-scene-heading h1 { font-size: 35px; }
+  .mc-orbit { width: 146px; }
+  .mc-study-values { gap: 12px; }
+  .mc-footer { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 760px) {
+  .mission-control { margin-top: -9px; }
+  .mc-toolbar { align-items: stretch; gap: 15px; margin-bottom: 19px; }
+  .mc-vehicle-chooser { width: 100%; min-height: 93px; }
+  .mc-vehicle-chooser strong { font-size: 25px; }
+  .mc-chooser-thumbnail { width: 114px; }
+  .mc-market-switch { align-self: stretch; margin-top: 0; }
+  .mc-market-switch > p { display: block; }
+  .mc-segmented { justify-content: space-between; }
+  .mc-segmented button { flex: 1; min-height: 44px; font-size: 11px; padding: 6px 9px; }
+  .mc-scene { height: 610px; border-radius: 22px; }
+  .mc-scene-heading { padding: 23px; flex-direction: column; gap: 13px; }
+  .mc-scene-heading h1 { font-size: 35px; }
+  .mc-scene-heading > div > p:last-child { font-size: 12px; }
+  .mc-scene-heading > a { margin-top: 0; min-height: 40px; padding: 9px 15px; }
+  .mc-car-stage { top: 190px; height: 190px; width: 98%; left: 1%; }
+  .mc-orbit { top: 387px; width: calc(50% - 29px); padding: 12px; border-radius: 13px; }
+  .mc-feedback { left: 22px; }
+  .mc-study { right: 22px; }
+  .mc-orbit > strong, .mc-study-values strong { font-size: 25px; }
+  .mc-orbit small { font-size: 8px; }
+  .mc-orbit-label { font-size: 10px; }
+  .mc-scene-bottom { left: 23px; right: 23px; bottom: 17px; }
+  .mc-scene-bottom .mc-eyebrow { font-size: 8px; }
+  .mc-scene-bottom strong { font-size: 17px; }
+  .mc-scene-bottom strong > span { font-size: 8px; }
+  .mc-image-note { top: 369px; bottom: auto; font-size: 7px; }
+  .mc-section-heading { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .mc-section-heading h2 { font-size: 23px; }
+  .mc-mode { align-self: stretch; }
+  .mc-topic-grid { grid-template-columns: repeat(2, 1fr); }
+  .mc-topic-card { min-height: 160px; }
+  .mc-caption { font-size: 10px; }
+  .mc-map-panel .mc-section-heading { flex-direction: row; }
+  .mc-map-panel, .mc-voice-panel { padding: 22px; }
+  .mc-world { margin-left: -12px; margin-right: -12px; }
+  .mc-map-marker { transform: translate(-50%, -50%) scale(.8); }
+  .mc-map-legend small { width: 100%; margin-top: 4px; }
+  .mc-market-pairs { gap: 7px; }
+  .mc-market-pairs strong { font-size: 19px; }
+  .mc-market-pairs button > span { font-size: 10px; }
+  .mc-voice-panel > blockquote { font-size: 22px; }
+  .mc-signal-grid { grid-template-columns: 1fr; gap: 4px; }
+  .mc-signals .mc-section-heading { flex-direction: row; align-items: center; }
+  .mc-signals .mc-section-heading .mc-text-link { font-size: 10px; }
+  .mc-signals h2 { font-size: 21px; }
+  .mc-footer > div { flex-wrap: wrap; gap: 12px; }
+  .mc-garage[data-slot=sheet-content] { padding: 27px 20px; }
+  .mc-garage [data-slot=sheet-title] { font-size: 29px; }
+  .mc-garage-grid { grid-template-columns: 1fr; gap: 12px; }
+  .mc-garage-art { height: 130px; }
+  .mc-garage-car { padding: 16px; }
+  .mc-garage-name { margin-top: 6px; }
+  .mc-detail-sheet [data-slot=sheet-header], .mc-drawer-content { padding-left: 22px; padding-right: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mission-control *, .mc-garage * { animation: none !important; transition: none !important; }
+}
