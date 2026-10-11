@@ -45,6 +45,12 @@ const REGIONS = ["Americas", "Europe", "Asia"] as const
 // Display label only - the filter key stays the persona JSON's p.region value.
 const REGION_LABEL: Record<string, string> = { Americas: "America" }
 
+// Flag for the persona's evidence cohort (market string from personas/*.json -
+// deliberately not identity_illustration, which is labelled illustration only).
+const FLAG: Record<string, string> = { US: "🇺🇸", EU: "🇪🇺", China: "🇨🇳", Korea: "🇰🇷🇯🇵" }
+const flagOf = (market: string) =>
+  Object.entries(FLAG).find(([k]) => market.startsWith(k))?.[1] ?? "🌍"
+
 function VerdictPill({ v, className }: { v: Verdict; className?: string }) {
   return (
     <span className={cn("inline-flex h-6 items-center rounded-full px-2.5 text-xs font-medium whitespace-nowrap", VERDICT[v].cls, className)}>
@@ -246,7 +252,7 @@ export function WhatIfClient({
                         <div className="min-w-0 space-y-0.5">
                           <p className="truncate text-[15px] font-semibold">{p.name}</p>
                           <p className="truncate text-sm text-muted-foreground">
-                            {p.blurb} · {p.market}
+                            {p.blurb} {flagOf(p.market)}
                           </p>
                         </div>
                       </CardHeader>
