@@ -99,27 +99,77 @@ const FINDING_COLS =
   "id, source_id, kind, topic, subject, title, stance, value, unit, year, quote, quote_translation, source_name, source_url, source_page, source_type, published_date, market"
 
 // Curated highlights for Mission Control (ids are stable; every one links to its source).
-const REPORT_FACTS = ["M5-5-6-series-2025", "M5-5-6-series-2024", "M1-total-2025", "M2-china-2025", "M2-china-2024", "M4-bev-share-2025"]
+// Group-level facts of the BMW Group Report 2025, plus the delivery facts of the selected car line.
+const REPORT_FACTS_GROUP = ["M1-total-2025", "M2-china-2025", "M2-china-2024", "M4-bev-share-2025"]
+const REPORT_FACTS_LINE: Record<string, string[]> = {
+  G60: ["M5-5-6-series-2025", "M5-5-6-series-2024"],
+  G70: ["M5-7-8-series-2025", "M5-7-8-series-2024"],
+  F70: ["M5-1-2-series-2025", "M5-1-2-series-2024"],
+}
 const TREND_HIGHLIGHTS = ["mt-002", "mt-019", "mt-008", "mt-021"]
 
-export async function outsideView() {
-  const [report, trends, voices, search] = await Promise.all([
-    db.from("external_finding").select(FINDING_COLS).in("id", REPORT_FACTS.map((i) => `bmw_report_2025:${i}`)),
+// Region chip per quote source (the only owner-voice sources so far are per-car-line).
+const regionOf = (f: Finding): "US" | "Europe" | "China" =>
+  f.source_id.includes("europe_") ? "Europe" : f.source_id.includes("china_") ? "China" : "US"
+
+export type OwnerVoice = Finding & { region: ReturnType<typeof regionOf> }
+
+// Stable order: negatives (pain points) first, then the rest, each ordered by id.
+const preferNegative = (rows: Finding[]) => [
+  ...rows.filter((r) => r.stance === "negative"),
+  ...rows.filter((r) => r.stance !== "negative"),
+]
+
+export async function outsideView(vehicle: string, market: MarketId = "all") {
+  const ids = [...REPORT_FACTS_GROUP, ...(REPORT_FACTS_LINE[vehicle] ?? [])].map((i) => `bmw_report_2025:${i}`)
+  const [report, trends, voices] = await Promise.all([
+    db.from("external_finding").select(FINDING_COLS).in("id", ids),
     db.from("external_finding").select(FINDING_COLS).in("id", TREND_HIGHLIGHTS.map((i) => `market_trends:${i}`)),
-    db.from("external_finding").select(FINDING_COLS).eq("kind", "owner_quote").order("id"),
-    db.from("search_trend").select("region, keyword, month, value").eq("region", "US").order("month"),
+    db.from("external_finding").select(FINDING_COLS).eq("kind", "owner_quote").eq("vehicle", vehicle).order("id"),
   ])
-  const byId = (rows: Finding[], prefix: string) => Object.fromEntries(rows.map((r) => [r.id.replace(prefix, ""), r]))
+  // Only ids that actually exist in the snapshot are shown; a missing one is dropped, not faked.
+  const found = new Map((must(report, "report facts") as Finding[]).map((r) => [r.id, r]))
+  const trendById = Object.fromEntries((must(trends, "trends") as Finding[]).map((r) => [r.id.replace("market_trends:", ""), r]))
   const voiceRows = must(voices, "owner voices") as Finding[]
-  // One voice per theme for the dashboard: the first negative (pain point) by id, so it is stable.
-  const pick = (theme: string, stance = "negative") => voiceRows.find((v) => v.topic === theme && v.stance === stance)
-  return {
-    report: byId(must(report, "report facts") as Finding[], "bmw_report_2025:"),
-    trends: TREND_HIGHLIGHTS.map((i) => byId(must(trends, "trends") as Finding[], "market_trends:")[i]).filter(Boolean),
-    voices: [pick("controls"), pick("rear_comfort"), pick("ev_range_charging"), pick("driving", "positive")].filter(Boolean) as Finding[],
-    voiceCount: voiceRows.length,
-    search: must(search, "search_trend") as { region: string; keyword: string; month: string; value: number }[],
+
+  let picked: Finding[]
+  if (market === "EU") picked = preferNegative(voiceRows.filter((v) => v.market === "EU")).slice(0, 6)
+  else if (market === "CN") picked = preferNegative(voiceRows.filter((v) => v.market === "CN")).slice(0, 6)
+  else if (market === "US") picked = preferNegative(voiceRows.filter((v) => regionOf(v) === "US")).slice(0, 6)
+  else {
+    // All markets: two quotes per source (US forums, Europe, China) so no single source dominates.
+    const sources = [...new Set(voiceRows.map((v) => v.source_id))]
+    picked = sources.flatMap((s) => preferNegative(voiceRows.filter((v) => v.source_id === s)).slice(0, 2))
   }
+
+  return {
+    report: ids.map((i) => found.get(i)).filter((r): r is Finding => Boolean(r)),
+    trends: TREND_HIGHLIGHTS.map((i) => trendById[i]).filter(Boolean),
+    voices: picked.map((v) => ({ ...v, region: regionOf(v) })) as OwnerVoice[],
+    voiceCount: voiceRows.length,
+  }
+}
+
+// How many what-if runs exist for this car line (head count, no rows transferred).
+export async function countRuns(vehicle: string): Promise<number> {
+  const { count, error } = await db
+    .from("simulation_run")
+    .select("*", { count: "exact", head: true })
+    .eq("vehicle", vehicle)
+  if (error) throw new Error(`simulation_run count: ${error.message}`)
+  return count ?? 0
+}
+
+// Everything gathered about this car line outside the feedback file: report facts, quotes, rivals
+// (external_finding) plus what the research agent found (research_finding).
+export async function countOutside(vehicle: string): Promise<number> {
+  const [ext, res] = await Promise.all([
+    db.from("external_finding").select("*", { count: "exact", head: true }).eq("vehicle", vehicle),
+    db.from("research_finding").select("*", { count: "exact", head: true }).eq("vehicle", vehicle),
+  ])
+  if (ext.error) throw new Error(`external_finding count: ${ext.error.message}`)
+  if (res.error) throw new Error(`research_finding count: ${res.error.message}`)
+  return (ext.count ?? 0) + (res.count ?? 0)
 }
 
 export async function allFindings() {
