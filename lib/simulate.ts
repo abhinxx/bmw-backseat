@@ -20,7 +20,8 @@ import EU1 from "@/personas/EU-1.json"
 import EU2 from "@/personas/EU-2.json"
 import EU3 from "@/personas/EU-3.json"
 
-export const MODEL = "gpt-4.1"
+export const MODEL = "gpt-6-luna"
+const REASONING_EFFORT = "medium"
 export const PROMPT_VERSION = "whatif-v2"
 const MIN_COMMENTS = 3
 
@@ -101,8 +102,7 @@ async function llm<T>(system: string, user: string, name: string, schema: object
     headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model: MODEL,
-      temperature: 0,
-      seed: 7,
+      reasoning_effort: REASONING_EFFORT, // this model only supports the default temperature; repeatability comes from the stored-run cache
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
@@ -359,6 +359,7 @@ export async function runWhatIf(question: string, vehicle: string, vehicleName: 
     .select("id, change, feature_id, evidence_hash")
     .eq("vehicle", vehicle)
     .eq("question_norm", qn)
+    .eq("model", MODEL)
     .eq("prompt_version", PROMPT_VERSION)
     .eq("feature_map_version", FEATURE_MAP_VERSION)
     .order("created_at", { ascending: false })
