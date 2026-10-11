@@ -16,6 +16,7 @@
     "data:external": "tsx --env-file=.env.local scripts/load-external.ts"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.9.0",
     "@supabase/supabase-js": "^2.117.3",
     "class-variance-authority": "^0.7.1",
     "cmdk": "^1.1.1",
