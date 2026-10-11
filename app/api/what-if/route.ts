@@ -1,3 +1,4 @@
+import { MIN_WORDS, wordCount } from "@/lib/nav"
 import { loadRun, runWhatIf } from "@/lib/simulate"
 import { vehicleOf } from "@/lib/scope"
 
@@ -7,8 +8,17 @@ export const maxDuration = 60
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as { question?: unknown; vehicle?: unknown } | null
   const question = typeof body?.question === "string" ? body.question.trim() : ""
-  if (question.length < 5 || question.length > 500) {
-    return Response.json({ error: "Describe the change in 5 to 500 characters." }, { status: 400 })
+  if (wordCount(question) < MIN_WORDS) {
+    return Response.json(
+      {
+        error:
+          'Describe the change in a full sentence of at least 5 words, e.g. "Make rear-seat heating standard on every trim".',
+      },
+      { status: 400 }
+    )
+  }
+  if (question.length > 500) {
+    return Response.json({ error: "Keep the question under 500 characters." }, { status: 400 })
   }
   const vehicle = vehicleOf(typeof body?.vehicle === "string" ? body.vehicle : null)
   if (vehicle.id !== "G60") {

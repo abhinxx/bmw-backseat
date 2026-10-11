@@ -37,8 +37,13 @@ export const NAV = [
 export const navFor = (pathname: string) =>
   NAV.find((n) => (n.href === "/" ? pathname === "/" : pathname.startsWith(n.href))) ?? NAV[0]
 
+// A what-if needs to name a feature and a change; 2-3 word questions find poor evidence.
+export const MIN_WORDS = 5
+export const wordCount = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
+
 export const SUGGESTED_WHAT_IFS = [
-  "Make rear-seat heating standard",
-  "Simplify the iDrive controls",
-  "Raise the price by €2,000 for more range",
+  "Make adaptive suspension standard on every future 5 Series trim",
+  "Simplify the exterior design and remove the illuminated grille",
+  "Bring back physical buttons for climate and volume",
+  "Make the digital key and wireless CarPlay standard on all trims",
 ] as const
