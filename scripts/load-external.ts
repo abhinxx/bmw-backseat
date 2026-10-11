@@ -1,7 +1,7 @@
 // external-loader: load public-evidence JSON files (data/external/) into
 // external_source, external_finding and search_trend, then verify counts.
 // Run from the worktree root:
-//   DATA_ROOT=/Users/abhinavsingh/Documents/codes/ehl-hackathon npx tsx --env-file=/Users/abhinavsingh/Documents/codes/ehl-hackathon/.env.local scripts/load-external.ts
+// Run from the repo root: npm run data:external
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
