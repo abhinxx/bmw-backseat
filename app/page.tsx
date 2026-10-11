@@ -51,8 +51,8 @@ export default async function MissionControl({
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {TILES.map((t) => (
           <Card key={t.label} className="gap-3">
-            <CardHeader className="flex flex-row items-center justify-between gap-2">
-              <CardDescription>{t.label}</CardDescription>
+            <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2">
+              <CardDescription className="whitespace-nowrap">{t.label}</CardDescription>
               <Provenance kind={t.kind} />
             </CardHeader>
             <CardContent className="space-y-1">
