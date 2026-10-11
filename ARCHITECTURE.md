@@ -120,7 +120,8 @@ flowchart LR
 
 ## 6. Known limits
 
-- Prompts in `lib/simulate.ts` are first drafts (`whatif-v2`); a reviewed rewrite is pending.
+- Prompts in `lib/simulate.ts` are `whatif-v3.2`: verdict rubric, evidence definitions, a price rule. Audit, A/B against v2 and remaining limits in `docs/PROMPTS.md`.
+- `/api/deck` has no rate limit either; each run's PDF is generated once and then served from storage.
 - The feature map and persona scope were drafted by Claude and are not yet reviewed by the team.
 - `/api/what-if` has no rate limit yet (on the backlog).
 - Personas exist for the 5 Series (G60) only.
@@ -163,3 +164,13 @@ Rules:
 Sources, and why: Linkup returns the page text, so every quote can be checked. OpenAI's own web search returns citations but not the page text, so quotes could not be verified; not used. Reddit is reached through Linkup (`includeDomains` per platform); the Hermes Reddit skill is for offline collection only (about 1 request per minute without credentials).
 
 Mixed sources (`research-v4`): every search targets either "web" (press, reviews, maker pages, studies) or ONE social platform group: Reddit, owner forums (Bimmerpost, Bimmerfest, MBWorld, Audizine, motor-talk), X, YouTube/TikTok, Facebook, Chinese car communities (Autohome, Dongchedi); list in `lib/channels.ts`, probed with Linkup. One platform per search stops Reddit from crowding out the rest. Instagram, Weibo and Xiaohongshu are left out because Linkup returns almost no text from them. Standard and deep runs always mix at least one web and one social search; the "Owner voices" focus is social only. Focus (Open question, Owner voices, Competitors, Press and reviews, Market trends) only steers the planner. The planner gets this car's rival list from our comparison table, so "top three competitors" means the first three rivals there. Findings that match none of the 16 features carry a short topic label instead. Each finding records whose car it is about (the BMW, a named rival, or the market); only claims about the BMW get the agrees / contradicts label. The channel tag (Reddit, X, Owner forum, Press...) is read from the URL, not from the model.
+
+## 8. PDF decision memo (live)
+
+Code: `lib/deck/*`, `app/api/deck/route.ts`, `app/api/deck/file/route.ts`, `components/deck-button.tsx`. Table `deck_export`, private storage bucket `decks`. Design: `docs/DECK-EXPORT-SPEC.md` (partner's spec), simplified to synchronous generation.
+
+1. **Payload (no AI):** the stored What-If run becomes a fixed payload: verdict counts, per-segment rows, every cited item with its verbatim text and source line. It is the only source of numbers and quotes in the PDF.
+2. **Copy (gpt-6-luna):** title, 3 bullets, takeaway. A validator rejects any number not in the payload and any unknown evidence ID; one correction retry, then a plain fallback built from the counts. `copy_source` records which one shipped.
+3. **Cover (gpt-image-2.5-flare):** one illustration, with a fixed footer forbidding text, logos, badges and faces. Any failure means no cover; the PDF still renders.
+4. **PDF (@react-pdf/renderer):** cover, segment board, evidence, assumptions and gaps, full citation appendix; run ID, model and prompt version on every page.
+5. Stored once per run; the What-If page offers Export or Download, History links every ready PDF.
