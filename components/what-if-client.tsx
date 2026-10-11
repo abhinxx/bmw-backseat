@@ -1,10 +1,10 @@
 "use client"
 
-import { ArrowRight, Database, FileSpreadsheet, FileText, Loader2, Quote, ShieldCheck, Sparkles } from "lucide-react"
+import { ArrowRight, Database, ExternalLink, FileSpreadsheet, FileText, History, Loader2, Quote, ShieldCheck, Sparkles } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Provenance } from "@/components/provenance"
 import { Button } from "@/components/ui/button"
@@ -58,6 +58,8 @@ export function WhatIfClient({
   suggestions,
   initialQuestion,
   initialRun,
+  recent,
+  requestedRun,
 }: {
   vehicle: { id: string; name: string }
   market: string
@@ -65,6 +67,8 @@ export function WhatIfClient({
   suggestions: readonly string[]
   initialQuestion: string
   initialRun: Run | null
+  recent: { id: string; question: string }[]
+  requestedRun: string | null
 }) {
   const router = useRouter()
   const [question, setQuestion] = useState(initialRun?.question ?? initialQuestion)
@@ -72,6 +76,40 @@ export function WhatIfClient({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [open, setOpen] = useState<string | null>(null)
+
+  const LAST = `whatif:last:${vehicle.id}`
+  const DRAFT = `whatif:draft:${vehicle.id}`
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (requestedRun && !initialRun) localStorage.removeItem(LAST)
+    if (!requestedRun && !initialQuestion) {
+      const last = localStorage.getItem(LAST)
+      if (last && /^[0-9a-f-]{36}$/.test(last)) router.replace(`/what-if?v=${vehicle.id}&m=${market}&run=${last}`, { scroll: false })
+    }
+    if (!initialQuestion) {
+      const draft = localStorage.getItem(DRAFT)
+      if (draft) setQuestion(draft)
+    }
+  }, [])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    setRun(initialRun)
+    if (initialRun) setQuestion(localStorage.getItem(DRAFT) || initialRun.question)
+  }, [initialRun?.id])
+
+  useEffect(() => {
+    if (run) localStorage.setItem(LAST, run.id)
+  }, [run?.id])
+
+  const newQuestion = () => {
+    setRun(null)
+    setQuestion("")
+    localStorage.removeItem(LAST)
+    localStorage.removeItem(DRAFT)
+    router.replace(`/what-if?v=${vehicle.id}&m=${market}`, { scroll: false })
+  }
 
   const simulate = async (q = question) => {
     if (q.trim().length < 5 || loading) return
@@ -87,6 +125,7 @@ export function WhatIfClient({
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? "Simulation failed")
       setRun(data)
+      localStorage.removeItem(DRAFT)
       router.replace(`/what-if?v=${vehicle.id}&m=${market}&run=${data.id}`, { scroll: false })
     } catch (e) {
       setError(e instanceof Error ? e.message : "Simulation failed")
@@ -109,7 +148,12 @@ export function WhatIfClient({
         <CardContent className="space-y-4">
           <Textarea
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            onChange={(e) => {
+              const v = e.target.value
+              setQuestion(v)
+              if (v.trim() && v !== run?.question) localStorage.setItem(DRAFT, v)
+              else localStorage.removeItem(DRAFT)
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) simulate()
             }}
@@ -128,7 +172,17 @@ export function WhatIfClient({
                 {s}
               </button>
             ))}
-            <Button size="lg" className="ml-auto rounded-full px-6" onClick={() => simulate()} disabled={loading || question.trim().length < 5}>
+            {run && (
+              <Button variant="ghost" size="lg" className="ml-auto rounded-full" onClick={newQuestion} disabled={loading}>
+                New question
+              </Button>
+            )}
+            <Button
+              size="lg"
+              className={cn("rounded-full px-6", !run && "ml-auto")}
+              onClick={() => simulate()}
+              disabled={loading || question.trim().length < 5}
+            >
               {loading ? <Loader2 className="animate-spin" /> : <Sparkles />}
               {loading ? "Reading the evidence…" : "Simulate"}
             </Button>
@@ -136,6 +190,26 @@ export function WhatIfClient({
           {error && <p className="text-sm text-destructive">{error}</p>}
         </CardContent>
       </Card>
+
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+        <span className="text-muted-foreground">Recent</span>
+        {recent.map((r) => (
+          <Link
+            key={r.id}
+            href={`/what-if?v=${vehicle.id}&m=${market}&run=${r.id}`}
+            title={r.question}
+            className={cn(
+              "max-w-[16rem] truncate rounded-full bg-secondary px-3 py-1 hover:bg-accent",
+              r.id === run?.id && "ring-1 ring-primary"
+            )}
+          >
+            {r.question}
+          </Link>
+        ))}
+        <Link href="/history" className="ml-auto inline-flex items-center gap-1 font-medium text-primary hover:underline">
+          <History className="size-3.5" /> All history
+        </Link>
+      </div>
 
       {run && !loading && (
         <div className="mt-4 grid gap-4 animate-in fade-in slide-in-from-bottom-2 duration-500 lg:grid-cols-3">
@@ -297,7 +371,7 @@ export function WhatIfClient({
 
       <Sheet open={!!open} onOpenChange={(o) => !o && setOpen(null)}>
         <SheetContent className="w-full overflow-y-auto sm:max-w-xl">
-          {openPersona && openVerdict && <EvidencePanel persona={openPersona} v={openVerdict} />}
+          {openPersona && openVerdict && <EvidencePanel persona={openPersona} v={openVerdict} vehicle={run?.vehicle ?? vehicle.id} />}
         </SheetContent>
       </Sheet>
     </>
@@ -322,9 +396,9 @@ function EvidenceCount({ v }: { v: VerdictRow }) {
   )
 }
 
-type Item = { id: string; kind: "comment" | "study" | "option"; title: string; body: string; source: string }
+type Item = { id: string; kind: "comment" | "study" | "option"; title: string; body: string; source: string; href: string }
 
-function items(e: Evidence): Item[] {
+function items(e: Evidence, vehicle: string): Item[] {
   return [
     ...e.comments.map((c) => ({
       id: c.id,
@@ -332,6 +406,7 @@ function items(e: Evidence): Item[] {
       title: `${c.id} · ${c.country} · ${c.engine} · ${c.sentiment}`,
       body: c.text,
       source: `Feedback workbook, Excel row ${c.excel_row}${c.taxonomy ? ` · class “${c.taxonomy}”` : ""}`,
+      href: `/evidence/comment/${encodeURIComponent(c.id)}`,
     })),
     ...e.study.map((s) => ({
       id: s.id,
@@ -339,6 +414,7 @@ function items(e: Evidence): Item[] {
       title: `${s.model} · ${s.market}`,
       body: `${s.attribute}: ${s.metric === "top2box" ? `${(s.value * 100).toFixed(1)}% top-2-box` : `${s.value.toFixed(2)} mean`}`,
       source: `Customer study, ${s.source}`,
+      href: `/evidence/study/${encodeURIComponent(s.source)}`,
     })),
     ...e.options.map((o) => ({
       id: o.id,
@@ -346,6 +422,7 @@ function items(e: Evidence): Item[] {
       title: `${o.code} ${o.name}${o.price_eur ? ` · €${o.price_eur.toLocaleString("en-US")}` : ""}`,
       body: o.contents,
       source: `Price list Germany July 2026, page ${o.page}`,
+      href: `/evidence/option/${encodeURIComponent(`${vehicle}-${o.code}`)}`,
     })),
   ]
 }
@@ -367,7 +444,14 @@ function EvidenceList({ title, list, tone }: { title: string; list: Item[]; tone
               <Icon className="size-3.5" /> {it.title}
             </p>
             <p className="mt-1.5 leading-relaxed">{it.body}</p>
-            <p className="mt-1.5 text-[11px] text-muted-foreground">{it.source}</p>
+            <a
+              href={it.href}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-1.5 inline-flex items-center gap-1 text-[11px] text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+            >
+              {it.source} <ExternalLink className="size-3" />
+            </a>
           </div>
         )
       })}
@@ -375,8 +459,8 @@ function EvidenceList({ title, list, tone }: { title: string; list: Item[]; tone
   )
 }
 
-function EvidencePanel({ persona, v }: { persona: PersonaCard; v: VerdictRow }) {
-  const all = items(v.evidence)
+function EvidencePanel({ persona, v, vehicle }: { persona: PersonaCard; v: VerdictRow; vehicle: string }) {
+  const all = items(v.evidence, vehicle)
   const sup = new Set(v.supporting_ids)
   const opp = new Set(v.opposing_ids)
   return (
