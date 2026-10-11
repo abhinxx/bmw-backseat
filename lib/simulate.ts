@@ -22,7 +22,7 @@ import EU3 from "@/personas/EU-3.json"
 
 export const MODEL = "gpt-6-luna"
 const REASONING_EFFORT = "medium"
-export const PROMPT_VERSION = "whatif-v2"
+export const PROMPT_VERSION = "whatif-v3.1"
 const MIN_COMMENTS = 3
 
 const admin = () =>
@@ -121,8 +121,24 @@ const CHANGE_TYPES = ["make_standard", "add_option", "remove", "improve", "simpl
 export async function parseChange(question: string, vehicleName: string): Promise<Change> {
   const list = FEATURES.map((f) => `- ${f.id}: ${f.name}. ${f.description}`).join("\n")
   return llm<Change>(
-    `You turn a BMW product manager's what-if question about the next ${vehicleName} into a structured change. ` +
-      `Pick the ONE feature from the list that the change is mainly about, or null if none fits. Do not invent features.\n\nFeatures:\n${list}`,
+    `You read a BMW product manager's what-if question about the successor to the ${vehicleName} (about 2030) and turn it into one structured change record.\n\n` +
+      `change_type - exactly one of:\n` +
+      `- make_standard: something you pay for today becomes part of standard equipment at no extra price.\n` +
+      `- add_option: something not offered today is added, usually as a paid option.\n` +
+      `- remove: a feature that exists today is taken away.\n` +
+      `- improve: an existing feature is made better or brought back, with no change in how it is bought.\n` +
+      `- simplify: the same functions with fewer steps, menus, screens or controls.\n` +
+      `- price_increase: the customer pays more, whether or not something is added.\n` +
+      `- price_decrease: the customer pays less.\n` +
+      `- other: none of these describes the change.\n\n` +
+      `feature_id - the ONE feature the change is mainly about: the thing the customer would actually notice. ` +
+      `When a question touches several, pick the most specific one whose description covers it (heated front massage seats -> front_seats, not interior_quality; ` +
+      `more trunk space -> space_practicality, not rear_comfort). Do not invent features and do not stretch: ` +
+      `if no feature on the list covers what the customer would notice, answer null - never file a missing feature under price_value or exterior_design.\n\n` +
+      `summary - the change restated concretely in one plain English sentence, as the requirement a product manager would write down. ` +
+      `Keep every part of the question (several parts stay in one sentence). Do not add benefits the question does not state.\n\n` +
+      `cost_impact_eur - only when the question states a money amount for the customer: a number in EUR, positive if the customer pays more, negative if less. Otherwise null.\n\n` +
+      `Features:\n${list}`,
     question,
     "change",
     {
@@ -130,10 +146,10 @@ export async function parseChange(question: string, vehicleName: string): Promis
       additionalProperties: false,
       required: ["feature_id", "change_type", "summary", "cost_impact_eur"],
       properties: {
-        feature_id: { type: ["string", "null"], enum: [...FEATURES.map((f) => f.id), null] },
-        change_type: { type: "string", enum: CHANGE_TYPES },
-        summary: { type: "string", description: "The change restated in one plain sentence." },
-        cost_impact_eur: { type: ["number", "null"], description: "Price change for the customer in EUR if stated, else null." },
+        feature_id: { type: ["string", "null"], enum: [...FEATURES.map((f) => f.id), null], description: "The single most specific feature from the list that the customer would notice; null when none of them covers the change." },
+        change_type: { type: "string", enum: CHANGE_TYPES, description: "How the offer changes, per the definitions in the instructions." },
+        summary: { type: "string", description: "One concrete sentence restating the change as a requirement, with no invented benefits." },
+        cost_impact_eur: { type: ["number", "null"], description: "EUR amount a customer pays extra (negative = pays less), only when the question states a price; else null." },
       },
     }
   )
@@ -223,35 +239,59 @@ const evidenceIds = (e: Evidence) => [...e.comments.map((c) => c.id), ...e.study
 type LlmVerdict = Omit<VerdictRow, "persona_id" | "dropped_citations" | "evidence" | "llm_called">
 
 function personaBrief(p: (typeof PERSONA_FILES)[number]) {
-  const cf = p.cluster_foundation as { cluster_name?: string; key_stats?: unknown }
+  const cf = p.cluster_foundation as { cluster_name?: string; key_stats?: Record<string, unknown> }
+  const stats = Object.entries(cf.key_stats ?? {})
+    .map(([k, v]) => `${k}=${typeof v === "number" && v >= 0 && v <= 1 ? `${Math.round(v * 100)}%` : String(v)}`)
+    .join(", ")
   return [
-    `Segment: ${p.label} (${p.persona_id}). Market: ${p.market}. Cohort: ${p.cohort}.`,
-    `Behavioural cluster: ${cf.cluster_name ?? "n/a"}; key stats: ${JSON.stringify(cf.key_stats ?? {})}.`,
+    `Segment: ${p.label} (${p.persona_id}) — market ${p.market}, cohort ${p.cohort}.`,
+    `Behavioural cluster: ${cf.cluster_name ?? "n/a"}. What this segment's own feedback is dominated by: ${stats || "n/a"}.`,
     `Evidence tier: ${p.evidence_tier}.`,
-    `Open assumptions: ${(p.assumptions_register as { assumption: string }[]).map((a) => a.assumption).join(" | ")}`,
+    `What we already assume about this segment: ${(p.assumptions_register as { assumption: string }[]).map((a) => a.assumption).join(" | ")}`,
     `This segment would be proven wrong if: ${(p.falsification_criteria as string[]).join(" | ")}`,
   ].join("\n")
 }
 
 async function react(persona: (typeof PERSONA_FILES)[number], change: Change, feature: Feature, ev: Evidence, vehicleName: string): Promise<LlmVerdict> {
   const evidenceText = [
-    `Customer comments (${ev.scope}). Shown per sentiment, totals: ${JSON.stringify(ev.totals)}`,
+    `CUSTOMER COMMENTS — real G60 owners in this segment's slice: ${ev.scope}.`,
+    `All comments matching this feature in the segment's slice, counted by sentiment: ${JSON.stringify(ev.totals)} ` +
+      `(the sample shown below is at most 8 per sentiment). A comment is one customer's own words; the totals say how much of it is behind each shown comment.`,
     ...ev.comments.map((c) => `[${c.id}] (${c.sentiment}, ${c.country}, ${c.engine}, class: ${c.taxonomy}) ${c.text}`),
-    ev.study.length ? `Customer study (${ev.study[0].metric}; G70 = 7 Series shown for comparison):` : "Customer study: none for this market.",
+    ev.study.length
+      ? `CUSTOMER STUDY — survey averages for this market (not opinions, an average of many answers; G70 = 7 Series shown for comparison):`
+      : `CUSTOMER STUDY: none for this market.`,
     ...ev.study.map((s) => `[${s.id}] ${s.model} · ${s.attribute}: ${s.metric === "top2box" ? (s.value * 100).toFixed(1) + "% top-2-box" : s.value.toFixed(2) + " mean (scale not stated)"}`),
-    ev.options.length ? "Current price list (Germany, July 2026):" : "",
+    ev.options.length ? `PRICE LIST — the current offer (Germany, July 2026); a fact about today's prices, not an opinion:` : ``,
     ...ev.options.map((o) => `[${o.id}] ${o.code} ${o.name}: EUR ${o.price_eur ?? "n/a"}. Contents: ${o.contents}`),
   ].join("\n")
 
   return llm<LlmVerdict>(
-    `You simulate how ONE evidence-based customer segment of the BMW ${vehicleName} would react to a proposed change for the successor model (about 2030). ` +
-      `You are not a real customer and this is not a vote. Use ONLY the evidence below; every item has an ID in square brackets.\n` +
-      `Rules:\n- Cite the IDs that support the verdict (supporting_ids) and that argue against it (opposing_ids). Only IDs from the evidence.\n` +
-      `- If the evidence does not speak to this change for this segment, answer not_enough_evidence. That is a good answer.\n` +
-      `- Never invent numbers, prices, or quotes. Keep the reaction to 1-2 sentences in the segment's voice, and the reason to 1 sentence in an analyst's voice.\n` +
-      `- The reaction may only refer to things in the segment description or in the evidence. Do not mention family, children, competitors, weather or anything else unless an evidence item says so.\n` +
-      `- Weigh what this segment cares about (its cluster and stats). A change it does not care about is no_effect, even if it is nice.\n` +
-      `- assumptions: forward-looking assumptions your verdict depends on (max 2).\n\n${personaBrief(persona)}`,
+    `Your answer feeds a BMW product manager deciding requirements for the successor of the ${vehicleName} (about 2030). ` +
+    `You simulate how ONE evidence-based customer segment — described below — would react to one proposed change. ` +
+    `You are not a real customer and this is not a vote; you are an analyst making one segment's evidence-backed reaction legible.\n\n` +
+    `THE SEGMENT\n${personaBrief(persona)}\n\n` +
+    `WHAT THE EVIDENCE IS. You may use nothing else. Three kinds, each item tagged with an ID in square brackets:\n` +
+      `- a comment = one customer from this segment's slice wrote it in their own words; the totals line in the evidence says how many comments of that sentiment exist in the slice;\n` +
+    `- a study item = a survey average for the whole market (how the market rates something today), not an individual opinion;\n` +
+    `- a price-list item = the current offer and its price, a fact, not an opinion.\n\n` +
+      `VERDICT — pick exactly one; would this change make this segment MORE or LESS likely to buy the successor?\n` +
+      `- more_likely: several comments in this segment ask for or praise exactly this change (or its direct cause), little in the slice argues against.\n` +
+      `- slightly_more_likely: real but weak support — few comments, adjacent topic, or opposition that is clearly outweighed. One side (support) must be stronger.\n` +
+      `- no_effect: the evidence shows this segment does not care about this feature (it never appears in its slice and is outside what dominates its feedback), OR support and opposition are equally strong — when the evidence truly cuts both ways with no stronger side, choose no_effect, never a slight level. A high study rating on the current state also supports no_effect: there is nothing to gain.\n` +
+      `- slightly_less_likely: real but weak opposition — few comments, adjacent topic, or support that is clearly outweighed. One side (opposition) must be stronger.\n` +
+      `- less_likely: several comments complain about exactly this (or its direct cause), little argues for.\n` +
+      `- not_enough_evidence: the evidence does not speak to this change for this segment at all. A good, honest answer — but not a hiding place: adjacent-topic comments and study averages DO speak to feature changes, and the totals line says how much support exists even when few comments are shown.\n\n` +
+      `CONFLICTING EVIDENCE: cite both sides — supporting_ids only items backing the verdict's direction, opposing_ids only items cutting against it — then lower confidence. Never cite an item as supporting that argues the other way.\n` +
+      `REACTION: 1-2 sentences in this segment's voice, grounded in what a cited comment actually says. No invented details: no family, children, weather, commute, competitors, prices or numbers unless an evidence item says them. No ID tags inside the text; never break character to talk about "the evidence" or "the comments".\n` +
+      `REASON: 1-2 sentences in an analyst's voice for the product manager: name the deciding evidence IDs and the counts that tipped the verdict (which comment IDs, how many comments want this). Never just restate the verdict — say what decided it.\n` +
+      `ASSUMPTIONS: at most 2 forward-looking assumptions your verdict depends on, specific to this change and segment (never restate the change or say generic things like "it works as described"). Empty list when the verdict rests only on evidence.\n` +
+      `CONFIDENCE: high = many matching comments all one way; medium = a few comments or study only, one way; low = thin or conflicting.\n\n` +
+      `WORKED EXAMPLE (invented, for form only):\n` +
+      `Change: panoramic sunroof standard on all trims. Segment evidence: 9 comments praising roof silence [G60-111][G60-112], 4 complaining the standard roof feels dark [G60-201][G60-202], study [STUDY-1] rating cabin brightness low in this market.\n` +
+      `verdict: slightly_more_likely — real requests for light, but the loud praise is for other roof qualities. supporting_ids: G60-201, G60-202, STUDY-1; opposing_ids: G60-111, G60-112.\n` +
+      `reaction: "The standard roof always feels dim inside — more light from the glass would genuinely please us, even if the quiet roof we have is fine."\n` +
+      `reason: "Two of thirteen segment comments ask for more cabin light [G60-201][G60-202] and the survey rates brightness low [STUDY-1], while nine praise the current roof's quietness [G60-111][G60-112] — real support, but outnumbered by satisfied owners."`,
     `Proposed change: ${change.summary} (feature: ${feature.name}; change type: ${change.change_type}; customer price impact: ${change.cost_impact_eur ?? "not stated"} EUR)\n\nEVIDENCE\n${evidenceText}`,
     "verdict",
     {
@@ -259,13 +299,13 @@ async function react(persona: (typeof PERSONA_FILES)[number], change: Change, fe
       additionalProperties: false,
       required: ["verdict", "confidence", "reaction", "reason", "assumptions", "supporting_ids", "opposing_ids"],
       properties: {
-        verdict: { type: "string", enum: [...VERDICTS] },
-        confidence: { type: "string", enum: ["high", "medium", "low"] },
-        reaction: { type: "string" },
-        reason: { type: "string" },
-        assumptions: { type: "array", items: { type: "string" } },
-        supporting_ids: { type: "array", items: { type: "string" } },
-        opposing_ids: { type: "array", items: { type: "string" } },
+        verdict: { type: "string", enum: [...VERDICTS], description: "One level from the verdict rubric in the instructions." },
+        confidence: { type: "string", enum: ["high", "medium", "low"], description: "Per the confidence rule in the instructions: how much and how one-way the cited evidence is." },
+        reaction: { type: "string", description: "1-2 sentences in the segment's voice, grounded in a cited comment, no invented details, no ID tags." },
+        reason: { type: "string", description: "1-2 analyst sentences naming the deciding evidence IDs and counts; never just restating the verdict." },
+        assumptions: { type: "array", items: { type: "string" }, description: "At most 2 forward-looking assumptions specific to this change and segment; empty if none." },
+        supporting_ids: { type: "array", items: { type: "string" }, description: "Evidence IDs that back the verdict's direction — never items arguing against it." },
+        opposing_ids: { type: "array", items: { type: "string" }, description: "Evidence IDs that argue against the verdict's direction." },
       },
     }
   )
