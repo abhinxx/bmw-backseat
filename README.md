@@ -69,7 +69,7 @@ Produces one record per comment (10,128) with its category labels as a list; sen
 |---|---|---|
 | M1 | Next.js + shadcn/ui on Vercel, auto-deploy from `main` | done |
 | M2 | App shell: sidebar, vehicle/market pickers, ⌘K, light/dark, provenance chips, 5 screens | done |
-| M3 | Internal BMW data in Supabase (read-only, every row points back to its source cell/row/page); Mission Control on real numbers | in progress |
+| M3 | Internal BMW data in Supabase (read-only, every row points back to its source cell/row/page); Mission Control on real numbers | done |
 | M4 | Feature ↔ evidence map; What-If with stored, cited persona verdicts; History as audit log | next |
 | M5 | Requirements board (approve / reject / edit / challenge, logged) | |
 | M6 | Research Agent (Linkup) | |
