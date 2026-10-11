@@ -19,6 +19,7 @@ export type PersonaCard = {
   id: string
   name: string
   label: string
+  blurb: string
   region: string
   market: string
   avatar: string
@@ -241,9 +242,9 @@ export function WhatIfClient({
                           className={cn("size-11 rounded-full bg-muted ring-2 ring-offset-2 ring-offset-card", v ? VERDICT[v.verdict].ring : "ring-transparent")}
                         />
                         <div className="min-w-0 space-y-0.5">
-                          <p className="truncate text-[15px] font-semibold">{p.label}</p>
+                          <p className="truncate text-[15px] font-semibold">{p.name}</p>
                           <p className="truncate text-sm text-muted-foreground">
-                            {p.name} · {p.market}
+                            {p.blurb} · {p.market}
                           </p>
                         </div>
                       </CardHeader>

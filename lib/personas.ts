@@ -35,6 +35,7 @@ export type Persona = {
   id: string
   name: string
   label: string
+  blurb: string // two-word descriptor (pitch deck); shown as the card subtitle
   basis: string
   region: string
   market: string
@@ -55,6 +56,20 @@ export const EVIDENCE_LIGHT: Record<EvidenceLight, { label: string; dot: string;
   red: { label: "Inferred", dot: "bg-red-500", meaning: "No feedback rows; built from studies and named external sources." },
 }
 
+// Two-word descriptors, as agreed in the pitch-deck session (AM-1/AM-2 are the revised labels).
+// Card shows the person's name as title and this as the one-line characterisation.
+const BLURBS: Record<string, string> = {
+  "AM-1": "Tech frustrated",
+  "AM-2": "Classic driver",
+  "AM-3": "Comfort buyer",
+  "EU-1": "Anxious pioneer",
+  "EU-2": "Quiet majority",
+  "EU-3": "Legacy driver",
+  "AS-1": "Status buyer",
+  "AS-2": "Cost calculator",
+  "AS-3": "Waiting skeptic",
+}
+
 export const PERSONAS: Persona[] = RAW.map(([p, avatar]) => {
   const [label, basis = ""] = p.label.split(/ \((.*)\)$/)
   const tierNote = String(p.evidence_tier)
@@ -62,6 +77,7 @@ export const PERSONAS: Persona[] = RAW.map(([p, avatar]) => {
     id: p.persona_id,
     name: p.name,
     label,
+    blurb: BLURBS[p.persona_id] ?? label,
     basis,
     region: p.region,
     market: String(p.market),
