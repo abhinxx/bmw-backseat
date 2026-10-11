@@ -43,6 +43,17 @@ const VERDICT: Record<Verdict, { label: string; score: number | null; cls: strin
 }
 const REGIONS = ["Americas", "Europe", "Asia"] as const
 
+// The drawer's grey reason paragraph, chopped into scannable points at sentence /
+// clause boundaries. Splitting existing text only - no word is added or dropped.
+const reasonPoints = (reason: string) => {
+  const parts = reason
+    .split(/(?<=[.!?])\s+|;\s+|,\s+(?=(?:but|and|while|whereas|because|so that|which)\b)/i)
+    .map((s) => s.trim())
+    .filter(Boolean)
+  // one short sentence shouldn't render as a lone bullet
+  return parts.length === 1 && reason.length <= 90 ? [] : parts.map((s) => s.replace(/[.!?]$/, ""))
+}
+
 function VerdictPill({ v, className }: { v: Verdict; className?: string }) {
   return (
     <span className={cn("inline-flex h-6 items-center rounded-full px-2.5 text-xs font-medium whitespace-nowrap", VERDICT[v].cls, className)}>
@@ -396,7 +407,16 @@ function EvidencePanel({ persona, v }: { persona: PersonaCard; v: VerdictRow }) 
           <span className="text-xs text-muted-foreground">{v.confidence} confidence</span>
         </div>
         {v.reaction && <p className="text-sm">&ldquo;{v.reaction}&rdquo;</p>}
-        <p className="text-sm text-muted-foreground">{v.reason}</p>
+        {v.reason && (
+          <ul className="space-y-1 text-sm text-muted-foreground">
+            {reasonPoints(v.reason).map((s, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="mt-[7px] size-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                {s}
+              </li>
+            ))}
+          </ul>
+        )}
         {v.assumptions.length > 0 && (
           <div className="rounded-xl bg-inferred/10 p-3 text-xs">
             <p className="mb-1 font-semibold text-inferred">Assumptions (forward-looking, not evidence)</p>
