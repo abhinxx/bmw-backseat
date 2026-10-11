@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { MIN_WORDS, wordCount } from "@/lib/nav"
 import type { Evidence, Run, Verdict, VerdictRow } from "@/lib/simulate"
 import { cn } from "@/lib/utils"
 
@@ -112,7 +113,7 @@ export function WhatIfClient({
   }
 
   const simulate = async (q = question) => {
-    if (q.trim().length < 5 || loading) return
+    if (wordCount(q) < MIN_WORDS || loading) return
     setQuestion(q)
     setLoading(true)
     setError(null)
@@ -181,12 +182,17 @@ export function WhatIfClient({
               size="lg"
               className={cn("rounded-full px-6", !run && "ml-auto")}
               onClick={() => simulate()}
-              disabled={loading || question.trim().length < 5}
+              disabled={loading || wordCount(question) < MIN_WORDS}
             >
               {loading ? <Loader2 className="animate-spin" /> : <Sparkles />}
               {loading ? "Reading the evidence…" : "Simulate"}
             </Button>
           </div>
+          {question.trim() && wordCount(question) < MIN_WORDS && (
+            <p className="text-xs text-muted-foreground">
+              {wordCount(question)} of {MIN_WORDS} words. Name the feature and the change in a full sentence; it finds better evidence.
+            </p>
+          )}
           {error && <p className="text-sm text-destructive">{error}</p>}
         </CardContent>
       </Card>
