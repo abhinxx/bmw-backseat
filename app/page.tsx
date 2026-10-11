@@ -5,7 +5,8 @@ import { EmptyState, PageHeader } from "@/components/page"
 import { CoverageWarning, Provenance, type ProvenanceKind } from "@/components/provenance"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BUCKETS, missionControl, type Bucket, type ThemeRow } from "@/lib/data"
+import { OutsideView } from "@/components/outside-view"
+import { BUCKETS, missionControl, outsideView, type Bucket, type ThemeRow } from "@/lib/data"
 import { SUGGESTED_WHAT_IFS } from "@/lib/nav"
 import { marketOf, vehicleOf } from "@/lib/scope"
 
@@ -46,7 +47,7 @@ export default async function MissionControl({
   const vehicle = vehicleOf(v)
   const market = marketOf(m)
   const scope = `v=${vehicle.id}&m=${market.id}`
-  const d = await missionControl(vehicle.id, market.id)
+  const [d, outside] = await Promise.all([missionControl(vehicle.id, market.id), outsideView()])
 
   const one = market.id !== "all" ? (market.id as Bucket) : null
   const sales25 = one ? d.sales2025[one] : sum(d.sales2025)
@@ -221,6 +222,8 @@ export default async function MissionControl({
           </CardContent>
         </Card>
       </section>
+
+      <OutsideView data={outside} />
 
       <section className="mt-4 grid gap-4 lg:grid-cols-3">
         <Card className="lg:col-span-2">
