@@ -30,3 +30,6 @@ HANDOVER.md
 out/
 next-env.d.ts
 *.tsbuildinfo
+
+# agent worktrees (subagent branches)
+.worktrees/

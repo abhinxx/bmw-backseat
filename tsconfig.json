@@ -44,6 +44,7 @@
     "backups",
     "BMW-Data",
     ".venv",
-    "supabase"
+    "supabase",
+    ".worktrees"
   ]
 }
