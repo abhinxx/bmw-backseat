@@ -1,25 +1,39 @@
 import { connection } from "next/server"
 import Link from "next/link"
-import { History as HistoryIcon } from "lucide-react"
+import { FlaskConical, Globe, History as HistoryIcon } from "lucide-react"
 
 import { EmptyState, PageHeader } from "@/components/page"
 import { Card, CardContent } from "@/components/ui/card"
 import { recentResearch, recentRuns, tally } from "@/lib/history"
 import { MISSIONS, type MissionId } from "@/lib/research"
+import { cn } from "@/lib/utils"
 
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Berlin" })
 
-export default async function History() {
+const TYPES = { all: "All", whatif: "What-if", research: "Research" } as const
+type TypeId = keyof typeof TYPES
+
+// One timeline: every what-if and every research run, newest first, each tagged with what it was.
+export default async function History({ searchParams }: { searchParams: Promise<{ type?: string }> }) {
   await connection() // render on every request, never prerendered
+  const { type } = await searchParams
+  const show: TypeId = type === "whatif" || type === "research" ? type : "all"
   const [runs, research] = await Promise.all([recentRuns(), recentResearch()])
+
+  const items = [
+    ...runs.map((r) => ({ kind: "whatif" as const, at: r.created_at, r })),
+    ...research.map((r) => ({ kind: "research" as const, at: r.created_at, r })),
+  ].sort((a, b) => b.at.localeCompare(a.at))
+  const count: Record<TypeId, number> = { all: items.length, whatif: runs.length, research: research.length }
+  const shown = items.filter((it) => show === "all" || it.kind === show)
 
   return (
     <>
       <PageHeader
         title="History"
-        description="Every what-if, research run and decision, with the exact evidence, model and time. Reopen anything as it was."
+        description="Every what-if and research run, newest first, with the exact evidence, model and time. Reopen anything as it was."
       />
-      {runs.length + research.length === 0 ? (
+      {items.length === 0 ? (
         <Card>
           <CardContent>
             <EmptyState icon={HistoryIcon} title="Nothing logged yet" className="py-16">
@@ -29,71 +43,79 @@ export default async function History() {
         </Card>
       ) : (
         <>
-          <p className="pb-4 text-sm text-muted-foreground">
-            {runs.length} what-if runs saved. Each one stores the question, the model, and the exact evidence every
-            segment saw.
-          </p>
+          <div className="flex flex-wrap items-center gap-1.5 pb-4">
+            {(Object.keys(TYPES) as TypeId[]).map((t) => (
+              <Link
+                key={t}
+                href={t === "all" ? "/history" : `/history?type=${t}`}
+                className={cn(
+                  "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+                  show === t ? "bg-foreground text-background" : "bg-secondary text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {TYPES[t]} <span className="tabular-nums opacity-60">{count[t]}</span>
+              </Link>
+            ))}
+          </div>
           <Card>
             <CardContent className="divide-y p-0">
-              {runs.map((run) => {
-                const counts = tally(run.verdicts)
+              {shown.map((it) => {
+                if (it.kind === "research")
+                  return (
+                    <Row
+                      key={it.r.id}
+                      href={`/research?v=${it.r.vehicle}&run=${it.r.id}`}
+                      kind="research"
+                      title={it.r.question}
+                      meta={`${when(it.r.created_at)} · ${it.r.vehicle} · ${MISSIONS[it.r.mission as MissionId]?.label ?? it.r.mission} · ${it.r.depth} · ${it.r.model}`}
+                    >
+                      <span className="text-muted-foreground">{it.r.linkup_calls} searches</span>
+                      <span className="text-chart-1">{it.r.findings[0]?.count ?? 0} findings</span>
+                    </Row>
+                  )
+                const c = tally(it.r.verdicts)
                 return (
-                  <Link
-                    key={run.id}
-                    href={`/what-if?v=${run.vehicle}&run=${run.id}`}
-                    className="flex items-center justify-between gap-4 rounded-md px-4 py-3 hover:bg-accent"
+                  <Row
+                    key={it.r.id}
+                    href={`/what-if?v=${it.r.vehicle}&run=${it.r.id}`}
+                    kind="whatif"
+                    title={it.r.question}
+                    meta={`${when(it.r.created_at)} · ${it.r.vehicle} · ${it.r.feature_id ? it.r.feature_id.replaceAll("_", " ") : "no feature matched"} · ${it.r.model}`}
                   >
-                    <div className="min-w-0">
-                      <p className="truncate font-medium">{run.question}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {new Date(run.created_at).toLocaleString("en-GB", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                          timeZone: "Europe/Berlin",
-                        })}{" "}
-                        · {run.vehicle} ·{" "}
-                        {run.feature_id ? run.feature_id.replaceAll("_", " ") : "no feature matched"} · {run.model}
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-4 text-xs tabular-nums">
-                      <span className="text-observed">{counts.more} more likely</span>
-                      <span className="text-muted-foreground">{counts.none} no effect</span>
-                      <span className="text-destructive">{counts.less} less likely</span>
-                      <span className="text-muted-foreground">{counts.noEvidence} no evidence</span>
-                    </div>
-                  </Link>
+                    <span className="text-observed">{c.more} more likely</span>
+                    <span className="text-muted-foreground">{c.none} no effect</span>
+                    <span className="text-destructive">{c.less} less likely</span>
+                    <span className="text-muted-foreground">{c.noEvidence} no evidence</span>
+                  </Row>
                 )
               })}
-            </CardContent>
-          </Card>
-          <p className="pt-8 pb-4 text-sm text-muted-foreground">
-            {research.length} research runs saved. Each one stores every search, every page the model read, every finding with
-            its source, and what was dropped.
-          </p>
-          <Card>
-            <CardContent className="divide-y p-0">
-              {research.map((r) => (
-                <Link
-                  key={r.id}
-                  href={`/research?v=${r.vehicle}&run=${r.id}`}
-                  className="flex items-center justify-between gap-4 rounded-md px-4 py-3 hover:bg-accent"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate font-medium">{r.question}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {when(r.created_at)} · {r.vehicle} · {MISSIONS[r.mission as MissionId]?.label ?? r.mission} · {r.depth} · {r.model}
-                    </p>
-                  </div>
-                  <div className="flex shrink-0 items-center gap-4 text-xs tabular-nums">
-                    <span className="text-muted-foreground">{r.linkup_calls} searches</span>
-                    <span className="text-chart-1">{r.findings[0]?.count ?? 0} findings</span>
-                  </div>
-                </Link>
-              ))}
             </CardContent>
           </Card>
         </>
       )}
     </>
+  )
+}
+
+function Row({ href, kind, title, meta, children }: { href: string; kind: "whatif" | "research"; title: string; meta: string; children: React.ReactNode }) {
+  const Icon = kind === "whatif" ? FlaskConical : Globe
+  return (
+    <Link href={href} className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-accent">
+      <div className="flex min-w-0 items-center gap-3">
+        <span
+          className={cn(
+            "inline-flex w-[5.75rem] shrink-0 items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-medium",
+            kind === "whatif" ? "bg-simulated/10 text-simulated" : "bg-chart-1/10 text-chart-1"
+          )}
+        >
+          <Icon className="size-3.5" /> {kind === "whatif" ? "What-if" : "Research"}
+        </span>
+        <div className="min-w-0">
+          <p className="truncate font-medium">{title}</p>
+          <p className="truncate text-xs text-muted-foreground">{meta}</p>
+        </div>
+      </div>
+      <div className="hidden shrink-0 items-center gap-4 text-xs tabular-nums sm:flex">{children}</div>
+    </Link>
   )
 }
