@@ -11,6 +11,16 @@ const NAMES: Record<string, string> = {
   "volvo-es90": "Volvo ES90",
   "genesis-g80": "Genesis G80",
   "xiaomi-su7": "Xiaomi SU7",
+  "mercedes-s-class": "Mercedes S-Class",
+  "audi-a8": "Audi A8",
+  "lexus-ls": "Lexus LS",
+  "genesis-g90": "Genesis G90",
+  "nio-et9": "NIO ET9",
+  "mercedes-a-class": "Mercedes A-Class",
+  "audi-a3-sportback": "Audi A3 Sportback",
+  "vw-golf": "VW Golf",
+  "volvo-ex30": "Volvo EX30",
+  "tesla-model-3": "Tesla Model 3",
 }
 
 const clip = (s: string) => (s.length > 80 ? `${s.slice(0, 80)}…` : s)

@@ -200,17 +200,27 @@ async function main() {
     }
   } else console.log(`SKIP ${cFile} (missing)`);
 
-  // ---------------------------------------------------- D: competitors
-  const dFile = "competitors_g60.json";
-  if (existsSync(path.join(dir, dFile))) {
+  // ---------------------------------------------------- D: competitors, one table per car line
+  for (const [line, vehicle, title] of [
+    ["g60", "G60", "Competitor equipment, 5 Series (E-Class, A6 e-tron, ES90, G80, SU7)"],
+    ["g70", "G70", "Competitor equipment, 7 Series (S-Class, A8, LS, G90, ET9)"],
+    ["f70", "F70", "Competitor equipment, 1 Series (A-Class, A3, Golf, EX30, Model 3)"],
+  ] as const) {
+    const dFile = `competitors_${line}.json`
+    const sourceId = `competitors_${line}`
+    if (!existsSync(path.join(dir, dFile))) {
+      console.log(`SKIP ${dFile} (missing)`)
+      continue
+    }
     const d = readJson(path.join(dir, dFile));
     const findings: any[] = [];
     for (const comp of d.competitors ?? []) {
       for (const [keyName, feat] of Object.entries<any>(comp.features ?? {})) {
         findings.push({
-          id: `competitors_g60:${comp.id}:${keyName}`,
-          source_id: "competitors_g60",
+          id: `${sourceId}:${comp.id}:${keyName}`,
+          source_id: sourceId,
           kind: "competitor_feature",
+          vehicle,
           topic: keyName,
           subject: comp.id,
           title: String(feat?.value ?? "unknown"),
@@ -225,15 +235,15 @@ async function main() {
     }
     sources.push({
       source: {
-        id: "competitors_g60",
-        title: "Competitor equipment (E-Class, A6 e-tron, ES90, G80, SU7)",
+        id: sourceId,
+        title,
         method: d.method,
         collected_at: d.generated_at,
         file: `data/external/${dFile}`,
       },
       findings,
     });
-  } else console.log(`SKIP ${dFile} (missing)`);
+  }
 
   // ---------------------------------------------------- E/F: China + Europe voices
   for (const [fName, sourceId, title, market] of [
@@ -256,6 +266,10 @@ async function main() {
   }
 
   // ---------------------------------------------------- write sources + findings
+  // ONLY=competitors_g70,competitors_f70 loads just those sources (and skips search trends).
+  const only = process.env.ONLY?.split(",").map((s) => s.trim()).filter(Boolean);
+  if (only?.length) sources.splice(0, sources.length, ...sources.filter((s) => only.includes(s.source.id)));
+  if (only?.length) trendRows.length = 0;
   const allFindings = sources.flatMap((s) => s.findings);
   for (const s of sources) s.source.record_count = s.findings.length;
 
