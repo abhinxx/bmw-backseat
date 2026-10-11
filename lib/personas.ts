@@ -40,7 +40,19 @@ export type Persona = {
   market: string
   tier: string
   tierNote: string
+  light: EvidenceLight
   avatar: string
+}
+
+// Evidence traffic light (Ampel): the tier code translated to green/yellow/red.
+// green  = A    own BMW feedback rows carry the persona, no external help needed
+// yellow = A-/A/B real rows, but a thin cohort
+// red    = B/C  no feedback rows; built from studies + named external sources
+export type EvidenceLight = "green" | "yellow" | "red"
+export const EVIDENCE_LIGHT: Record<EvidenceLight, { label: string; dot: string; meaning: string }> = {
+  green: { label: "Strong evidence", dot: "bg-emerald-500", meaning: "Backed by BMW's own customer feedback rows." },
+  yellow: { label: "Solid, smaller cohort", dot: "bg-amber-400", meaning: "Real feedback rows, but few of them — read with care." },
+  red: { label: "Inferred", dot: "bg-red-500", meaning: "No feedback rows; built from studies and named external sources." },
 }
 
 export const PERSONAS: Persona[] = RAW.map(([p, avatar]) => {
@@ -54,9 +66,18 @@ export const PERSONAS: Persona[] = RAW.map(([p, avatar]) => {
     region: p.region,
     market: String(p.market),
     tier: tierNote.match(/^[ABC][-+]?(\/[ABC])?/)?.[0] ?? "?",
+    light: lightOf(tierNote),
     tierNote,
     avatar: avatar.src,
   }
 })
+
+// Ampel rule, matching the pitch-deck matrix: A = green, A- / A/B = yellow, B/C = red.
+function lightOf(note: string): EvidenceLight {
+  const code = note.match(/^[ABC][-+]?(\/[ABC])?/)?.[0] ?? ""
+  if (code === "A") return "green"
+  if (code === "A-" || code === "A+" || code === "A/B") return "yellow"
+  return "red"
+}
 
 export const REGIONS = ["Americas", "Europe", "Asia"] as const
