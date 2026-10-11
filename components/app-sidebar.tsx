@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { Suspense } from "react"
@@ -49,9 +50,14 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <span className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground">
-                  B
-                </span>
+                <Image
+                  src="/bmw-roundel.png"
+                  alt="BMW"
+                  width={32}
+                  height={32}
+                  className="aspect-square size-8 rounded-full"
+                  priority
+                />
                 <span className="grid leading-tight">
                   <span className="font-semibold">Backseat</span>
                   <span className="text-xs text-muted-foreground">BMW product intelligence</span>
