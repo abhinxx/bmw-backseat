@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { EmptyState, PageHeader } from "@/components/page"
 import { CoverageWarning, Provenance, type ProvenanceKind } from "@/components/provenance"
+import { ProductDevelopmentTimeline } from "@/components/product-development-timeline"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BUCKETS, missionControl, type Bucket, type ThemeRow } from "@/lib/data"
@@ -115,6 +116,8 @@ export default async function MissionControl({
           </Card>
         ))}
       </section>
+
+      <ProductDevelopmentTimeline vehicleName={vehicle.name} vehicleId={vehicle.id} className="mt-4" />
 
       <Card className="mt-4">
         <CardHeader className="flex flex-row items-start justify-between gap-2">
