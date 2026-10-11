@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { SUGGESTED_WHAT_IFS } from "@/lib/nav"
-import { PERSONAS, REGIONS } from "@/lib/personas"
+import { EVIDENCE_LIGHT, PERSONAS, REGIONS } from "@/lib/personas"
 import { marketOf, vehicleOf } from "@/lib/scope"
 
 // Fixed verdict scale (PLAN §4.3). Same question + same evidence = same answer.
@@ -112,11 +112,17 @@ export default async function WhatIf({
                   <CardContent className="flex items-center justify-between gap-2">
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <span className="cursor-default rounded-full bg-secondary px-2 py-0.5 text-[11px] font-medium">
-                          Evidence tier {p.tier}
+                        <span className="flex cursor-default items-center gap-1.5 rounded-full bg-secondary px-2 py-0.5 text-[11px] font-medium">
+                          <span
+                            aria-label={`${EVIDENCE_LIGHT[p.light].label} evidence`}
+                            className={`size-2 shrink-0 rounded-full ${EVIDENCE_LIGHT[p.light].dot}`}
+                          />
+                          {EVIDENCE_LIGHT[p.light].label}
                         </span>
                       </TooltipTrigger>
-                      <TooltipContent className="max-w-xs">{p.tierNote}</TooltipContent>
+                      <TooltipContent className="max-w-xs">
+                        {EVIDENCE_LIGHT[p.light].meaning} ({p.tier}) — {p.tierNote}
+                      </TooltipContent>
                     </Tooltip>
                     <span className="text-xs text-muted-foreground">No verdict yet</span>
                   </CardContent>
