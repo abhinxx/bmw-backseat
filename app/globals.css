@@ -147,3 +147,11 @@
     @apply font-sans;
     }
 }
+
+/* Printed or saved as PDF, the page keeps its colours and chips (browsers drop backgrounds by default). */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

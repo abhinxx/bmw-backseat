@@ -1,6 +1,6 @@
 "use client"
 
-import { ExternalLink, Globe, Loader2, Search, ShieldCheck } from "lucide-react"
+import { AlertTriangle, ExternalLink, Globe, Loader2, Search, ShieldCheck } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -10,17 +10,25 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { channelOf } from "@/lib/channels"
 import type { ResearchFinding, ResearchRun } from "@/lib/research"
 import { cn } from "@/lib/utils"
 
 type Option = { id: string; label: string }
 
-const RELATION: Record<string, { label: string; cls: string; hint: string }> = {
-  agrees: { label: "Agrees with BMW data", cls: "bg-observed/10 text-observed", hint: "At least 20% of BMW's own comments on this feature say the same." },
-  contradicts: { label: "Contradicts BMW data", cls: "bg-destructive/10 text-destructive", hint: "Fewer than 20% of BMW's own comments on this feature say the same." },
-  new_signal: { label: "New signal", cls: "bg-chart-1/10 text-chart-1", hint: "BMW's own feedback barely mentions this feature (fewer than 5 comments)." },
-  context: { label: "Context", cls: "bg-secondary text-muted-foreground", hint: "A fact without judgement, such as a spec or a price." },
+// Colour only where it means something: the relation to BMW's own customers. Everything else is neutral.
+const RELATION: Record<string, { label: string; text: string; dot: string; hint: string }> = {
+  agrees: { label: "Agrees with BMW customers", text: "text-observed", dot: "bg-observed", hint: "At least 20% of BMW's own comments on this feature say the same." },
+  contradicts: { label: "Contradicts BMW customers", text: "text-destructive", dot: "bg-destructive", hint: "Fewer than 20% of BMW's own comments on this feature say the same." },
+  new_signal: { label: "New signal", text: "text-chart-1", dot: "bg-chart-1", hint: "BMW's own feedback barely mentions this feature (fewer than 5 comments)." },
+  context: { label: "Context", text: "text-muted-foreground", dot: "bg-muted-foreground", hint: "A fact without an opinion, such as a spec or a price." },
 }
+
+const FILTERS = [
+  { id: "all", label: "All" },
+  { id: "social", label: "Social and forums" },
+  { id: "web", label: "Press and web" },
+] as const
 
 const host = (url: string) => {
   try {
@@ -54,6 +62,7 @@ export function ResearchClient({
   const [run, setRun] = useState<ResearchRun | null>(initialRun)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]["id"]>("all")
 
   const start = async () => {
     if (question.trim().length < 5 || loading) return
@@ -94,7 +103,7 @@ export function ResearchClient({
               </SelectContent>
             </Select>
             <Select value={depth} onValueChange={setDepth}>
-              <SelectTrigger className="w-[160px]" aria-label="Depth">
+              <SelectTrigger className="w-[210px]" aria-label="Depth">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -136,17 +145,19 @@ export function ResearchClient({
             <CardHeader className="flex flex-row items-start justify-between gap-2">
               <div className="space-y-1">
                 <CardTitle>Findings</CardTitle>
-                <CardDescription>{run.question}</CardDescription>
+                <CardDescription className="line-clamp-2" title={run.question}>
+                  {run.question}
+                </CardDescription>
               </div>
               <Provenance kind="external" />
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-4">
               {run.findings.length === 0 ? (
                 <EmptyState icon={Globe} title="No finding survived">
                   The pages Linkup returned did not answer the question, or no quote could be verified. See the searches and pages on the right.
                 </EmptyState>
               ) : (
-                run.findings.map((f) => <FindingCard key={f.id} f={f} features={features} />)
+                <Findings run={run} features={features} filter={filter} setFilter={setFilter} />
               )}
             </CardContent>
           </Card>
@@ -167,28 +178,92 @@ export function ResearchClient({
   )
 }
 
-function FindingCard({ f, features }: { f: ResearchFinding; features: Record<string, string> }) {
-  const rel = f.relation ? RELATION[f.relation] : null
-  const c = f.bmw_context
+function Findings({
+  run,
+  features,
+  filter,
+  setFilter,
+}: {
+  run: ResearchRun
+  features: Record<string, string>
+  filter: (typeof FILTERS)[number]["id"]
+  setFilter: (f: (typeof FILTERS)[number]["id"]) => void
+}) {
+  // Social and owner forums first: owners' own words are what BMW's own data lacks.
+  const all = run.findings
+    .map((f) => ({ f, ch: channelOf(f.source_url, f.source_type) }))
+    .sort((a, b) => Number(b.ch.social) - Number(a.ch.social))
+  const count = { all: all.length, social: all.filter((x) => x.ch.social).length, web: all.filter((x) => !x.ch.social).length }
+  const shown = all.filter((x) => filter === "all" || (filter === "social") === x.ch.social)
+  // BMW's own counts, once per feature instead of on every card.
+  const ctx = new Map(run.findings.filter((f) => f.feature_id && f.bmw_context).map((f) => [f.feature_id!, f.bmw_context!]))
+
   return (
-    <div className="space-y-2 rounded-xl bg-muted/50 p-4 text-sm">
-      <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-        {rel ? (
-          <span title={rel.hint} className={cn("rounded-full px-2 py-0.5 font-medium", rel.cls)}>
-            {rel.label}
-          </span>
-        ) : (
-          <span className="rounded-full border border-dashed border-foreground/20 px-2 py-0.5 text-muted-foreground">Not matched to a feature</span>
-        )}
-        {f.feature_id && <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">{features[f.feature_id] ?? f.feature_id}</span>}
-        {[f.source_type?.replaceAll("_", " "), f.market, f.published_date].filter(Boolean).map((x) => (
-          <span key={x} className="rounded-full bg-secondary px-2 py-0.5 text-muted-foreground">
-            {x}
-          </span>
+    <>
+      <div className="flex flex-wrap items-center gap-1.5">
+        {FILTERS.map((x) => (
+          <button
+            key={x.id}
+            type="button"
+            onClick={() => setFilter(x.id)}
+            className={cn(
+              "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+              filter === x.id ? "bg-foreground text-background" : "bg-secondary text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {x.label} <span className="tabular-nums opacity-60">{count[x.id]}</span>
+          </button>
         ))}
       </div>
-      <p className="font-medium leading-snug">{f.claim}</p>
-      <p className="leading-relaxed text-muted-foreground italic">&ldquo;{f.quote}&rdquo;</p>
+      {[...ctx].map(([id, c]) => (
+        <p key={id} className="text-xs text-muted-foreground">
+          BMW&apos;s own feedback on <span className="font-medium text-foreground">{features[id] ?? id}</span>: {c.positive} positive · {c.negative}{" "}
+          negative · {c.want} wishes, of {c.total} comments.
+        </p>
+      ))}
+      {shown.length === 0 ? (
+        <p className="py-6 text-sm text-muted-foreground">
+          {filter === "social" ? "No social or forum finding survived in this run." : "No finding in this group."}
+        </p>
+      ) : (
+        <div className="divide-y">
+          {shown.map(({ f }) => (
+            <FindingCard key={f.id} f={f} features={features} />
+          ))}
+        </div>
+      )}
+    </>
+  )
+}
+
+function FindingCard({ f, features }: { f: ResearchFinding; features: Record<string, string> }) {
+  const ch = channelOf(f.source_url, f.source_type)
+  // Only a claim about the BMW itself is compared with BMW's customers (older runs did not record this).
+  const rel = f.relation && f.about_kind === "bmw" ? RELATION[f.relation] : null
+  return (
+    <article className="space-y-2.5 py-5 first:pt-1 last:pb-0">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-medium">
+          <span className={cn("size-2 rounded-full", ch.dot)} />
+          {ch.label}
+        </span>
+        {f.about_kind === "competitor" && (
+          <span className="text-muted-foreground">
+            About <span className="font-medium text-foreground">{f.about}</span>
+          </span>
+        )}
+        {f.about_kind === "market" && <span className="text-muted-foreground">Market · {f.about}</span>}
+        {rel && (
+          <span title={rel.hint} className={cn("inline-flex items-center gap-1.5 font-medium", rel.text)}>
+            <span className={cn("size-1.5 rounded-full", rel.dot)} />
+            {rel.label}
+          </span>
+        )}
+        {f.feature_id && <span className="text-muted-foreground">{features[f.feature_id] ?? f.feature_id}</span>}
+        {(f.market || f.published_date) && <span className="text-muted-foreground">{[f.market, f.published_date].filter(Boolean).join(" · ")}</span>}
+      </div>
+      <p className="text-[15px] leading-snug font-medium">{f.claim}</p>
+      <blockquote className="border-l-2 pl-3 text-sm leading-relaxed text-muted-foreground">&ldquo;{f.quote}&rdquo;</blockquote>
       <a
         href={f.source_url}
         target="_blank"
@@ -197,16 +272,12 @@ function FindingCard({ f, features }: { f: ResearchFinding; features: Record<str
       >
         {host(f.source_url)} · {f.source_name} <ExternalLink className="size-3" />
       </a>
-      {c && (
-        <p className="text-[11px] text-muted-foreground">
-          BMW feedback on this feature: {c.positive} positive, {c.negative} negative, {c.want} wishes ({c.total} comments).
-        </p>
-      )}
-    </div>
+    </article>
   )
 }
 
 function RunLog({ run }: { run: ResearchRun }) {
+  const social = run.findings.filter((f) => channelOf(f.source_url, f.source_type).social).length
   return (
     <Card className="gap-4">
       <CardHeader>
@@ -219,7 +290,7 @@ function RunLog({ run }: { run: ResearchRun }) {
       <CardContent className="space-y-5 text-sm">
         <div className="grid grid-cols-3 gap-2 text-center text-xs">
           {[
-            [run.linkup_calls, "Linkup searches"],
+            [run.linkup_calls, "searches"],
             [run.sources.length, "pages read"],
             [run.findings.length, "findings kept"],
           ].map(([n, l]) => (
@@ -229,20 +300,37 @@ function RunLog({ run }: { run: ResearchRun }) {
             </div>
           ))}
         </div>
-        <p className="flex items-start gap-2 rounded-xl bg-observed/10 p-3 text-xs text-observed">
-          <ShieldCheck className="mt-0.5 size-3.5 shrink-0" />
-          {run.dropped.length === 0
-            ? "Every kept quote was found word for word in its page."
-            : `${run.dropped.length} finding${run.dropped.length > 1 ? "s were" : " was"} dropped because the quote was not in its page.`}
+        <p className="text-center text-xs text-muted-foreground">
+          {social} of {run.findings.length} findings come from social media or owner forums.
         </p>
-        <section className="space-y-2">
+        {run.dropped.length === 0 ? (
+          <p className="flex items-start gap-2 rounded-xl bg-observed/10 p-3 text-xs text-observed">
+            <ShieldCheck className="mt-0.5 size-3.5 shrink-0" /> Every kept quote was found word for word in its page.
+          </p>
+        ) : (
+          <p className="flex items-start gap-2 rounded-xl bg-inferred/10 p-3 text-xs text-inferred">
+            <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
+            {run.dropped.length} finding{run.dropped.length > 1 ? "s were" : " was"} dropped: the quote was not in its page. Every kept quote was found
+            word for word.
+          </p>
+        )}
+        <section className="space-y-2.5">
           <h4 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Searches</h4>
           {run.queries.map((q) => (
-            <div key={q.q} className="text-xs">
-              <p>{q.q}</p>
+            <div key={q.q} className="space-y-0.5 text-xs">
+              <p>
+                <span
+                  className={cn(
+                    "mr-1.5 rounded px-1.5 py-px text-[10px] font-semibold tracking-wide uppercase",
+                    q.channel === "social" ? "bg-simulated/10 text-simulated" : "bg-secondary text-muted-foreground"
+                  )}
+                >
+                  {q.channel === "social" ? "Social" : "Web"}
+                </span>
+                {q.q}
+              </p>
               <p className="text-muted-foreground">
                 {q.error ? <span className="text-destructive">{q.error}</span> : `${q.results} results`} · {q.seconds.toFixed(1)} s · Linkup {q.depth}
-                {q.include_domains ? ` · only ${q.include_domains.join(", ")}` : ""}
               </p>
             </div>
           ))}
@@ -264,7 +352,7 @@ function RunLog({ run }: { run: ResearchRun }) {
         </details>
         {run.dropped.length > 0 && (
           <details className="text-xs">
-            <summary className="cursor-pointer text-xs font-semibold tracking-wide text-destructive uppercase">Dropped · {run.dropped.length}</summary>
+            <summary className="cursor-pointer text-xs font-semibold tracking-wide text-muted-foreground uppercase">Dropped · {run.dropped.length}</summary>
             <ul className="mt-2 space-y-2">
               {run.dropped.map((d, i) => (
                 <li key={i}>

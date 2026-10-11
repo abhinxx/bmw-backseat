@@ -73,6 +73,8 @@ export type FeedFinding = {
   claim: string
   feature_id: string
   relation: string | null
+  about_kind: string | null
+  about: string | null
   source_url: string
   source_name: string | null
 }
@@ -81,7 +83,7 @@ export type FeedFinding = {
 export async function featureFindings(vehicle: string, limit = 6): Promise<FeedFinding[]> {
   const { data, error } = await client
     .from("research_finding")
-    .select("id, created_at, run_id, vehicle, claim, feature_id, relation, source_url, source_name")
+    .select("id, created_at, run_id, vehicle, claim, feature_id, relation, about_kind, about, source_url, source_name")
     .eq("vehicle", vehicle)
     .not("feature_id", "is", null)
     .order("created_at", { ascending: false })

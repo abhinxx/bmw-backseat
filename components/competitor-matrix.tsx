@@ -20,8 +20,16 @@ const rowLabel = (topic: string) => {
 }
 
 // Feature × competitor grid from public sources; each cell links to its evidence record.
-export function CompetitorMatrix({ findings }: { findings: Finding[] }) {
+export function CompetitorMatrix({ findings, vehicleName }: { findings: Finding[]; vehicleName: string }) {
   const cells = findings.filter((f) => f.kind === "competitor_feature")
+  if (cells.length === 0)
+    return (
+      <Card className="mt-4">
+        <CardContent className="text-sm text-muted-foreground">
+          No rival comparison for the {vehicleName} yet. The comparison table exists for the 5 Series only.
+        </CardContent>
+      </Card>
+    )
   const usable = cells.filter((f) => f.topic && f.subject)
   const subjects = [...new Set(usable.map((f) => f.subject as string))]
   const topics = [...new Set(usable.map((f) => f.topic as string))]

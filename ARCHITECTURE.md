@@ -129,7 +129,7 @@ flowchart LR
 
 ## 7. Research Agent (live)
 
-Code: `lib/research.ts`, `app/api/research/route.ts`, `components/research-client.tsx`. Tables: `research_run`, `research_finding`. Prompt version `research-v2`.
+Code: `lib/research.ts`, `app/api/research/route.ts`, `components/research-client.tsx`. Tables: `research_run`, `research_finding`. Prompt version `research-v3`.
 
 The model never browses. Linkup searches the web and returns page text; the model reads only that text. No browser, no scraping.
 
@@ -158,3 +158,5 @@ Rules:
    - Opinions: **agrees** if at least 20% of BMW's comments on that feature point the same way (praise for praise; complaints + wishes for complaints), else **contradicts**.
 
 Sources, and why: Linkup returns the page text, so every quote can be checked. OpenAI's own web search returns citations but not the page text, so quotes could not be verified; not used. Reddit is reached through Linkup (`includeDomains` for the owner mission); the Hermes Reddit skill is for offline collection only (about 1 request per minute without credentials).
+
+Social first (`research-v3`): every search is tagged social or web. Social searches run only on Reddit, X, Facebook, TikTok, YouTube, owner forums (Bimmerpost, Bimmerfest, MBWorld, Audizine) and Chinese car communities (Autohome, Dongchedi); list in `lib/channels.ts`, probed with Linkup. Instagram, Weibo and Xiaohongshu are left out because Linkup returns almost no text from them. Standard and deep runs always include at least one social search (except Trends); "Social and owner voices" is social only. Each finding records whose car it is about (the BMW, a named rival, or the market); only claims about the BMW get the agrees / contradicts label. The channel tag (Reddit, X, Owner forum, Press...) is read from the URL, not from the model.

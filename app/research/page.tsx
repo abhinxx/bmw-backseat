@@ -51,7 +51,7 @@ export default async function Research({
         </CardContent>
       </Card>
 
-      <CompetitorMatrix findings={findings} />
+      <CompetitorMatrix findings={findings.filter((f) => f.source_id === `competitors_${vehicle.id.toLowerCase()}`)} vehicleName={vehicle.name} />
     </>
   )
 }

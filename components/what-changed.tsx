@@ -9,11 +9,15 @@ import { featureOf } from "@/lib/features"
 import { featureFindings, recentRuns } from "@/lib/history"
 
 const RELATION: Record<string, string> = {
-  agrees: "agrees with BMW data",
-  contradicts: "contradicts BMW data",
+  agrees: "agrees with BMW customers",
+  contradicts: "contradicts BMW customers",
   new_signal: "new signal",
   context: "context",
 }
+
+// Only a claim about the BMW itself is compared with BMW's customers; rivals are named instead.
+const label = (f: { relation: string | null; about_kind: string | null; about: string | null }) =>
+  f.about_kind === "competitor" ? `about ${f.about}` : f.about_kind === "bmw" && f.relation ? RELATION[f.relation] ?? f.relation : null
 
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Berlin" })
 
@@ -42,7 +46,7 @@ export async function WhatChanged({ vehicle, scope }: { vehicle: string; scope: 
               <p className="leading-snug">{it.f.claim}</p>
               <p className="text-xs text-muted-foreground">
                 {featureOf(it.f.feature_id)?.name ?? it.f.feature_id}
-                {it.f.relation ? ` · ${RELATION[it.f.relation] ?? it.f.relation}` : ""} · {when(it.f.created_at)} ·{" "}
+                {label(it.f) ? ` · ${label(it.f)}` : ""} · {when(it.f.created_at)} ·{" "}
                 <Link href={`/research?${scope}&run=${it.f.run_id}`} className="hover:underline">
                   research run
                 </Link>{" "}

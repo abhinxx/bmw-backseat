@@ -7,21 +7,20 @@
 //  6. The run, every query, every page shown to the model and every finding are stored (History).
 import { createClient } from "@supabase/supabase-js"
 
+import { SOCIAL_DOMAINS } from "@/lib/channels"
 import { FEATURES, featureOf } from "@/lib/features"
 import { llm, MODEL } from "@/lib/simulate"
 
-export const RESEARCH_PROMPT_VERSION = "research-v2"
+export const RESEARCH_PROMPT_VERSION = "research-v3"
 
+// social: which searches go to social media and owner forums. "all" = every search, "some" = at least one
+// (standard/deep), "none" = never.
 export const MISSIONS = {
-  competitors: { label: "Competitor comparison", hint: "rival models' specs, standard and optional equipment, prices, and reviews comparing them" },
-  reviews: { label: "Reviews and press", hint: "professional car reviews and motoring press" },
-  owners: {
-    label: "Owner forums and social",
-    hint: "owners describing their own experience",
-    includeDomains: ["reddit.com", "bimmerpost.com", "bimmerfest.com"],
-  },
-  trends: { label: "Trends", hint: "industry studies, surveys and market data about premium sedan and EV buyers" },
-  free: { label: "Free question", hint: "whatever best answers the question" },
+  owners: { label: "Social and owner voices", hint: "owners and drivers in their own words on Reddit, X, TikTok, Facebook, YouTube and car forums", social: "all" },
+  competitors: { label: "Competitor comparison", hint: "rival models' specs, equipment, prices, and what their owners say", social: "some" },
+  reviews: { label: "Reviews and press", hint: "professional car reviews and motoring press", social: "some" },
+  trends: { label: "Trends", hint: "industry studies, surveys and market data about premium sedan and EV buyers", social: "none" },
+  free: { label: "Free question", hint: "whatever best answers the question", social: "some" },
 } as const
 export type MissionId = keyof typeof MISSIONS
 
@@ -36,13 +35,18 @@ const PER_QUERY = 5
 const MAX_SOURCES = 15
 const PAGE_CHARS = 2500
 const MAX_FINDINGS = 10
-const G60_LAUNCH = "2023-06-01"
+// Current generation per car line: named in the searches, and social posts before its launch are about the old car.
+const GENERATION: Record<string, { note: string; since: string }> = {
+  G60: { note: "The current 5 Series is the G60 generation; the electric version is the i5.", since: "2023-06-01" },
+  G70: { note: "The current 7 Series is the G70 generation; the electric version is the i7.", since: "2022-04-01" },
+  F70: { note: "The current 1 Series is the F70 generation.", since: "2024-09-01" },
+}
 
 const SOURCE_TYPES = ["official_spec", "press", "review", "forum_post", "analysis", "other"] as const
 const STANCES = ["positive", "negative", "mixed", "neutral"] as const
 const MARKETS = ["US", "EU", "CN", "KR", "JP", "global"] as const
 
-export type Query = { q: string; depth: string; include_domains: string[] | null; results: number; seconds: number; error?: string }
+export type Query = { q: string; channel: "social" | "web"; depth: string; include_domains: string[] | null; results: number; seconds: number; error?: string }
 export type Source = { sid: string; url: string; name: string }
 export type Dropped = { source_id: string; quote: string; claim: string; reason: string }
 export type BmwContext = { positive: number; negative: number; want: number; total: number }
@@ -57,6 +61,8 @@ export type ResearchFinding = {
   market: string | null
   feature_id: string | null
   stance: string | null
+  about_kind: "bmw" | "competitor" | "market" | null
+  about: string | null
   relation: "agrees" | "contradicts" | "new_signal" | "context" | null
   bmw_context: BmwContext | null
 }
@@ -81,14 +87,23 @@ const admin = () =>
   createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, { auth: { persistSession: false } })
 
 // ---------- 1. Plan the searches ----------
-async function planQueries(question: string, mission: MissionId, n: number, vehicleName: string): Promise<string[]> {
+async function planQueries(question: string, mission: MissionId, n: number, vehicle: string, vehicleName: string): Promise<{ q: string; channel: "social" | "web" }[]> {
   const m = MISSIONS[mission]
-  const out = await llm<{ queries: string[] }>(
+  const socialRule =
+    m.social === "all"
+      ? `Every query is "social": it looks for owners' and drivers' own words.`
+      : m.social === "none"
+        ? `Every query is "web".`
+        : `At least one query must be "social" (owners' own words) unless only one query is allowed; use more social queries when the question is about what customers, owners or users say, like or complain about.`
+  const out = await llm<{ queries: { q: string; channel: "social" | "web" }[] }>(
     `You plan web searches for a BMW product manager who is defining the successor of the ${vehicleName} (on sale around 2030). ` +
       `Mission: ${m.label} (${m.hint}).\n` +
-      `Write exactly ${n} search ${n === 1 ? "query" : "queries"} that together answer the PM's question.\n` +
+      `Write exactly ${n} search ${n === 1 ? "query" : "queries"} that together answer the PM's question. Each query has a channel:\n` +
+      `- "social": searched only on Reddit, X, TikTok, Facebook, YouTube, BMW/Mercedes/Audi owner forums and Chinese car communities. Phrase it the way owners talk ("i5 owners complain about...", "anyone else hate the touchscreen climate...").\n` +
+      `- "web": press, professional reviews, carmaker sites, studies.\n` +
+      `${socialRule}\n` +
       `Rules:\n- Each query is a specific natural-language search of 8 to 20 words.\n` +
-      `- Name the cars, the feature and the market when they matter. The current ${vehicleName} is the G60 generation; the electric version is the i5.\n` +
+      `- Name the cars, the feature and the market when they matter. ${GENERATION[vehicle]?.note ?? ""}\n` +
       `- Each query covers a different angle. No two queries may ask the same thing.\n- Do not answer the question.`,
     question,
     "plan",
@@ -96,22 +111,38 @@ async function planQueries(question: string, mission: MissionId, n: number, vehi
       type: "object",
       additionalProperties: false,
       required: ["queries"],
-      properties: { queries: { type: "array", items: { type: "string" } } },
+      properties: {
+        queries: {
+          type: "array",
+          items: {
+            type: "object",
+            additionalProperties: false,
+            required: ["q", "channel"],
+            properties: { q: { type: "string" }, channel: { type: "string", enum: ["social", "web"] } },
+          },
+        },
+      },
     },
     "low"
   )
-  return out.queries.map((q) => q.trim()).filter(Boolean).slice(0, n)
+  const qs = out.queries.map((x) => ({ q: x.q.trim(), channel: x.channel })).filter((x) => x.q).slice(0, n)
+  // The mission's social rule is enforced here too, not left to the model.
+  if (m.social === "all") qs.forEach((x) => (x.channel = "social"))
+  if (m.social === "none") qs.forEach((x) => (x.channel = "web"))
+  if (m.social === "some" && n > 1 && !qs.some((x) => x.channel === "social") && qs.length) qs[qs.length - 1].channel = "social"
+  return qs
 }
 
 // ---------- 2. Search with Linkup (page text comes back with each result) ----------
 type Page = { url: string; name: string; content: string }
 
-async function linkup(q: string, depth: string, includeDomains: string[] | null, fromDate: string | null): Promise<{ pages: Page[]; query: Query }> {
+async function linkup(q: string, channel: "social" | "web", depth: string, fromDate: string | null): Promise<{ pages: Page[]; query: Query }> {
   const t0 = Date.now()
+  const includeDomains = channel === "social" ? SOCIAL_DOMAINS : null
   const body: Record<string, unknown> = { q, depth, outputType: "searchResults", maxResults: PER_QUERY }
   if (includeDomains) body.includeDomains = includeDomains
   if (fromDate) body.fromDate = fromDate
-  const query: Query = { q, depth, include_domains: includeDomains, results: 0, seconds: 0 }
+  const query: Query = { q, channel, depth, include_domains: includeDomains, results: 0, seconds: 0 }
   try {
     const res = await fetch("https://api.linkup.so/v1/search", {
       method: "POST",
@@ -139,6 +170,8 @@ type RawFinding = {
   market: (typeof MARKETS)[number] | null
   feature_id: string | null
   stance: (typeof STANCES)[number]
+  about_kind: "bmw" | "competitor" | "market"
+  about: string
 }
 
 async function extract(question: string, mission: MissionId, sources: (Source & { content: string })[], vehicleName: string): Promise<RawFinding[]> {
@@ -154,6 +187,8 @@ async function extract(question: string, mission: MissionId, sources: (Source & 
       `- claim: one plain sentence stating what the page says. Nothing that is not in the quote: no extra numbers, names or facts.\n` +
       `- Only what the page itself says. Never add your own knowledge. Opinions stay opinions ("an owner says...", "the reviewer finds...").\n` +
       `- feature_id: the ONE feature from the list below that the finding is about, or null if none fits.\n` +
+      `- about_kind and about: WHOSE car the claim is about. "bmw" if it is about the BMW ${vehicleName} (any generation, including its electric version); about = "BMW ${vehicleName}". ` +
+      `"competitor" if it is about another brand's car; about = brand and model, e.g. "Mercedes-Benz E-Class". "market" if it is about buyers, a segment or the industry in general; about = a 2 to 4 word label.\n` +
       `- stance: the opinion or experience the page expresses about that feature: positive (an owner or reviewer likes it, it works well), negative (complaint, problem, something missing), mixed (both). ` +
       `Use neutral for facts without an opinion: specs, equipment lists, prices, or a rival offering a feature, even when the fact sounds favourable.\n` +
       `- source_type: official_spec (the carmaker's own site), press (news), review (professional test), forum_post (owners on forums or social media), analysis (studies, surveys, consultancies), other.\n` +
@@ -172,7 +207,7 @@ async function extract(question: string, mission: MissionId, sources: (Source & 
           items: {
             type: "object",
             additionalProperties: false,
-            required: ["source_id", "claim", "quote", "source_type", "published_date", "market", "feature_id", "stance"],
+            required: ["source_id", "claim", "quote", "source_type", "published_date", "market", "feature_id", "stance", "about_kind", "about"],
             properties: {
               source_id: { type: "string" },
               claim: { type: "string" },
@@ -182,6 +217,8 @@ async function extract(question: string, mission: MissionId, sources: (Source & 
               market: { type: ["string", "null"], enum: [...MARKETS, null] },
               feature_id: { type: ["string", "null"], enum: [...FEATURES.map((f) => f.id), null] },
               stance: { type: "string", enum: [...STANCES] },
+              about_kind: { type: "string", enum: ["bmw", "competitor", "market"] },
+              about: { type: "string" },
             },
           },
         },
@@ -243,16 +280,18 @@ export async function runResearch(input: { vehicle: string; vehicleName: string;
   const db = admin()
   const m = MISSIONS[input.mission]
   const d = DEPTHS[input.depth]
-  const include = "includeDomains" in m ? [...m.includeDomains] : null
-  const fromDate = input.mission === "owners" || input.mission === "reviews" ? G60_LAUNCH : null
+  // Social posts and reviews from before the current generation's launch are about the old car.
+  const since = (channel: "social" | "web") => (channel === "social" || input.mission === "reviews" ? GENERATION[input.vehicle]?.since ?? null : null)
 
-  const planned = await planQueries(input.question, input.mission, d.queries, input.vehicleName)
-  const searched = await Promise.all(planned.map((q) => linkup(q, d.linkup, include, fromDate)))
+  const planned = await planQueries(input.question, input.mission, d.queries, input.vehicle, input.vehicleName)
+  const searched = await Promise.all(planned.map((p) => linkup(p.q, p.channel, d.linkup, since(p.channel))))
 
-  // Every page the model will see gets an ID; duplicates by URL are dropped.
+  // Every page the model will see gets an ID; duplicates by URL are dropped. Social pages go first so the
+  // page cap never cuts owners' voices.
   const seen = new Set<string>()
   const pages: (Source & { content: string })[] = []
-  for (const { pages: ps } of searched)
+  const ordered = [...searched].sort((a, b) => (a.query.channel === "social" ? 0 : 1) - (b.query.channel === "social" ? 0 : 1))
+  for (const { pages: ps } of ordered)
     for (const p of ps) {
       if (seen.has(p.url) || pages.length >= MAX_SOURCES) continue
       seen.add(p.url)
@@ -317,7 +356,10 @@ export async function runResearch(input: { vehicle: string; vehicleName: string;
       market: f.market,
       feature_id: f.feature_id,
       stance: f.stance,
-      relation: ctx ? relate(f.source_type === "official_spec" ? "neutral" : f.stance, ctx) : null,
+      about_kind: f.about_kind,
+      about: f.about,
+      // Only a claim about the BMW itself can agree or disagree with BMW's own customers.
+      relation: ctx && f.about_kind === "bmw" ? relate(f.source_type === "official_spec" ? "neutral" : f.stance, ctx) : null,
       bmw_context: ctx,
     }
   })
