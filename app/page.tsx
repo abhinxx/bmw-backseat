@@ -1,4 +1,4 @@
-import { Activity, ArrowRight, MessageSquareText } from "lucide-react"
+import { ArrowRight, MessageSquareText } from "lucide-react"
 import Link from "next/link"
 
 import { EmptyState, PageHeader } from "@/components/page"
@@ -6,6 +6,7 @@ import { CoverageWarning, Provenance, type ProvenanceKind } from "@/components/p
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { OutsideView } from "@/components/outside-view"
+import { WhatChanged } from "@/components/what-changed"
 import { BUCKETS, missionControl, outsideView, type Bucket, type ThemeRow } from "@/lib/data"
 import { SUGGESTED_WHAT_IFS } from "@/lib/nav"
 import { marketOf, vehicleOf } from "@/lib/scope"
@@ -229,12 +230,10 @@ export default async function MissionControl({
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>What changed</CardTitle>
-            <CardDescription>New research findings, simulations and decisions since your last visit.</CardDescription>
+            <CardDescription>New research findings matched to a feature, and the latest what-ifs.</CardDescription>
           </CardHeader>
           <CardContent>
-            <EmptyState icon={Activity} title="Nothing yet">
-              Every what-if, research run and decision will show up here.
-            </EmptyState>
+            <WhatChanged vehicle={vehicle.id} scope={scope} />
           </CardContent>
         </Card>
 

@@ -1,98 +1,56 @@
-import { Globe, Info } from "lucide-react"
+import { Info } from "lucide-react"
 
 import { CompetitorMatrix } from "@/components/competitor-matrix"
-import { EmptyState, PageHeader } from "@/components/page"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
+import { PageHeader } from "@/components/page"
+import { ResearchClient } from "@/components/research-client"
+import { Card, CardContent } from "@/components/ui/card"
 import { allFindings } from "@/lib/data"
+import { FEATURES } from "@/lib/features"
+import { DEPTHS, loadResearchRun, MISSIONS } from "@/lib/research"
 import { marketOf, vehicleOf } from "@/lib/scope"
-
-const MISSIONS = ["Competitor comparison", "Reviews and press", "Owner forums and social", "Trends", "Free question"]
-const DEPTHS = ["Quick", "Standard", "Deep"]
 
 export default async function Research({
   searchParams,
 }: {
-  searchParams: Promise<{ v?: string; m?: string }>
+  searchParams: Promise<{ v?: string; m?: string; q?: string; run?: string }>
 }) {
-  const { v, m } = await searchParams
+  const { v, m, q, run } = await searchParams
   const vehicle = vehicleOf(v)
   const market = marketOf(m)
-  const { findings } = await allFindings()
+  const [{ findings }, initialRun] = await Promise.all([
+    allFindings(),
+    run && /^[0-9a-f-]{36}$/.test(run) ? loadResearchRun(run) : Promise.resolve(null),
+  ])
 
   return (
     <>
       <PageHeader
         eyebrow={`${vehicle.name} · ${vehicle.id} · ${market.name}`}
         title="Research Agent"
-        description="Sends an analyst to the web for what BMW's own data cannot say. Every finding keeps its source link and date."
+        description="Sends an analyst to the web for what BMW's own data cannot say. Every finding keeps its source link and a quote checked against the page."
       />
 
-      <Card>
-        <CardContent className="space-y-4">
-          <div className="flex flex-wrap gap-3">
-            <Select defaultValue={MISSIONS[0]}>
-              <SelectTrigger className="w-[220px]" aria-label="Mission">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {MISSIONS.map((x) => (
-                  <SelectItem key={x} value={x}>
-                    {x}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select defaultValue="Standard">
-              <SelectTrigger className="w-[140px]" aria-label="Depth">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {DEPTHS.map((x) => (
-                  <SelectItem key={x} value={x}>
-                    {x}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <Textarea
-            placeholder={`What should the agent find out? e.g. "How do Mercedes E-Class and Audi A6 handle rear-seat comfort?"`}
-            className="min-h-20 resize-none border-0 bg-muted/60 text-base shadow-none"
-          />
-          <div className="flex justify-end">
-            <Button size="lg" className="rounded-full px-6" disabled>
-              Run research
-            </Button>
-          </div>
+      <ResearchClient
+        vehicle={{ id: vehicle.id, name: vehicle.name }}
+        market={market.id}
+        missions={Object.entries(MISSIONS).map(([id, x]) => ({ id, label: x.label }))}
+        depths={Object.entries(DEPTHS).map(([id, x]) => ({ id, label: `${x.label} · ${x.queries} search${x.queries > 1 ? "es" : ""}` }))}
+        features={Object.fromEntries(FEATURES.map((f) => [f.id, f.name]))}
+        initialQuestion={q ?? ""}
+        initialRun={initialRun}
+      />
+
+      <Card className="mt-4">
+        <CardContent className="flex flex-wrap items-start gap-x-8 gap-y-2 text-sm text-muted-foreground">
+          <p className="flex items-center gap-2 font-medium text-foreground">
+            <Info className="size-4 text-muted-foreground" /> Guardrails
+          </p>
+          <p>Loud is not representative. Twelve forum posts are not a market share.</p>
+          <p>A competitor having a feature does not mean BMW should copy it.</p>
+          <p>External signals add to BMW&apos;s evidence. They never silently replace it.</p>
         </CardContent>
       </Card>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Findings</CardTitle>
-            <CardDescription>Tagged as agrees with BMW data, contradicts, or new signal.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <EmptyState icon={Globe} title="No research runs yet" />
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Info className="size-4 text-muted-foreground" /> Guardrails
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
-            <p>Loud is not representative. Twelve forum posts are not a market share.</p>
-            <p>A competitor having a feature does not mean BMW should copy it.</p>
-            <p>External signals add to BMW&apos;s evidence. They never silently replace it.</p>
-          </CardContent>
-        </Card>
-      </div>
       <CompetitorMatrix findings={findings} />
     </>
   )

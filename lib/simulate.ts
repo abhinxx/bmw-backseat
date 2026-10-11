@@ -96,13 +96,13 @@ export type VerdictRow = {
 }
 
 // ---------- OpenAI (structured outputs) ----------
-async function llm<T>(system: string, user: string, name: string, schema: object): Promise<T> {
+export async function llm<T>(system: string, user: string, name: string, schema: object, effort: string = REASONING_EFFORT): Promise<T> {
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model: MODEL,
-      reasoning_effort: REASONING_EFFORT, // this model only supports the default temperature; repeatability comes from the stored-run cache
+      reasoning_effort: effort, // this model only supports the default temperature; repeatability comes from the stored-run cache
       messages: [
         { role: "system", content: system },
         { role: "user", content: user },
