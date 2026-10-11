@@ -1,5 +1,6 @@
 import { connection } from "next/server"
 import Link from "next/link"
+import { createClient } from "@supabase/supabase-js"
 import { FlaskConical, Globe, History as HistoryIcon } from "lucide-react"
 
 import { EmptyState, PageHeader } from "@/components/page"
@@ -18,7 +19,15 @@ export default async function History({ searchParams }: { searchParams: Promise<
   await connection() // render on every request, never prerendered
   const { type } = await searchParams
   const show: TypeId = type === "whatif" || type === "research" ? type : "all"
-  const [runs, research] = await Promise.all([recentRuns(), recentResearch()])
+  const anon = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+    auth: { persistSession: false },
+  })
+  const [runs, research, decks] = await Promise.all([
+    recentRuns(),
+    recentResearch(),
+    anon.from("deck_export").select("run_id").eq("status", "ready"), // which what-if runs already have a PDF
+  ])
+  const deckReady = new Set((decks.data ?? []).map((d) => d.run_id as string))
 
   const items = [
     ...runs.map((r) => ({ kind: "whatif" as const, at: r.created_at, r })),
@@ -81,6 +90,7 @@ export default async function History({ searchParams }: { searchParams: Promise<
                     kind="whatif"
                     title={it.r.question}
                     meta={`${when(it.r.created_at)} · ${it.r.vehicle} · ${it.r.feature_id ? it.r.feature_id.replaceAll("_", " ") : "no feature matched"} · ${it.r.model}`}
+                    pdfHref={deckReady.has(it.r.id) ? `/api/deck/file?run=${it.r.id}` : null}
                   >
                     <span className="text-observed">{c.more} more likely</span>
                     <span className="text-muted-foreground">{c.none} no effect</span>
@@ -97,10 +107,24 @@ export default async function History({ searchParams }: { searchParams: Promise<
   )
 }
 
-function Row({ href, kind, title, meta, children }: { href: string; kind: "whatif" | "research"; title: string; meta: string; children: React.ReactNode }) {
+function Row({
+  href,
+  kind,
+  title,
+  meta,
+  pdfHref,
+  children,
+}: {
+  href: string
+  kind: "whatif" | "research"
+  title: string
+  meta: string
+  pdfHref?: string | null
+  children: React.ReactNode
+}) {
   const Icon = kind === "whatif" ? FlaskConical : Globe
-  return (
-    <Link href={href} className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-accent">
+  const row = (
+    <Link href={href} className="flex min-w-0 flex-1 items-center justify-between gap-4 px-4 py-3 hover:bg-accent">
       <div className="flex min-w-0 items-center gap-3">
         <span
           className={cn(
@@ -117,5 +141,18 @@ function Row({ href, kind, title, meta, children }: { href: string; kind: "whati
       </div>
       <div className="hidden shrink-0 items-center gap-4 text-xs tabular-nums sm:flex">{children}</div>
     </Link>
+  )
+  if (!pdfHref) return row
+  // A sibling of the Link, never nested inside it: an <a> may not wrap another <a>.
+  return (
+    <div className="flex items-center">
+      {row}
+      <a
+        href={pdfHref}
+        className="mr-4 shrink-0 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+      >
+        PDF
+      </a>
+    </div>
   )
 }
