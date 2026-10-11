@@ -2,6 +2,8 @@
 
 Evidence-led product intelligence console for BMW product managers. The PM picks a vehicle, proposes a feature change, and sees how evidence-backed customer segments might react - every claim traceable to its source. The PM drives; the customers take the backseat.
 
+**Live:** https://bmw-backseat.vercel.app (every push to `main` deploys to production; there is no separate local or staging setup).
+
 Built at the **[European Hackathon League](https://ehl.gg) Grand Finale**, Munich, 10-11 October 2026 ([event](https://ehl.gg/apply/finale) · [rules](https://ehl.gg/rules) · [partners](https://ehl.gg/partners)), BMW challenge. Partners: [BMW Group](https://www.bmwgroup.com), [Entire](https://entire.io), Tacto, Atira.
 
 ## The problem
@@ -43,8 +45,10 @@ Key findings:
 |---|---|---|
 | `README.md` | yes | This file |
 | `BMW_Product_Vision_PRD_Brief.md` | yes | Product vision brief |
+| `app/`, `components/`, `lib/` | yes | Next.js 16 app (shadcn/ui). `lib/data.ts` is the only place that reads the database |
+| `supabase/migrations/` | yes | Database schema, applied to production with `supabase db push` |
 | `personas/` | yes | G60 persona JSONs and avatar SVGs |
-| `scripts/` | yes | Node/TS data cleaning (`npm run data:feedback`) |
+| `scripts/` | yes | Data cleaning (`npm run data:feedback`) and loading into Supabase |
 | `BMW-Data/` | no | Raw BMW files, including the official challenge brief |
 | `research/` | no | Research reports, extracted data (survey, option lists, aggregates), legacy Python scripts |
 | `data/` | no | Cleaned output from `scripts/`, loaded into the database |
@@ -59,11 +63,18 @@ npm run data:feedback   # BMW-Data feedback xlsx -> data/clean/feedback_comments
 
 Produces one record per comment (10,128) with its category labels as a list; sentiment is kept per label because one comment can be both a "Like" and a "Difficult to Use". The script rebuilds every original spreadsheet row from the cleaned data and refuses to write output if any cell differs.
 
-## Next
+## Milestones
 
-1. Clickable app shell with placeholder data, deployed on Vercel.
-2. Cleaned data in Supabase; replace placeholders screen by screen.
-3. Persona reactions, research agent, requirements board.
+| | What | Status |
+|---|---|---|
+| M1 | Next.js + shadcn/ui on Vercel, auto-deploy from `main` | done |
+| M2 | App shell: sidebar, vehicle/market pickers, ⌘K, light/dark, provenance chips, 5 screens | done |
+| M3 | Internal BMW data in Supabase (read-only, every row points back to its source cell/row/page); Mission Control on real numbers | in progress |
+| M4 | Feature ↔ evidence map; What-If with stored, cited persona verdicts; History as audit log | next |
+| M5 | Requirements board (approve / reject / edit / challenge, logged) | |
+| M6 | Research Agent (Linkup) | |
+
+Grounding rules: the database does all counting; AI only sees rows selected by a fixed query, must cite their IDs, and the server rejects any ID or quote that is not in that set.
 
 ## Setup
 
