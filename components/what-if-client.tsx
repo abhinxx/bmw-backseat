@@ -43,6 +43,17 @@ const VERDICT: Record<Verdict, { label: string; score: number | null; cls: strin
   },
 }
 const REGIONS = ["Americas", "Europe", "Asia"] as const
+// Display label only — the filter key stays the persona JSON's p.region value (PR #7).
+const REGION_LABEL: Record<string, string> = { Americas: "America" }
+
+// Flag for the persona's evidence cohort (market string from personas/*.json, PR #7).
+// Deliberately not identity_illustration, which is labelled illustration only.
+const FLAG: Record<string, string> = { US: "🇺🇸", EU: "🇪🇺", China: "🇨🇳", Korea: "🇰🇷🇯🇵" }
+const flagOf = (market: string) => Object.entries(FLAG).find(([k]) => market.startsWith(k))?.[1] ?? "🌍"
+
+// The drawer's reason paragraph, chopped at sentence boundaries (PR #9).
+// Splitting existing text only — no word is added, dropped or rewritten.
+const reasonSentences = (reason: string) => reason.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean)
 
 function VerdictPill({ v, className }: { v: Verdict; className?: string }) {
   return (
@@ -292,7 +303,7 @@ export function WhatIfClient({
       <div className="mt-5 space-y-8">
         {REGIONS.map((region) => (
           <section key={region}>
-            <h3 className="mb-3 text-sm font-medium text-muted-foreground">{region}</h3>
+            <h3 className="mb-3 text-sm font-medium text-muted-foreground">{REGION_LABEL[region] ?? region}</h3>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(17rem,1fr))]">
               {personas
                 .filter((p) => p.region === region)
@@ -324,7 +335,7 @@ export function WhatIfClient({
                         <div className="min-w-0 space-y-0.5">
                           <p className="truncate text-[15px] font-semibold">{p.name}</p>
                           <p className="truncate text-sm text-muted-foreground">
-                            {p.blurb} · {p.market}
+                            {p.blurb} {flagOf(p.market)}
                           </p>
                         </div>
                       </CardHeader>
@@ -486,7 +497,21 @@ function EvidencePanel({ persona, v, vehicle }: { persona: PersonaCard; v: Verdi
           <span className="text-xs text-muted-foreground">{v.confidence} confidence</span>
         </div>
         {v.reaction && <p className="text-sm">&ldquo;{v.reaction}&rdquo;</p>}
-        <p className="text-sm text-muted-foreground">{v.reason}</p>
+        {(() => {
+          const points = v.reason ? reasonSentences(v.reason) : []
+          return points.length >= 2 ? (
+            <ul className="space-y-1 text-sm text-muted-foreground">
+              {points.map((s, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="mt-[7px] size-1 shrink-0 rounded-full bg-muted-foreground/60" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted-foreground">{v.reason}</p>
+          )
+        })()}
         {v.assumptions.length > 0 && (
           <div className="rounded-xl bg-inferred/10 p-3 text-xs">
             <p className="mb-1 font-semibold text-inferred">Assumptions (forward-looking, not evidence)</p>
