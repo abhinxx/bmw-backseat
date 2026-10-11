@@ -13,6 +13,8 @@ export function NameForm() {
 
   useEffect(() => {
     const n = readName()
+    // Browser-only hydration after the server render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setName(n)
     setSaved(n)
   }, [])

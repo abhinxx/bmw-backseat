@@ -2,7 +2,13 @@
 // The key is only forwarded to OpenAI in the Authorization header; it is never logged or echoed back.
 export const maxDuration = 30
 
+// shortcut: per-instance burst guard; use shared storage for a workspace-wide BYOK-test budget.
+let windowStart = 0
+let requests = 0
+
 export async function POST(req: Request) {
+  if (Date.now() - windowStart >= 60_000) { windowStart = Date.now(); requests = 0 }
+  if (++requests > 30) return Response.json({ ok: false, message: "Too many key tests. Try again in a minute." }, { status: 429 })
   const body = (await req.json().catch(() => null)) as Record<string, unknown> | null
   const provider = typeof body?.provider === "string" ? body.provider : ""
   const key = typeof body?.key === "string" ? body.key.trim() : ""

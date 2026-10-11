@@ -1,4 +1,5 @@
 import { challenge, pmAction, type PmAction } from "@/lib/requirements/engine"
+import { LIMITS } from "@/lib/requirements/config"
 import { REQ_STATUSES, type Priority, type ReqStatus } from "@/lib/requirements/types"
 
 export const maxDuration = 120
@@ -11,17 +12,21 @@ const actorOf = (v: unknown) => {
 // POST { type: status | edit | priority | challenge, ..., reason, actor } -> logged human decision (or AI challenge).
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  if (!/^[0-9a-f-]{36}$/.test(id)) return Response.json({ error: "Unknown requirement" }, { status: 400 })
+  if (!/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(id)) return Response.json({ error: "Unknown requirement" }, { status: 400 })
   const body = (await req.json().catch(() => null)) as Record<string, unknown> | null
-  if (!body) return Response.json({ error: "JSON body required" }, { status: 400 })
+  if (!body || typeof body !== "object" || Array.isArray(body)) return Response.json({ error: "JSON body required" }, { status: 400 })
   const actor = actorOf(body.actor)
   const reason = typeof body.reason === "string" ? body.reason.slice(0, 1000) : ""
+
+  if (reason.trim().length < LIMITS.reasonMinChars) return Response.json({ error: "Give a reason (at least 5 characters). Every action is logged." }, { status: 400 })
+  const version = body.version === undefined ? undefined : Number(body.version)
+  if (version !== undefined && (!Number.isInteger(version) || version < 1)) return Response.json({ error: "Invalid requirement version" }, { status: 400 })
 
   try {
     if (body.type === "challenge") {
       const key = req.headers.get("x-openai-key")?.trim() || null
       const model = req.headers.get("x-openai-model")?.trim() || ""
-      return Response.json(await challenge(id, actor, key ? { key, model: /^[\w.\-:]{2,60}$/.test(model) ? model : "" } : null))
+      return Response.json(await challenge(id, actor, key ? { key, model: /^[\w.\-:]{2,60}$/.test(model) ? model : "" } : null, reason))
     }
     let action: PmAction
     if (body.type === "status") {
@@ -37,8 +42,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       if (p !== null && !["P1", "P2", "P3"].includes(String(p))) return Response.json({ error: "Unknown priority" }, { status: 400 })
       action = { type: "priority", priority: p as Priority | null, reason }
     } else return Response.json({ error: "Unknown action" }, { status: 400 })
-    return Response.json(await pmAction(id, action, actor))
+    return Response.json(await pmAction(id, action, actor, version))
   } catch (e) {
-    return Response.json({ error: e instanceof Error ? e.message : "Failed" }, { status: 400 })
+    return Response.json({ error: e instanceof Error ? e.message : "Failed" }, { status: e instanceof Error && e.message.startsWith("Run limit:") ? 429 : 400 })
   }
 }

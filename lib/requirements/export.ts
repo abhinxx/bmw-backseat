@@ -10,6 +10,8 @@ export function effectivePriority(r: Requirement): Priority {
 
 /** RFC 4180: fields containing comma, quote, CR or LF are wrapped in quotes; inner quotes are doubled. */
 function csvField(value: string): string {
+  // Untrusted PM/AI text must not execute as a spreadsheet formula.
+  if (/^\s*[=+\-@]|^[\t\r\n]/.test(value)) value = "\'" + value
   if (/[",\r\n]/.test(value)) return `"${value.replace(/"/g, '""')}"`
   return value
 }
@@ -27,7 +29,8 @@ function factorsColumn(r: Requirement): string {
  */
 export function toCsv(reqs: Requirement[]): string {
   const header = [
-    "id",
+    "code",
+    "uuid",
     "title",
     "description",
     "type",
@@ -51,16 +54,17 @@ export function toCsv(reqs: Requirement[]): string {
   ]
   const rows = reqs.map((r) => [
     r.code,
+    r.id,
     r.title,
     r.description,
-    KIND_LABEL[r.kind].label,
+    KIND_LABEL[r.kind]?.label ?? r.kind,
     r.vehicle,
     effectivePriority(r),
     r.priority_override ? "PM override" : "Score",
     String(r.score),
     String(r.rank),
     r.evidence_level,
-    STATUS_LABEL[r.status],
+    STATUS_LABEL[r.status] ?? r.status,
     r.status_reason ?? "",
     r.markets.join(" / "),
     r.target ?? "",
@@ -103,6 +107,7 @@ export function toCodebeamerItem(r: Requirement) {
   if (r.rationale) lines.push(`Rationale: ${r.rationale}`)
   if (r.assumptions.length) lines.push("Assumptions:", ...r.assumptions.map((a) => `• ${a}`))
   if (r.uncertainties.length) lines.push("Uncertainties:", ...r.uncertainties.map((u) => `• ${u}`))
+  lines.push(`Vehicle: ${r.vehicle}; markets: ${r.markets.join(" / ")}; rank: ${r.rank}; score: ${r.score}`)
   lines.push(`Evidence level: ${r.evidence_level}`)
   if (r.sources.length) lines.push(`Sources: ${r.sources.map((s) => s.id).join(", ")}`)
   lines.push(
@@ -114,11 +119,7 @@ export function toCodebeamerItem(r: Requirement) {
     descriptionFormat: "PlainText",
     priority: { name: CB_PRIORITY[effectivePriority(r)], type: "ChoiceOptionReference" },
     status: { name: "New", type: "ChoiceOptionReference" },
-    customFields: [
-      { fieldId: 0, name: "Backseat ID", value: r.code, type: "TextFieldValue" },
-      { fieldId: 0, name: "Vehicle", value: r.vehicle, type: "TextFieldValue" },
-      { fieldId: 0, name: "Score", value: String(r.score), type: "TextFieldValue" },
-      { fieldId: 0, name: "Evidence level", value: r.evidence_level, type: "TextFieldValue" },
-    ],
+    // Tracker-specific field IDs are unknown. Keep traceability in the description, never invent IDs.
+    customFields: [],
   }
 }

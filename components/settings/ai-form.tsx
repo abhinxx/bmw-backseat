@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { DRAFT_MODEL } from "@/lib/requirements/config"
 import { readAi, writeAi, type AiProvider, type AiSettings } from "@/lib/client-settings"
 
 const PROVIDERS: { id: AiProvider; label: string }[] = [
@@ -13,7 +14,7 @@ const PROVIDERS: { id: AiProvider; label: string }[] = [
   { id: "azure-openai", label: "Azure OpenAI · not wired in this prototype" },
 ]
 
-const DEFAULT_MODEL = "gpt-6-luna"
+const DEFAULT_MODEL = DRAFT_MODEL
 
 type Result = { ok: boolean; message: string } | null
 
@@ -28,6 +29,8 @@ export function AiForm() {
 
   useEffect(() => {
     const ai = readAi()
+    // Browser-only hydration: never expose stored credentials in server-rendered HTML.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrent(ai)
     if (ai) {
       setProvider(ai.provider)
@@ -69,7 +72,7 @@ export function AiForm() {
   return (
     <div className="space-y-4">
       <p className="text-sm">
-        {current?.key ? (
+        {current?.key && current.provider === "openai" ? (
           <>
             Using <span className="font-medium">your own key</span>{" "}
             <span className="font-mono text-xs text-muted-foreground">sk-...{current.key.slice(-4)}</span>
@@ -89,7 +92,7 @@ export function AiForm() {
             className="h-8 w-full rounded-lg border border-input bg-transparent px-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30"
           >
             {PROVIDERS.map((p) => (
-              <option key={p.id} value={p.id}>
+              <option key={p.id} value={p.id} disabled={p.id !== "openai"}>
                 {p.label}
               </option>
             ))}
@@ -112,10 +115,10 @@ export function AiForm() {
         </label>
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <Button onClick={save} disabled={!key.trim()}>
+        <Button onClick={save} disabled={!key.trim() || provider !== "openai"}>
           Save
         </Button>
-        <Button variant="outline" onClick={test} disabled={busy || !key.trim()}>
+        <Button variant="outline" onClick={test} disabled={busy || !key.trim() || provider !== "openai"}>
           {busy ? "Testing…" : "Test key"}
         </Button>
         <Button variant="ghost" onClick={remove} disabled={!current?.key && !key}>

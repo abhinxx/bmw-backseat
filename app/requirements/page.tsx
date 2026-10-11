@@ -36,7 +36,7 @@ export default async function Requirements({ searchParams }: { searchParams: Pro
         action={
           <div className="flex items-center gap-2">
             <ExportMenu requirements={reqs} vehicle={vehicle.id} />
-            <CreateRequirements vehicle={vehicle.id} vehicleName={vehicle.name} hasRequirements={allReqs.length > 0} />
+            <CreateRequirements key={vehicle.id} vehicle={vehicle.id} vehicleName={vehicle.name} hasRequirements={allReqs.length > 0} />
           </div>
         }
       />

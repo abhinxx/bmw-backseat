@@ -111,11 +111,11 @@ export const STATUS_LABEL = {
 
 /** Who does what (deliverable 3). Used by the Workflow page and Settings. */
 export const WORKFLOW = [
-  { step: "Situation analysis", who: "ai", does: "Reads BMW feedback, study, price lists and sales; adds verified public data and research findings when switched on." },
+  { step: "Situation analysis", who: "code", does: "Reads BMW feedback, study, price lists and sales; adds verified public data and research findings when switched on." },
   { step: "Structure and context", who: "code", does: "Groups comments into 16 features by BMW's own taxonomy; counts each comment once; maps public findings to the same features." },
   { step: "Requirement candidates", who: "code", does: "A feature becomes a candidate when enough customers complain, ask or praise (fix / add / protect)." },
   { step: "Drafting", who: "ai", does: "Writes the requirement, measurable target, rationale, assumptions and uncertainties from the cited evidence only. Uncited ids are dropped and logged." },
   { step: "Scoring and priority", who: "code", does: "Computes each factor from the database and the weighted score. The AI never produces a number." },
-  { step: "Review gate", who: "pm", does: "The PM approves, edits, rejects, postpones or overrides the priority, always with a reason. Mandatory before anything leaves the tool." },
-  { step: "Documentation", who: "code", does: "Every change is logged with who, when, before and after, and why. Export to CSV or Codebeamer." },
+  { step: "Review gate", who: "pm", does: "The PM approves, edits, rejects, postpones or overrides the priority, always with a reason. Mandatory for approval. CSV/JSON can also export unapproved drafts with their status." },
+  { step: "Documentation", who: "code", does: "Every change is logged with who, when, before and after, and why. Export CSV/JSON; preview Codebeamer payloads (not connected, nothing sent)." },
 ] as const

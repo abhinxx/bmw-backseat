@@ -255,7 +255,7 @@ export function buildCandidates(sig: Signals, opts: GenerateOptions, weights: Re
     // The US-heavy feedback is a car-line blind spot, shown once on the board (coverage), not on every requirement.
 
     // 4. Rival offer (verified public rival tables)
-    const rivals: RivalCell[] = sig.extRows
+    const rivals: RivalCell[] = (opts.public ? sig.extRows : [])
       .filter((r) => r.kind === "competitor_feature" && r.vehicle === sig.vehicle && r.topic && RIVAL_TOPIC[r.topic] === feature.id)
       .map((r) => ({ id: r.id, topic: r.topic!, rival: r.raw?.competitor ?? r.subject ?? "", value: r.title, status: classifyRival(r.title), url: r.raw?.feature?.source_url ?? r.source_url }))
     const presence = rivals.filter((r) => RIVAL_PRESENCE.has(r.topic))

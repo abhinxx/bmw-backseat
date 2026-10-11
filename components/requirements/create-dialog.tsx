@@ -34,11 +34,11 @@ export function CreateRequirements({ vehicle, vehicleName, hasRequirements }: { 
   const [done, setDone] = useState<string | null>(null)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  useEffect(() => {
-    setName(readName())
-    setOwnKey(Boolean(readAi()))
-  }, [open])
-  useEffect(() => setOpts((o) => ({ ...o, whatif: vehicle === "G60" ? o.whatif : false })), [vehicle])
+  function setDialogOpen(value: boolean) {
+    if (busy) return
+    if (value) { setName(readName()); setOwnKey(readAi()?.provider === "openai"); setError(null); setDone(null) }
+    setOpen(value)
+  }
   useEffect(() => () => {
     if (timer.current) clearInterval(timer.current)
   }, [])
@@ -72,7 +72,7 @@ export function CreateRequirements({ vehicle, vehicleName, hasRequirements }: { 
 
   // shortcut: this endpoint returns once complete; list stages, not invented live progress.
   const stages = STEPS.join(" → ")
-  const Check = ({ k, label, hint, disabled }: { k: keyof GenerateOptions; label: string; hint: string; disabled?: boolean }) => (
+  const check = ({ k, label, hint, disabled }: { k: keyof GenerateOptions; label: string; hint: string; disabled?: boolean }) => (
     <label className={`flex items-start gap-3 py-2.5 ${disabled ? "opacity-50" : "cursor-pointer"}`}>
       <input
         type="checkbox"
@@ -90,11 +90,11 @@ export function CreateRequirements({ vehicle, vehicleName, hasRequirements }: { 
 
   return (
     <>
-      <Button size="lg" className="rounded-full px-5" onClick={() => setOpen(true)}>
+      <Button size="lg" className="rounded-full px-5" onClick={() => setDialogOpen(true)}>
         <SparklesIcon className="size-4" />
         {hasRequirements ? "Update requirements" : "Create requirements"}
       </Button>
-      <Dialog open={open} onOpenChange={(o) => !busy && setOpen(o)}>
+      <Dialog open={open} onOpenChange={setDialogOpen}>
         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>{hasRequirements ? "Update" : "Create"} requirements · {vehicleName}</DialogTitle>
@@ -111,14 +111,11 @@ export function CreateRequirements({ vehicle, vehicleName, hasRequirements }: { 
                 <span className="block text-xs text-muted-foreground">Customer comments, customer study, price list, sales. Always on: the primary source.</span>
               </span>
             </label>
-            <Check k="public" label="Verified public data" hint="BMW Group Report, industry studies, rival tables, owner quotes from forums in the US, Europe and China." />
-            <Check k="research" label="Research Agent findings" hint="Every finding from past research runs whose quote was found word for word on its page." />
-            <Check
-              k="whatif"
-              label="What-If simulations"
-              hint={vehicle === "G60" ? "Latest simulated segment reaction per feature. Lowest weight; simulated, not a customer vote." : "Customer segments exist for the 5 Series only."}
-              disabled={vehicle !== "G60"}
-            />
+            {check({ k: "public", label: "Verified public data", hint: "Industry studies, rival tables and owner quotes from forums in the US, Europe and China." })}
+            {check({ k: "research", label: "Research Agent findings", hint: "Past findings with verified quotes, matched to this feature and car line." })}
+            {check({ k: "whatif", label: "What-If simulations",
+              hint: vehicle === "G60" ? "Latest simulated segment reaction per feature. Lowest weight; simulated, not a customer vote." : "Customer segments exist for the 5 Series only.",
+              disabled: vehicle !== "G60" })}
           </div>
 
           <div className="space-y-2">

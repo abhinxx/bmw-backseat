@@ -23,6 +23,7 @@ export async function chat<T>(system: string, user: string, name: string, schema
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: "Bearer " + (ai?.key || process.env.OPENAI_API_KEY), "Content-Type": "application/json" },
+    signal: AbortSignal.timeout(90_000),
     body: JSON.stringify({
       model: ai?.model || DRAFT_MODEL,
       reasoning_effort: effort,
@@ -33,7 +34,7 @@ export async function chat<T>(system: string, user: string, name: string, schema
       response_format: { type: "json_schema", json_schema: { name, strict: true, schema } },
     }),
   })
-  if (!res.ok) throw new Error(`OpenAI ${res.status}: ${(await res.text()).slice(0, 200)}`)
+  if (!res.ok) throw new Error(`OpenAI ${res.status}: drafting request failed. Check your key/model in Settings. No draft was saved.`)
   const data = await res.json()
   return JSON.parse(data.choices[0].message.content) as T
 }
@@ -202,8 +203,7 @@ export async function draft(c: Candidate, evidence: SourceRef[], vehicleName: st
     if (!supporting_ids.length) return { draft: fallbackDraft(c), dropped, fallback: true }
     return { draft: { ...d, rationale, supporting_ids, opposing_ids }, dropped, fallback: false }
   } catch (e) {
-    console.error("draft failed", c.feature.id, e)
-    return { draft: fallbackDraft(c), dropped: [], fallback: true }
+    throw e
   }
 }
 

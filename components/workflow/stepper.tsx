@@ -66,7 +66,7 @@ export function WorkflowStepper() {
               <p className="max-w-2xl text-sm text-muted-foreground">{w.does}</p>
               {w.who === "pm" && (
                 <p className="text-xs text-muted-foreground">
-                  Nothing is exported to Codebeamer until a requirement is approved.
+                  Codebeamer is a payload preview only. It sends nothing. CSV/JSON exports preserve the decision status.
                 </p>
               )}
             </div>

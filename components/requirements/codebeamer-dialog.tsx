@@ -4,7 +4,7 @@
 // would be sent (a real PTC Codebeamer v3 tracker-item body per requirement) and where it would
 // go. Nothing leaves the tool until Settings → Integrations is configured, and human review
 // (approved only) is the default gate.
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -37,13 +37,9 @@ export function CodebeamerDialog({
   )
   const selected = items.find((r) => r.code === previewCode) ?? items[0] ?? null
 
-  // Reset the "not connected" alert whenever the dialog closes.
-  useEffect(() => {
-    if (!open) setShowAlert(false)
-  }, [open])
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={(value) => { if (!value) setShowAlert(false); onOpenChange(value) }}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Export to Codebeamer</DialogTitle>
@@ -63,11 +59,11 @@ export function CodebeamerDialog({
             Approved only
           </label>
           <p className="text-xs text-muted-foreground">
-            Human review is mandatory: only approved requirements leave the tool by default.
+            Payload preview defaults to approved requirements. Nothing is sent, regardless of status.
           </p>
 
           <div className="space-y-1">
-            <div className="text-sm font-medium">{items.length} items</div>
+            <div className="text-sm font-medium">{items.length} items · tracker-specific fields are not mapped</div>
             <div className="text-xs text-muted-foreground">{CODEBEAMER_ENDPOINT}</div>
           </div>
 
@@ -100,7 +96,7 @@ export function CodebeamerDialog({
             <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-sm">
               <div className="font-medium">Codebeamer is not connected.</div>
               <div className="mt-1 text-muted-foreground">
-                Add your BMW Codebeamer URL, tracker ID and API token in Settings → Integrations.
+                A real connection requires your Codebeamer URL, tracker ID and API token. Connection is disabled in this prototype; see Settings → Integrations.
                 Nothing was sent.
               </div>
               <Link className="mt-2 inline-block text-primary underline-offset-4 hover:underline" href="/settings#integrations">
