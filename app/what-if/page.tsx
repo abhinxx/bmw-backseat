@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/page"
+import { DeckButton } from "@/components/deck-button"
 import { WhatIfClient, type PersonaCard } from "@/components/what-if-client"
 import { recentRuns } from "@/lib/history"
 import { SUGGESTED_WHAT_IFS } from "@/lib/nav"
@@ -39,6 +40,7 @@ export default async function WhatIf({
         eyebrow={`${vehicle.name} · ${vehicle.id} · ${market.name}`}
         title="What-If Studio"
         description="Propose a change. Each customer segment reacts on a fixed scale, citing the BMW evidence for and against."
+        action={<DeckButton runId={initialRun?.id ?? null} />}
       />
       <WhatIfClient
         vehicle={{ id: vehicle.id, name: vehicle.name }}
