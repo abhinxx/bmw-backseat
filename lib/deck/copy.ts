@@ -121,8 +121,16 @@ export function fallbackCopy(payload: DeckPayload): DeckCopy {
 
 export async function copyForDeck(payload: DeckPayload): Promise<CopyResult> {
   try {
-    const copy = await llm<DeckCopy>(SYSTEM + ART_DIRECTION, JSON.stringify(payload), "deck_copy", SCHEMA, "medium")
-    const problems = validateCopy(copy, payload)
+    const user = JSON.stringify(payload)
+    let copy = await llm<DeckCopy>(SYSTEM + ART_DIRECTION, user, "deck_copy", SCHEMA, "medium")
+    let problems = validateCopy(copy, payload)
+    // One correction round: small slips (a takeaway 6 characters too long) should not cost the whole copy.
+    if (problems.length) {
+      console.error("deck copy rejected, retrying once:", problems)
+      const retry = `${user}\n\nYour previous answer was rejected by the validator for: ${problems.join("; ")}. Fix exactly these problems and answer again; keep everything else.`
+      copy = await llm<DeckCopy>(SYSTEM + ART_DIRECTION, retry, "deck_copy", SCHEMA, "medium")
+      problems = validateCopy(copy, payload)
+    }
     if (problems.length) {
       console.error("deck copy rejected by validator:", problems)
       return { copy: fallbackCopy(payload), source: "fallback" }
