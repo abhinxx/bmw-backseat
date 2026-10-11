@@ -1,11 +1,11 @@
 // db-loader: copy cleaned BMW data files into the 8 internal snapshot tables, then verify counts.
-// Run: npx tsx --env-file=/Users/abhinavsingh/Documents/codes/ehl-hackathon/.env.local scripts/load-internal.ts
+// Run from the repo root: npm run data:load
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import ExcelJS from "exceljs";
-const R = "/Users/abhinavsingh/Documents/codes/ehl-hackathon";
+const R = path.resolve(import.meta.dirname, "..");
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -232,7 +232,7 @@ for ws in wb.worksheets:
 print(json.dumps(rows))
 `;
   const salesRaw = execFileSync(
-    "/Users/abhinavsingh/Documents/codes/ehl-hackathon/.venv/bin/python",
+    path.join(R, ".venv/bin/python"),
     ["-c", pyScript],
     { encoding: "utf8" },
   );

@@ -64,7 +64,7 @@ export default async function MissionControl({
       note: sales25 ? `${k(sales30)} forecast for 2030` : `Not sold in ${market.name}`,
     },
     {
-      label: "Customer comments",
+      label: "Comments",
       kind: "calculated",
       value: n(fbHere),
       note: one ? `${pct(fbHere, fbTotal)}% of all ${vehicle.name} feedback` : "Unique comments, not label rows",

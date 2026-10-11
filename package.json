@@ -11,7 +11,8 @@
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "data:feedback": "tsx scripts/ingest-feedback.ts",
-    "env:push": "bash scripts/push-env.sh"
+    "env:push": "bash scripts/push-env.sh",
+    "data:load": "tsx --env-file=.env.local scripts/load-internal.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3",
