@@ -30,9 +30,9 @@ export const PHASES: Phase[] = [
   { n: 6, name: "Design & Product Validation (DV & PV)", short: "DV & PV", group: "Prototype & Validation", gate: "G5 · DV & PV Complete", start: M(2028, 1), end: M(2028, 7) },
   { n: 7, name: "Homologation & Type Approval", short: "Homologation", group: "Homologation", gate: "G6 · Homologation Approval", start: M(2028, 7), end: M(2029, 1) },
   { n: 8, name: "Industrialization & Production Prep", short: "Industrialization", group: "Industrialization", gate: "G7 · Industrialization Readiness", start: M(2029, 1), end: M(2029, 7) },
-  { n: 9, name: "Pilot Build & Pre-SOP", short: "Pilot Build", group: "Production", gate: "G9 · Pre-SOP Approval", start: M(2029, 7), end: M(2029, 12) },
-  { n: 10, name: "SOP (Start of Production)", short: "SOP / Launch", group: "Production", gate: "G10 · SOP Declaration", start: M(2029, 12), end: M(2030, 3) },
-  { n: 11, name: "Mass Production & Ramp-up", short: "Mass Prod.", group: "Production", gate: "G11 · COP Approval", start: M(2030, 3), end: M(2030, 6) },
+  { n: 9, name: "Pilot Build & Pre-SOP", short: "Pilot Build", group: "Production", gate: "G8 · Pre-SOP Approval", start: M(2029, 7), end: M(2029, 12) },
+  { n: 10, name: "SOP (Start of Production)", short: "SOP / Launch", group: "Production", gate: "G9 · SOP Declaration", start: M(2029, 12), end: M(2030, 3) },
+  { n: 11, name: "Mass Production & Ramp-up", short: "Mass Prod.", group: "Production", gate: "G10 · Ramp-up Complete", start: M(2030, 3), end: M(2030, 6) },
   { n: 12, name: "COP Setup & Approval", short: "COP", group: "Production", gate: "G11 · COP Approval", start: M(2030, 6), end: M(2030, 9) },
   { n: 13, name: "Market Feedback & Continuous Improvement", short: "Field Feedback", group: "Post Launch", gate: "G12 · Product Improving", start: M(2030, 9), end: M(2031, 1), ongoing: true },
 ]

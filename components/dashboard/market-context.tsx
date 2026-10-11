@@ -31,7 +31,7 @@ export function MarketContext({
         <div className="space-y-1">
           <CardTitle className="text-base">Market context: sales vs. voice</CardTitle>
           <CardDescription>
-            {marketName}: {soldHere ? `${k(salesHere)} sold in 2025, ${k(forecastHere)} forecast for 2030.` : "Not sold in this market."}
+            {marketName}: {soldHere ? `${k(salesHere)} sold in 2025, ${k(forecastHere)} forecast for 2030.` : "Not sold in this market."}{" "}
             Bar shares below are for all markets: sales next to customer comments.
           </CardDescription>
         </div>

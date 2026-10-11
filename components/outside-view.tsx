@@ -57,7 +57,8 @@ export function OutsideView({
           <div className="space-y-1">
             {data.report.map((f) => (
               <Link key={f.id} href={href(f.id)} className={LINK_CLS}>
-                {f.title}
+                {/* subject says WHAT was counted (China, BMW 5 Series/6 Series, BEV share); title is the report's generic table name */}
+                {f.subject ? `${f.subject}: ${f.title.toLowerCase()}` : f.title}
                 <span className="block text-xs text-muted-foreground">{factMeta(f)}</span>
               </Link>
             ))}

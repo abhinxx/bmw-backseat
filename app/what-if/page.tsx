@@ -15,8 +15,10 @@ export default async function WhatIf({
   const vehicle = vehicleOf(v)
   const market = marketOf(m)
   const initialRun = run && /^[0-9a-f-]{36}$/.test(run) ? await loadRun(run) : null
+  // One chip per question: the same question re-run under a newer prompt shows once, newest run.
   const recent = (await recentRuns(20))
     .filter((r) => r.vehicle === vehicle.id)
+    .filter((r, i, all) => all.findIndex((x) => x.question.trim().toLowerCase() === r.question.trim().toLowerCase()) === i)
     .slice(0, 5)
     .map((r) => ({ id: r.id, question: r.question }))
 

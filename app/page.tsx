@@ -6,6 +6,7 @@ import { CoverageWarning, Provenance, type ProvenanceKind } from "@/components/p
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { MarketContext } from "@/components/dashboard/market-context"
+import { DevTimeline } from "@/components/dev-timeline"
 import { ThemeChart, topThemeBars } from "@/components/dashboard/theme-chart"
 import { OutsideView } from "@/components/outside-view"
 import { WhatChanged } from "@/components/what-changed"
@@ -196,7 +197,9 @@ export default async function MissionControl({
         feedbackBy={d.feedbackBy}
       />
 
-      {/* DevTimeline: placed by orchestrator */}
+      <div className="mt-4">
+        <DevTimeline vehicleName={vehicle.name} />
+      </div>
     </>
   )
 }
