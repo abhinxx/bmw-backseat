@@ -46,37 +46,75 @@ Write the narrative copy for a 5-page corporate decision memo. Rules, in priorit
   "exec_bullets": [ "≤140 chars, 3 bullets: net verdict + strongest evidence; the
                     main opposing signal; the honest caveat (tier/confidence/coverage)" ],
   "takeaway": "≤180 chars, one sentence a PM would repeat in a meeting",
-  "infographic_concept": "see constraints given in a separate image-model system prompt;
-                          describe the SCENE only in ≤45 words, no numbers, no text, no
-                          brand names, no people's faces"
+  "image_prompt": "60-120 words, the COMPLETE prompt for the cover illustration —
+                    you are the art director: subject and metaphor specific to THIS
+                    proposal (see art-director rules below); composition encodes the
+                    verdict split through objects, never through data"
 }
 6. If payload totals show llm_called=false for a persona, never describe its verdict as
    evidence-based.
 ```
 
-The `infographic_concept` string is then interpolated into Prompt B server-side; the model never talks to the image API directly.
+The copy call's output includes the full image prompt (author role above); the server
+concatenates the compliance footer and is the only thing that talks to the image API.
 
-## Prompt B — infographic (system-ish block prepended to every image request, gpt-image-2.5-flare)
+## Prompt B — image prompt writer (direction brief; the model writes the FULL image prompt)
 
+The copy model, having read the grounded payload, is asked to AUTHOR the complete
+image prompt itself — subject, visual metaphor and composition all follow the actual
+proposal (seat heating ⇒ cabin comfort scenes; iDrive ⇒ control surfaces; pricing ⇒
+value perception). A fixed art template does NOT generalize; only the constraints below
+are fixed, and the server appends them so they cannot be negotiated away:
+
+System message (direction brief):
 ```
-Create one editorial data-journalism style infographic illustration for a BMW product
-memo about: "{question}".
-Concept: {infographic_concept}.
-Art direction: flat vector illustration, BMW-adjacent palette (charcoal #1d1d1f, cool
-gray #f4f5f7, one signal green #166534, one warning amber #b45309), generous white
-space, subtle isometric G60 sedan silhouette as anchor object, visual grouping that
-mirrors {pos_count} positive / {neg_count} negative / {unk_count} unknown segment
-reactions through composition (count and color of accent objects), NOT through data.
-Hard constraints: absolutely NO text, letters, numbers, logos, watermarks, brand names,
-or readable signage anywhere in the image; no photorealistic human faces; landscape
-composition safe to crop to 16:9. The PDF will print all text itself.
+You are the art director for BMW Backseat decision memos. Given the payload's proposal
+question and verdict composition, write ONE image-generation prompt (60-120 words) for
+a high-definition editorial illustration that visually argues the memo's story.
+- Subject and metaphor must be specific to THIS proposal's change (what physically or
+  experientially changes for the customer), not generic automotive stock.
+- Encode the verdict composition through objects/composition (count, color, placement),
+  never through data graphics.
+- Scene style: premium editorial isometric/flat illustration, calm, corporate.
+- Output only the prompt text.
 ```
 
-Retry policy: one retry at `quality:low`; if still failing, render the deck without the image slot (deck must never fail because of art).
+Server-appended compliance footer (always concatenated after the model's prompt, before
+the call — the model cannot override it):
+```
+Hard constraints (non-negotiable): absolutely NO text, letters, numbers, charts with
+labels, logos, watermarks, brand names or readable signage anywhere; no photorealistic
+human faces; flat/pseudo-3D editorial illustration only; palette limited to charcoal
+#1d1d1f, cool gray #f4f5f7, signal green #166534, warning amber #b45309, blue #0653b6;
+landscape composition safe to crop to 16:9 with the focal object in the lower half
+(the PDF title sits below the image). The PDF prints all text and data itself.
+```
+
+Call: `gpt-image-2.5-flare`, `1536x1024`, `quality:medium`. Live-verified 2026-10-11:
+11.8 s, ~$0.01, output passed strict vision QA (zero text; composition encoded 6/1/2
+segment split correctly from payload counts).
+
+Retry policy: one regeneration at `quality:low` if vision-QA flags text/numbers (cheap
+automated check with the same vision model); if it still fails, render the deck without
+the hero slot — the deck must never fail because of art.
 
 ## Prototype (approved look)
 
-Built with reportlab against the REAL run "Simplify the iDrive controls" (`run 25edcfdf…`): 5 pages — cover (title, KPI rows, verdict bars, infographic slot), segment board (9 rows, Ampel tier column, quotes in table order), evidence that moved verdicts (verbatim quotes with per-ID attribution + study-cell table), assumptions, appendix citation map (every ID, for/against, segments, truncated verbatim). Vision-QA'd: no clipping/overflow, traceable IDs on every claim. Final implementation ports the layout to `@react-pdf/renderer`; the PDF bytes, PNG, and prompts are stored so every deck is reproducible from `run_id` alone.
+Final prototype (6 pages, reportlab, against the REAL run "Simplify the iDrive controls",
+`run 25edcfdf…`): cover = generated hero image (live `gpt-image-2.5-flare` output,
+full-width, focal objects kept clear of the title below) + proposal title + KPI rows
+(net verdict, evidence cited, market volumes) + provenance disclaimer; segment verdict
+bars on a shared 5-point track (green positive / gray neutral / tick = insufficient);
+segment board = 9 rows with avatar PNGs, two-word blurbs, Ampel tier column, quotes in
+table order; "What the evidence says" (verbatim customer text + study cells, every claim
+carries its ID); assumptions; appendix = full citation map (ID -> verbatim text/cell,
+supports/against per segment). Vision-QA'd page by page: no clipping, no overflow, no
+cross-column collision. Note: the model spontaneously placed a BMW roundel on the car —
+fine here (BMW doc), the compliance footer says no-logos and vision-QA flags any
+third-party marks; if we want the art logo-free too, tighten the footer to "no badges
+on vehicles". Production ports this exact layout to `@react-pdf/renderer`; the PDF, PNG
+and the exact prompts used are stored per run so any deck is reproducible from
+`run_id` alone.
 
 ## Needs from the team
 
