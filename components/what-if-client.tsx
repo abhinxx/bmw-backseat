@@ -27,6 +27,12 @@ export type PersonaCard = {
   light: { label: string; dot: string; meaning: string }
 }
 
+// Flag for the persona's evidence cohort (from the market string in the persona JSON,
+// never from identity_illustration - that is labelled illustration only).
+const FLAG: Record<string, string> = { US: "🇺🇸", EU: "🇪🇺", China: "🇨🇳", Korea: "🇰🇷🇯🇵" }
+const flagOf = (market: string) =>
+  Object.entries(FLAG).find(([k]) => market.startsWith(k))?.[1] ?? "🌍"
+
 const VERDICT: Record<Verdict, { label: string; score: number | null; cls: string; ring: string }> = {
   more_likely: { label: "More likely to buy", score: 2, cls: "bg-observed/15 text-observed", ring: "ring-observed" },
   slightly_more_likely: { label: "Slightly more likely", score: 1, cls: "bg-observed/10 text-observed", ring: "ring-observed/50" },
@@ -243,7 +249,7 @@ export function WhatIfClient({
                         <div className="min-w-0 space-y-0.5">
                           <p className="truncate text-[15px] font-semibold">{p.label}</p>
                           <p className="truncate text-sm text-muted-foreground">
-                            {p.name} · {p.market}
+                            {p.name} {flagOf(p.market)} · {p.market}
                           </p>
                         </div>
                       </CardHeader>
