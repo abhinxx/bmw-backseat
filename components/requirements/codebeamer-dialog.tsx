@@ -40,7 +40,7 @@ export function CodebeamerDialog({
 
   return (
     <Dialog open={open} onOpenChange={(value) => { if (!value) setShowAlert(false); onOpenChange(value) }}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Export to Codebeamer</DialogTitle>
           <DialogDescription>
@@ -48,7 +48,7 @@ export function CodebeamerDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-3">
+        <div className="min-w-0 space-y-3">
           <label className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
@@ -85,7 +85,7 @@ export function CodebeamerDialog({
                 ))}
               </select>
               {selected && (
-                <pre className="max-h-72 overflow-auto rounded-lg bg-muted p-3 text-xs">
+                <pre className="max-h-72 max-w-full min-w-0 overflow-auto rounded-lg bg-muted p-3 text-xs break-words whitespace-pre-wrap">
                   {JSON.stringify(toCodebeamerItem(selected), null, 2)}
                 </pre>
               )}
