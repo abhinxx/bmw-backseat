@@ -49,9 +49,12 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <span className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground">
-                  B
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/bmw-roundel.png"
+                  alt="BMW"
+                  className="aspect-square size-8 rounded-full"
+                />
                 <span className="grid leading-tight">
                   <span className="font-semibold">Backseat</span>
                   <span className="text-xs text-muted-foreground">BMW product intelligence</span>
