@@ -73,3 +73,63 @@ export async function missionControl(v: VehicleId, m: MarketId) {
     themes: (must(themes, "feedback_themes") as ThemeRow[]).map((t) => ({ ...t, comments: Number(t.comments) })),
   }
 }
+
+// ---------- External evidence (public sources) ----------
+export type Finding = {
+  id: string
+  source_id: string
+  kind: string
+  topic: string | null
+  subject: string | null
+  title: string
+  stance: string | null
+  value: number | null
+  unit: string | null
+  year: number | null
+  quote: string | null
+  quote_translation: string | null
+  source_name: string | null
+  source_url: string | null
+  source_page: number | null
+  source_type: string | null
+  published_date: string | null
+  market: string | null
+}
+const FINDING_COLS =
+  "id, source_id, kind, topic, subject, title, stance, value, unit, year, quote, quote_translation, source_name, source_url, source_page, source_type, published_date, market"
+
+// Curated highlights for Mission Control (ids are stable; every one links to its source).
+const REPORT_FACTS = ["M5-5-6-series-2025", "M5-5-6-series-2024", "M1-total-2025", "M2-china-2025", "M2-china-2024", "M4-bev-share-2025"]
+const TREND_HIGHLIGHTS = ["mt-002", "mt-019", "mt-008", "mt-021"]
+
+export async function outsideView() {
+  const [report, trends, voices, search] = await Promise.all([
+    db.from("external_finding").select(FINDING_COLS).in("id", REPORT_FACTS.map((i) => `bmw_report_2025:${i}`)),
+    db.from("external_finding").select(FINDING_COLS).in("id", TREND_HIGHLIGHTS.map((i) => `market_trends:${i}`)),
+    db.from("external_finding").select(FINDING_COLS).eq("kind", "owner_quote").order("id"),
+    db.from("search_trend").select("region, keyword, month, value").eq("region", "US").order("month"),
+  ])
+  const byId = (rows: Finding[], prefix: string) => Object.fromEntries(rows.map((r) => [r.id.replace(prefix, ""), r]))
+  const voiceRows = must(voices, "owner voices") as Finding[]
+  // One voice per theme for the dashboard: the first negative (pain point) by id, so it is stable.
+  const pick = (theme: string, stance = "negative") => voiceRows.find((v) => v.topic === theme && v.stance === stance)
+  return {
+    report: byId(must(report, "report facts") as Finding[], "bmw_report_2025:"),
+    trends: TREND_HIGHLIGHTS.map((i) => byId(must(trends, "trends") as Finding[], "market_trends:")[i]).filter(Boolean),
+    voices: [pick("controls"), pick("rear_comfort"), pick("ev_range_charging"), pick("driving", "positive")].filter(Boolean) as Finding[],
+    voiceCount: voiceRows.length,
+    search: must(search, "search_trend") as { region: string; keyword: string; month: string; value: number }[],
+  }
+}
+
+export async function allFindings() {
+  const [sources, findings] = await Promise.all([
+    db.from("external_source").select("*").order("id"),
+    db.from("external_finding").select(FINDING_COLS).order("id").limit(2000),
+  ])
+  return {
+    sources: must(sources, "external_source") as { id: string; title: string; method: string; collected_at: string | null; record_count: number | null; file: string | null }[],
+    findings: must(findings, "external_finding") as Finding[],
+  }
+}
+
