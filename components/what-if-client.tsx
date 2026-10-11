@@ -212,7 +212,7 @@ export function WhatIfClient({
         {REGIONS.map((region) => (
           <section key={region}>
             <h3 className="mb-3 text-sm font-medium text-muted-foreground">{region}</h3>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(17rem,1fr))]">
               {personas
                 .filter((p) => p.region === region)
                 .map((p, i) => {
