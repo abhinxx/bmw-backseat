@@ -124,27 +124,37 @@ flowchart LR
 - The feature map and persona scope were drafted by Claude and are not yet reviewed by the team.
 - `/api/what-if` has no rate limit yet (on the backlog).
 - Personas exist for the 5 Series (G60) only.
-- Public data is in the database but not yet shown on any screen.
+- Public data shows on Mission Control (Outside view) and Research (competitor table); it is not used by What-If verdicts.
+- `/api/research` has no rate limit yet either (backlog).
 
-## 7. Research Agent (planned, not built yet)
+## 7. Research Agent (live)
 
-Today Linkup is not connected to the app. It was only used offline to collect the public data in section 2. The Research Agent is the live version: it searches the web with Linkup on demand and feeds what it finds back into the product.
+Code: `lib/research.ts`, `app/api/research/route.ts`, `components/research-client.tsx`. Tables: `research_run`, `research_finding`. Prompt version `research-v2`.
+
+The model never browses. Linkup searches the web and returns page text; the model reads only that text. No browser, no scraping.
 
 ```mermaid
 flowchart TB
-  PM["PM starts a run: vehicle, mission, question"] --> S["Server: Linkup search, standard or deep"]
-  S --> X["Model extracts findings: claim, verbatim quote, URL, date, source type"]
-  X --> V{"Quote found in the page Linkup returned?"}
-  V -- "no" --> D["Dropped and logged"]
-  V -- "yes" --> C["Classify: which of the 16 features, and agrees / contradicts / new signal vs BMW data"]
-  C --> H["History: every run and every finding, always"]
-  C -- "maps to a feature" --> M["Mission Control: Outside view feed and that feature's evidence, labelled External with source and date"]
+  PM["PM: mission, depth, question"] --> P["Model plans 1 / 3 / 4 searches (quick / standard / deep)"]
+  P --> S["Linkup search, 5 results each, page text returned"]
+  S --> X["Model extracts findings from that text only: claim, verbatim quote, page ID, feature, stance, source type"]
+  X --> V{"Server: quote found word for word in that page?"}
+  V -- "no" --> D["Dropped, reason logged"]
+  V -- "yes" --> R["Server rule: relation to BMW feedback for that feature"]
+  R --> H["History: run, every search, every page shown, every finding, every drop"]
+  R -- "matched one of the 16 features" --> M["Mission Control, What changed: labelled External, with source link"]
 ```
 
 Rules:
 
 1. Every run and every finding is saved to History, whether or not it maps to a feature.
-2. Web findings never change dashboard numbers. Counts come from BMW data only. Findings appear beside them, labelled External, with source and date.
+2. Web findings never change dashboard numbers. Counts come from BMW data only. Findings appear beside them, labelled External, with source link.
 3. Findings are mapped with the same 16-feature map as What-If, so a finding about rear-seat heating lands next to the rear-comfort evidence.
-4. A quote that is not in the page Linkup returned is dropped.
-5. Each run has a cap on Linkup calls.
+4. A quote that is not in the page Linkup returned is dropped and logged.
+5. Linkup calls per run are capped by depth (1, 3 or 4), 5 results each, at most 15 pages shown to the model.
+6. The relation label is a fixed rule, not the model: BMW's own comment counts for the feature are stored with each finding.
+   - Fewer than 5 BMW comments on the feature: **new signal**.
+   - Facts without opinion (specs, prices, a rival offering a feature, any official spec page): **context**.
+   - Opinions: **agrees** if at least 20% of BMW's comments on that feature point the same way (praise for praise; complaints + wishes for complaints), else **contradicts**.
+
+Sources, and why: Linkup returns the page text, so every quote can be checked. OpenAI's own web search returns citations but not the page text, so quotes could not be verified; not used. Reddit is reached through Linkup (`includeDomains` for the owner mission); the Hermes Reddit skill is for offline collection only (about 1 request per minute without credentials).
