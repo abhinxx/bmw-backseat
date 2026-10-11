@@ -1,10 +1,12 @@
 import { Globe, Info } from "lucide-react"
 
+import { CompetitorMatrix } from "@/components/competitor-matrix"
 import { EmptyState, PageHeader } from "@/components/page"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { allFindings } from "@/lib/data"
 import { marketOf, vehicleOf } from "@/lib/scope"
 
 const MISSIONS = ["Competitor comparison", "Reviews and press", "Owner forums and social", "Trends", "Free question"]
@@ -18,6 +20,7 @@ export default async function Research({
   const { v, m } = await searchParams
   const vehicle = vehicleOf(v)
   const market = marketOf(m)
+  const { findings } = await allFindings()
 
   return (
     <>
@@ -90,6 +93,7 @@ export default async function Research({
           </CardContent>
         </Card>
       </div>
+      <CompetitorMatrix findings={findings} />
     </>
   )
 }
