@@ -19,6 +19,7 @@ export default async function WhatIf({
     id: p.id,
     name: p.name,
     label: p.label,
+    blurb: p.blurb,
     region: p.region,
     market: p.market,
     avatar: p.avatar,
