@@ -6,7 +6,9 @@ import { missionControl, outsideView } from "@/lib/data"
 import { missionQuotes } from "@/lib/mission-evidence"
 import { rankTopics } from "@/lib/mission-view"
 import { featureFindings } from "@/lib/history"
-import { marketOf, vehicleOf } from "@/lib/scope"
+import { MARKETS, marketOf, vehicleOf, type MarketId } from "@/lib/scope"
+import { listRequirements } from "@/lib/requirements/data"
+import { openRequirementCount } from "@/lib/requirements/ui"
 
 export default async function MissionControl({ searchParams }: {
   searchParams: Promise<{ v?: string; m?: string }>
@@ -15,10 +17,11 @@ export default async function MissionControl({ searchParams }: {
   const vehicle = vehicleOf(v)
   const market = marketOf(m)
   const scope = `v=${vehicle.id}&m=${market.id}`
-  const [data, outside, signals] = await Promise.all([
+  const [data, outside, signals, requirements] = await Promise.all([
     missionControl(vehicle.id, market.id),
     outsideView(vehicle.id, market.id),
     featureFindings(vehicle.id, 6),
+    listRequirements(vehicle.id),
   ])
   const themeNames = (["negative", "want", "positive"] as const)
     .flatMap((sentiment) => rankTopics(data.themes, sentiment).slice(0, 6).map((topic) => topic.level2))
@@ -26,6 +29,7 @@ export default async function MissionControl({ searchParams }: {
   const plan = timelineStatus(new Date())
   return <MissionOverview key={scope} vehicle={vehicle} market={market} data={data}
     quotes={quotes} voices={outside.voices} signals={signals} trends={outside.trends}
+    requirementsByMarket={Object.fromEntries(MARKETS.map((m) => [m.id, openRequirementCount(requirements, m.id)])) as Record<MarketId, number>}
     sources={<><div className="space-y-3 text-sm text-muted-foreground">
       <p>BMW internal feedback has no dates or demographics. There are no China or Germany comments in the internal snapshot. External owner quotes are a separate source.</p>
       <p>Non-US internal feedback comes from a single source. Studies have no sample sizes or stated satisfaction scale. Treat their means as source values, not a score out of ten.</p>
