@@ -41,6 +41,8 @@ const VERDICT: Record<Verdict, { label: string; score: number | null; cls: strin
   },
 }
 const REGIONS = ["Americas", "Europe", "Asia"] as const
+// Display label only - the filter key stays the persona JSON's p.region value.
+const REGION_LABEL: Record<string, string> = { Americas: "America" }
 
 function VerdictPill({ v, className }: { v: Verdict; className?: string }) {
   return (
@@ -211,7 +213,7 @@ export function WhatIfClient({
       <div className="mt-5 space-y-8">
         {REGIONS.map((region) => (
           <section key={region}>
-            <h3 className="mb-3 text-sm font-medium text-muted-foreground">{region}</h3>
+            <h3 className="mb-3 text-sm font-medium text-muted-foreground">{REGION_LABEL[region] ?? region}</h3>
             <div className="grid gap-4 md:grid-cols-3">
               {personas
                 .filter((p) => p.region === region)
