@@ -15,7 +15,7 @@ import type { FeedFinding } from "@/lib/history"
 import { featureOf } from "@/lib/features"
 import "./mission-control.css"
 
-const ART: Partial<Record<VehicleId, string>> = { G60: "/vehicles/5-series.webp", G70: "/vehicles/7-series.webp" }
+const ART: Partial<Record<VehicleId, string>> = { G60: "/vehicles/5-series.webp", G70: "/vehicles/7-series.webp", F70: "/vehicles/1-series.webp" }
 const number = (value: number) => value.toLocaleString("en-US")
 const percent = (part: number, total: number) => total ? Math.round(part / total * 100) : 0
 const sum = (values: Record<Bucket, number>) => Object.values(values).reduce((a, b) => a + b, 0)
