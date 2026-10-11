@@ -17,7 +17,7 @@ export const BUCKETS: { id: Bucket; name: string }[] = [
 ]
 
 // Country codes in the feedback, grouped into the brief's markets. Anything else is Rest of world.
-const EUROPE = ["GB", "SE", "DK", "FI", "NO", "FR", "LV", "ES", "DE", "IT", "NL", "BE", "CH", "AT", "PL", "PT", "IE"]
+export const EUROPE = ["GB", "SE", "DK", "FI", "NO", "FR", "LV", "ES", "DE", "IT", "NL", "BE", "CH", "AT", "PL", "PT", "IE"]
 const bucketOf = (cc: string | null): Bucket =>
   cc === "US" ? "US" : cc === "CN" ? "CN" : cc && EUROPE.includes(cc) ? "EU" : "RoW"
 const countriesFor = (m: MarketId) => (m === "EU" ? EUROPE : m === "US" ? ["US"] : m === "CN" ? ["CN"] : null)
