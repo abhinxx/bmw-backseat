@@ -149,6 +149,7 @@ async function planQueries(question: string, mission: MissionId, n: number, vehi
       `- What BMW ${vehicleName} customers complain about most: ${ctx.complaints.join("; ") || "unknown"}. Most requested: ${ctx.wishes.join("; ") || "unknown"}.\n\n` +
       `Rules:\n` +
       `- Each query is one specific natural-language search of 8 to 20 words, naming the car(s), the topic and, if relevant, the market.\n` +
+      `- Always write the brand with the model ("BMW i5", "BMW 5 Series G60", "Mercedes E-Class"): a bare "i5" or "5 Series" also finds other brands' cars (Hyundai Ioniq 5).\n` +
       `- Social queries are phrased the way owners write ("i5 owners, anyone else getting...", "G60 alignment pulling right after..."); web queries the way a reviewer or spec sheet would.\n` +
       `- When the question compares the BMW with rivals, give the BMW and the rivals separate queries rather than one query naming everything.\n` +
       `- "china" only when China or Chinese buyers matter for the question; "video" when the topic is visual or hands-on (controls, screens, space, sound).\n` +
@@ -268,7 +269,7 @@ async function extract(
       `It is about a car the question names, a rival when the question asks about competitors, or the BMW ${vehicleName} itself: the PM's own car is ALWAYS in scope, its owners are "our users".\n` +
       `- Owners' own experiences are the most valuable; then professional reviews; then specs and prices. Read every page: an owner post on the topic is almost always worth a finding.\n` +
       `- Extract every finding that qualifies, up to ${limit}, at most two per page, owners' own words first. Fewer is fine when the pages do not support more; never pad.\n` +
-      `- Skip: other topics, statements that something works fine unless the question asks about it, dealer or brand marketing, generic how-to content, posts about a much older generation unless the question asks, and anything already listed under ALREADY FOUND.\n\n` +
+      `- Skip: other topics; cars the question does not name, unless it asks about competitors, rivals or the market (a Hyundai Ioniq 5 post is not about the BMW i5); statements that something works fine unless the question asks about it; dealer or brand marketing; generic how-to content; posts about a much older generation unless the question asks; anything already listed under ALREADY FOUND.\n\n` +
       `Fields:\n` +
       `- quote: copy one or two consecutive sentences EXACTLY as they appear in that page's text, character for character, max 300 characters. ` +
       `Do not fix typos, do not join separate passages, do not add or remove words, no ellipses. The server rejects any quote it cannot find in the page.\n` +
